@@ -1,0 +1,390 @@
+#+TITLE: Intro to Java Programming - Part 01
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: Madrid
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{The Runnels School to Write More Good}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+* Getting Started with Programming
+** Objectives
+    1. Become familiar with the 'NetBeans with TMC' development environment used in this course.
+    2. Learn to download and submit programming exercises.
+*** Narrative                                                      :noexport:
+     For the first part of this course we're going to dive right into some very
+     basic usage examples of the tools you'll be using to write your code, test
+     for accuracy, and even submit the code for exercises to see if you got the
+     correct answer!
+
+     To do this, we'll be using what is called "Netbeans with TMC". Netbeans is
+     a very common Integrated Development Environment or "IDE" used by Java
+     developers. It will help you organize your code, remind you of things you
+     might not wish to simply memorize, and even give you little shortcuts that
+     help make the experience of being a developer a little more enjoyable!
+     There are lots of different IDEs and most developers feel pretty strongly
+     about the one they use since it's what they spend most of their day in!
+     Over time, as you do more more development and explore other options you
+     may find you prefer a different IDE than the one we use here; however
+     there's a very good reason why we'll be using this one. This course is
+     based on the content at mooc.fi and they have a service which allows you to
+     complete the exercises in the course in Netbeans and submit them for
+     "grading". In this case, it's a test that takes your code, runs it and
+     checks the output. If the output passes, you pass! This saves us from
+     setting up our environment and having to troubleshoot - this lets you focus
+     on one thing: Learning Java.
+** A quick tour of tmcbeans
+** The tmcbeans interface
+     [[./images/part01.000.png]]
+*** Narrative                                                      :noexport:
+     Once you have `tmcbeans` installed, when you open tmcbeans for the first
+     time you'll be asked for the username and password of your Mooc.fi account;
+     enter these values and select /Log In/. The next screen should show you the
+     organizational selection screen and ask for a course selection. We're using
+     /Mooc.fi/ and /Java Programming I/. Once you've selected both, you can
+     accept the default settings supplied by tmcbeans and when the follow-up
+     /Download exercises/ screen pops up, we can make sure all options are
+     selected and click on /Download/. After a short period of time, the IDE
+     will open with some pre-populated projects on the left. Like you see here.
+** Selecting a project
+   #+beamer: \only<1>{
+   #+attr_latex: :width 0.5\textwidth
+   [[./images/part01.001.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.002.png]]
+   #+beamer: }
+
+*** Narrative                                                      :noexport:
+     From here we can use the /Files/ tab to select the first project we'll look
+     at. Select the project which says /Part01_01.Sandbox/ by double-clicking
+     then double click through /src/, /main/, and /java/ to find /Sandbox.java/
+
+     ::NEXT SLIDE::
+     In the right hand quadrant of the screen there is some introductory source
+     code pre-filled for you. This is where we will be entering the source code
+     for our projects; where you will be typing commands to instruct the
+     computer what to do. The first line in our /main/ function begins with two
+     forward-slash characters; this denotes a comment. A comment is used to
+     document your code -- think of it as a message to yourself when you come
+     back to this code in six months or to the next person who reads your code.
+     Anything that happens after the comment on the same line will not be
+     processed by Java.
+** Writing our first Java code
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+   #+begin_src java
+      public class Sandbox {
+          public static void main(String[] args) {
+              // Write your program here
+              System.out.println("Hello world"); 
+          }
+      }
+   #+end_src
+*** Narrative                                                      :noexport:
+     We're going to fill in some code of our own. In this case we're
+     going to tell Java to generate text output using the command
+     =System.out.println()=.  Inside of the parenthesis we'll include a
+     string - which is text between quotation marks - in this case
+     "Hello World". Take a few minutes to insert the line here into
+     the Sandbox.java file you opened in the last step.  Notice how I
+     put a ";" character at the end of the line. This tells the
+     computer "this is the end of the line".
+
+     You might have noticed some windows popping up when you filled
+     out your code. These windows are /helper/ functions from your
+     Integrated Development Environment or IDE. It's trying to guess
+     what you're going to write and supplying options which might help
+     you or provide useful documentation for what you're doing.
+
+     With the line filled in, you /should/ have a working Java
+     program. We just need to compile and run it. We'll cover what the
+     word /compile/ means later.
+     
+** Run Your Code
+   [[./images/part01.004.png]]
+*** Narrative                                                      :noexport:
+    select the Run bputton and the computer will compile and execute your code!
+** Check Your Output
+   [[./images/part01.005.png]]
+*** Narrative                                                      :noexport:
+    You should see your output in the /Output/ dialog box at the bottom
+    of the screen! You've now written, compiled, and executed your
+    first Java program.
+    
+** What does TMC stand for?
+   #+beamer: \only<1>{
+  [[./images/part01.006.png]]
+  #+beamer: }\only<2>{
+  [[./images/part01.007.png]]
+  #+beamer: }
+*** Narrative                                                      :noexport:
+    The TMC package is "Test My Code". If your code executed and
+    generated output without errors you can Submit the code by
+    clicking on "TMC" and then selecting "Submit". This will submit
+    our code to TestMyCode which compares the output of the code to
+    the desired output TMC expects. Take a minute and click on /TMC/ at
+    the top and then select /Submit/.
+
+    You should see a dialog box that tells you the progress of the submission
+
+    ::NEXT SLIDE::
+    
+    If everything went well, the bottom right hand portion of the
+    screen should show a green "100%" indicator.
+
+* Printing
+** Objectives
+   1. Learn to write a program that prints text
+   2. Become familiar with executing programs
+   3. Know what the term /parameter/ means
+*** Narrative                                                      :noexport:
+    In this section we're going to focus on writing a program that prints text,
+    becoming more familiar with executing programs, and understanding what the
+    term /parameter/ means.
+** The System.out.println() command
+   #+beamer: \only<1>{
+   [[./images/part01.009.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.008.png]]
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    In the last section we added the =System.out.println()= command to a java
+    file and made it output the text we chose. When we added the =System.out.println()= command we needed to tell it what to print, to do that, we had to provide what is called a /parameter/ between the parenthesis. 
+
+    ::NEXT SLIDE::
+    In our case, our parameter was /Hello World/. We call this /passing a parameter/; you'd say /we passed the string 'hello world' to System.out.println()/
+** Program Boilerplate
+   #+beamer: \only<1>{
+   [[./images/part01.010.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.011.png]]
+   #+beamer: }\only<3>{
+   [[./images/part01.012.png]]
+   #+beamer: }\only<4>{
+   [[./images/part01.013.png]]
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    Java requires a good deal of what programmers call /boilerplate/ it comes
+    from when we used to use hot metal typesetting to make things like
+    newspapers but in modern vernacular it mostly means something that is copied
+    or reused without significant changes.
+
+    In the code we ran in the last section, everything that isn't the comment - the line starting with two forward slashes - and the System.out.println() command
+
+    ::NEXT SLIDE::
+
+    was boilerplate. In this example, the /boilerplate/ parts of our code tell
+    the computer that our program is called /Sandbox/. Java forces you to match
+    the name of the program to the name of the file that contains the source
+    code. Since our program is named /Sandbox/ it has to exist in a file named
+    =Sandbox.java= to work.
+
+    When the program starts, execution begins at the line that says =public static void main=
+
+    ::NEXT SLIDE::
+
+    and ends at the closing curly bracket.
+
+    We'll discuss what the terms /public class/ and /public static void/ mean
+    later on. In our example, we have only one command to execute since comments
+    are ignored.
+** Programming Exercise: Ada Lovelace
+   =Part01_02.AdaLovelace=
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!
+   #+begin_src java :exports code
+     public class AdaLovelace {
+         public static void main(String[] args) {
+             // Write your program here
+
+         }
+     }     
+   #+end_src
+
+   Desired output:
+   #+begin_example
+   Ada Lovelace
+   #+end_example
+*** Narrative                                                      :noexport:
+    It's time to do an exercise. In =tmcbeans=, open the project
+    =Part01_02.AdaLovelace= by double clicking, and continue to double click
+    through /src/, /main/, /java/, and /AdaLovelace.java/
+
+    Notice how the file named /AdaLovelace.java/ has a 'public class
+    AdaLovelace' as part of the boilerplate! Our job is to write a program that
+    outputs the string "Ada LoveLace". When you think you have the answer,
+    submit your answer to TMC!
+** Printing Multiple Lines
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+   #+begin_src java :results output :exports both
+     public class Ohjelma {
+         public static void main(String[] args) {
+             System.out.println("Hello world!");
+             System.out.println("... and the universe!");
+         }
+     }
+   #+end_src
+
+   #+RESULTS:
+   : Hello world!
+   : ... and the universe!
+
+*** Narrative                                                      :noexport:
+    We construct programs command by command but computer generally needs to
+    know when one command ends and another command begins. While computers are
+    quite complex there are places where it needs some /help/ to understand what
+    humans are telling it to do. Different languages use different means to tell
+    the computer /this is the end of a command/. In Java, a command usually ends
+    with a semicolon.
+
+    Here we have a program with two commands. Since the =System.out.println()=
+    command prints /LINES/ of text we get two lines when this code executes. 
+
+    ::NEXT SLIDE::
+
+    If we didn't have the semicolons at the end of lines 3 and 4 this would
+    generated an error instead of text. In fact, you don't really need to start
+    a every command on a new line in Java. The newlines are really there for
+    humans, not the computer! The computer will understand it if it's all on one
+    line as long as the semicolons are in the right place but humans are VERY
+    like to get a headache if they try to read it that way.
+
+** Programming Exercise - Once Upon a Time
+   =Part01_03.OnceUponATime=
+   #+begin_src java
+     public class OnceUponATime {
+         public static void main(String[] args) {
+             // Write your program here
+
+         }
+     }
+   #+end_src
+
+   Modify the program so that it will print the following text. Use _three_
+   =System.out.println()= commands for printing.
+
+   Desired output:
+   #+begin_example
+     Once upon a time
+     there was
+     a program
+   #+end_example
+
+*** Narrative   
+    The next exercise is =Part01_03.OnceUponATime=. Load the project in tmcbeans
+    and try to solve it! When you think you have it right, run your code, and
+    check the output. If it looks right, submit it to TMC.
+** Letting the IDE help you a bit
+*** Python
+    #+begin_src python :eval no
+      print("Hello World")
+    #+end_src
+*** Java
+    #+begin_src java :eval no
+      System.out.println("Hello World")
+    #+end_src
+*** Narrative                                                      :noexport:
+    Java is a notoriously /wordy/ language. A lot of languages, when they want
+    to print output, the command is just "print()" but Java makes you type 22
+    characters at minimum just to write =System.out.println("")=.
+
+    Thankfully, Netbeans - and just about every editor - provides you with some
+    shortcuts you can use to make your day to day use of Java just a bit better.
+    Let's take a look at a quick one. In whatever, Source code file you happen
+    to enter, go to the next line and type the word "sout" and hit the <TAB> key.
+
+    :: WAIT ::
+
+    The IDE expands sout to System.out.println("") AND moves your cursor to the
+    spot between the quotes. That reduces those 22 keypresses to no more than
+    five! It doesn't feel like a lot but your fingers will thank you later.
+** Programming Exercise - Dinosaur
+   =Part01_04.Dinosaur=
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+   #+begin_src java
+     public class Dinosaur {
+         public static void main(String[] args) {
+             // Write your program here
+         }
+     }
+   #+end_src
+
+   Desired output:
+   #+begin_example
+     Once upon a time
+     there was
+     a dinosaur
+   #+end_example
+
+*** Narrative                                                      :noexport:
+
+    Open the project =Part01_04.Dinosaur=. Modify the program so that it will
+   print the following text. Use _three_ =System.out.println()= commands for
+   printing but this time use =sout= instead of typing everything out!
+
+** Comments
+   #+begin_src java :eval no
+     public class Comments {
+         public static void main(String[] args) {
+             // Printing
+             System.out.println("Text to print");
+             System.out.println("More text to print!");
+             /* Next:
+                - more on printing
+                - more practice
+                - variables
+                - ...
+             ,*/
+             System.out.println("Some other text to print");
+             // System.out.println("Trying stuff out")
+         }
+     }
+   #+end_src
+*** Narrative
+    There are two types of comments we can use in Java. Single line comments
+    which start with forward slashes like the ones you see on lines 3 and 13 and
+    multi-line comments which start with a foward-slash and an asterisk and end
+    with an asterisk and a forward slash - like what you see starting on line 6
+    and ending on line 11.
+
+    Comments are very useful in code. While they don't do anything - the
+    compiler simply ignores them - they exist to act as reminders to the person
+    reading the code. There are two axiomatic statements - axiomatic means it is
+    self-evident and always true.
+
+    The first is that it is always easier to write code than it is to read code.
+    All things being equal, reading code that other people write will take more
+    time than it would have for you to write.
+
+    The second axiomatic statement is that you will certainly not remember that
+    thing you think you will remember. Sometimes you come back to code a week
+    later or six months later and it seems like an alien wrote the code you
+    wrote previously. It's very difficult to maintain /context/ about a thing.
+
+    Comments exist to help smooth over those issues. Using comments is a good
+    way to note when something about the code is not immediately evident to a
+    beginner who would be reading your code!  Sometimes, you're that beginner!
+
+    Comments can also be used to remove a command from the code that you think
+    you might want to add back later. We call this /commenting out code/. Line
+    13 is a commented-out print statement!
+
+* Reading Input
+* Variables
+* Calculating with Numbers
+* Conditional Statements and Conditional Operation
+* Programming in our Society
