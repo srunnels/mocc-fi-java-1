@@ -383,6 +383,458 @@
     13 is a commented-out print statement!
 
 * Reading Input
+** Objectives
+   1. Learn to write a program that reads text written by a user.
+   2. Know what a "string" refers to in programming.
+   3. Know how to join (i.e., "concatenate") strings together.
+*** Narrative                                                      :noexport:
+    In this section we're going to learn how to write a program that reads text
+   written by a user. We'll also learn what a "string" is and how to work with
+   them.
+** What is input?
+   - Text written by the user
+   - Input arrives as a /String/
+   - The =Scanner= library is used to read user input
+*** Narrative                                                      :noexport:
+    In programming, when we refer to /input/ we mean text which has been
+    provided by the user. This can take a lot of forms. When you type your name
+    and password into a site to login, that's user input. When you fill out your
+    payment information, that is also user input. User input can also take forms
+    other than keyboard input, user input could be a file provided to your
+    program which the program is intended to modify. For this section, we'll
+    focus on the type of user input where a user is providing it through the
+    keyboard.
+
+    When user input comes /into/ our program is almost always comes to us in the
+    form of a String. A string is datatype which we will cover in the next
+    section but for now just know that strings are, effectively, just a series
+    of characters which represent text. Once we have learned how to get a String
+    into a variable we'll learn some of the things we can do with Strings.
+
+** The Scanner Library
+***    
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={1}
+   #+begin_src java :eval no 
+     import java.util.Scanner; 
+     public class Program {
+         public static void main(String[] args) {
+             Scanner scanner = new Scanner(System.in); 
+         }
+     }
+   #+end_src
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={4}
+   #+begin_src java :eval no 
+     import java.util.Scanner; 
+     public class Program {
+         public static void main(String[] args) {
+             Scanner scanner = new Scanner(System.in); 
+         }
+     }
+   #+end_src
+
+*** Narrative                                                      :noexport:
+    To read user input provided from the keyboard we need to use the =Scanner=
+    library which is built into Java. A library is just a collection of someone
+    else's code. Sometimes it's from the official Java project, sometimes it's
+    code you found that helps you do what you want! While the Scanner library is built
+    into Java the functionality is /enabled/ by default. This helps keep the
+    size of our programs smaller since Java won't have to include very library
+    we could possibly want and instead only chooses the libraries we tell it to
+    include. To enable the functionality we /import/ the library. This is a very
+    common phrase in programming and one that you will run into regularly in
+    this course and in reading about Java or ANY programming language.
+    "Importing a library" means to add that library to your program. Every
+    language has a mechanism to do this. In Java, at the top of our .java file,
+    before the /public class/ boilerplate, we just type /import
+    java.util.Scanner;/ to import the library. Once that is in place, we can use
+    any of the features that come along with Scanner. Once we've imported the
+    Scanner library we have to create a Scanner.
+
+    NEXT SLIDE
+
+    We do this by telling our program what we want, in this case Scanner, and
+    how we want to _refer_ to the scanner. This is called /declaring a
+    variable/, we'll touch on this in the next lesson but for now just remember
+    that variables help both the programmer and the computer keep track of
+    information.
+
+    To declare a variable called scanner of _type_ Scanner, we use the format on
+    line 4. After the computer reads this line it will start tracking a Scanner
+    object as the name "scanner" and it will be configured to read text from
+    =System.in= which is the keyboard input into the system.
+    
+** Using Scanner
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={1}
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Program {
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+              System.out.println("Write a message: ");
+              String message = scanner.nextLine();
+              System.out.println(message);
+          }
+      }
+    #+end_src
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={5}
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Program {
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+              System.out.println("Write a message: ");
+              String message = scanner.nextLine();
+              System.out.println(message);
+          }
+      }
+    #+end_src
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <3>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={6}
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Program {
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+              System.out.println("Write a message: ");
+              String message = scanner.nextLine();
+              System.out.println(message);
+          }
+      }
+    #+end_src
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <4>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,highlightlines={7}
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Program {
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+              System.out.println("Write a message: ");
+              String message = scanner.nextLine();
+              System.out.println(message);
+          }
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    Now let's look at a program which asks the user to supply some input, reads
+    the input as a string and then prints it back out for the user. Just like we
+    showed in the last slide we're going to /import the java.util.Scanner
+    library/.
+
+    NEXT SLIDE
+
+    With the library imported we then declare our scanner variable of type Scanner
+
+    NEXT SLIDE
+
+    Next we print out a message to the user saying /Write a message/ using System.out.println
+
+    NEXT SLIDE
+
+    Now we create a new variable called /message/ and this variable will store
+    whatever is returned by =scanner.nextLine()=. This format we see here, with
+    the period before the word /scanner/ and /nextLine/ followed by parenthesis
+    lets us know that we're calling the nextLine() method of the scanner object
+    we declared. The =nextLine()= method will read the user input as a String
+    and store it in the variable called /message/. It does this by simply
+    waiting for the user to press 'enter'. Whatever it has read by the time the
+    user presses 'Enter' is what will be in message. The program is currently in
+    what is called a /blocking state/ - it cannot progress until the user
+    provides input or the program is canceled.
+
+    NEXT SLIDE
+
+    Once the user has supplied input and pressed 'Enter' the program will resume
+    and it will print the String that is pointed at by the =message= variable.
+** Programming Exercise - Message
+   =Part01_05.Message=
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+   #+begin_src java
+     import java.util.Scanner;
+
+     public class Message {
+
+         public static void main(String[] args) {
+             Scanner scanner = new Scanner(System.in);
+
+             System.out.println("Write a message:");
+             // Write your program here
+
+         }
+     }
+   #+end_src
+
+   Desired output:
+   #+begin_example
+   Write a meesage:
+   Bye
+   Bye
+   #+end_example
+
+*** Narrative                                                      :noexport:
+
+    Open the project =Part01_05.Message=. Modify the program so that it will
+   read text from the user and then print back what they wrote. When you run
+   your program you'll be able to enter text in the "Output" window at the
+   bottom.
+
+** Fundamentals of Strings
+*** Introducing Strings
+    "A sample string!"
+    
+    #+ATTR_LaTeX: :align |c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|
+    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+    |---+---+---+---+---+---+---+---+---+---+----+----+----+----+----+----|
+    | A |   | s | a | m | p | l | e |   | s |  t |  r |  i |  n |  g |  ! |
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+    #+begin_src java
+      String message = "A sample string!";
+    #+end_src
+
+*** Narrative                                                      :noexport:
+    Strings are generally another word for /text/. If we're being very specific
+    Strings are a datatype - a type of data which is defined by the values it
+    can take and how they can be used. Strings are a /string of characters/
+    which describe how the computer sees text on a more fundamental level - as a
+    sequence of individual characters.
+
+    So far in this course we've used strings to print words to the screen and
+    when it reading input. When we printed things we provided the
+    =System.out.println= function with a string in quotation marks. When we read
+    input from the user the nextLine() function returned a string which we
+    stored in a variable.
+
+    In practice, variables are named containers that contain information of some
+    specific type. Typically when we create a variable when do it at the same
+    time we're providing value for it at the same time. In this example we've
+    created a variable of type String and assigned the value the text "A sample
+    string!" as its value. Once we have a variable we can use it as many times
+    as we want!
+
+    The text between the quotation marks is called a /string literal/
+
+** Concatenation 
+*** Joining Strings
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+    #+begin_src java
+      String start = "The beginning and ";
+      String stop = "the ending";
+      String message = start + stop;
+      System.out.println(message);
+    #+end_src
+
+    #+RESULTS:
+    : The beginning and the ending
+
+*** Joining Strings
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+    #+begin_src java
+      String message = "Hello world";
+      System.out.println(message + " ... and the universe");
+    #+end_src
+
+    #+RESULTS:
+    : Hello, Jebidiah
+    
+    
+*** Narrative                                                      :noexport:
+    When we join two strings to make one string we call that process
+    "concatenation". In Java we can concatenate strings using the "+" operator.
+    We can add two string variables and store it in a new variable.
+
+    NEXT SLIDE
+
+    We can even add a string literal like the phrase "... and the universe! " to
+    a variable which we've stored the string "Hello world!". You're probably
+    used to adding numbers using the plus sign, but from the perspective of a
+    computer, if you can describe /how/ like things can be added you can add
+    them! We use code to build those descriptions and Java has already described
+    how to add or /concatenate/ strings - it just mooshes them together!
+
+    
+** Programming Exercise - Hi Ada Lovelace!
+   =Part01_06.HiAdaLovelace=
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
+    #+begin_src java
+      public class HiAdaLovelace {
+
+          public static void main(String[] args) {
+              String name = "Ada Lovelace";
+
+          }
+      }
+
+    #+end_src
+
+    Desired output
+   #+begin_example
+   Hi Ada Lovelace!
+   #+end_example
+*** Narrative                                                      :noexport:
+    Modify the program so that it concatenates a string literal "Hi " and the
+    contents of the variable /name/.
+** Programming Exercise - Message Three Times
+   =Part01_07.MessageThreeTimes=
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class MessageThreeTimes {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              System.out.println("Write a message: ");
+              // Write your program here
+          }
+      }
+    #+end_src
+
+    Desired output:
+    #+ATTR_LATEX: :options basicstyle=\ttfamily\scriptsize
+    #+begin_example
+    Write a message:
+    Hi
+    Hi
+    Hi
+    Hi
+    #+end_example
+*** Narrative                                                      :noexport:
+    Modify the program so that it prompts the user with "Write a message: ",
+    then reads input from the user using the nextLine method from Scanner but
+    this time print the string three times using System.out.println().
+** Programming Exercise - Greeting
+   =Part01_08.Greeting=
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Greeting {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+
+    Desired output
+    #+begin_example
+    What's your name?
+    Ada
+    Hi Ada
+    #+end_example
+*** Narrative                                                      :noexport:
+    Generate a program that prompts the user for their name with the message
+    "What's your name?" and uses Scanner to retrieve user input. Once you have
+    the name print "Hi " followed by their name.
+** Programming Exercise - Conversation
+   =Part01_09.Conversation=
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Conversation {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              //Write your program here
+          }
+      }
+    #+end_src
+
+    Desired output
+    #+begin_example
+    Greetings! How are you doing?
+    Good thank you!
+    Oh, how interesting. Tell me more!
+    Well, there's really nothing to tell.
+    Thanks for sharing!
+    #+end_example
+*** Narrative                                                      :noexport:
+    Since the nextLine method from Scanner puts the program into a blocking
+    state, you can use it to build something sort of like a conversation!
+
+    Use nextLine three times to generate the displayed conversation. In this
+    exercise you'll need to store a string two times. You can either create two
+    String variables or you can store the second string in the first variable.
+    When you re-use a variable you don't need to indicate that it's a String.
+
+** Programming Exercise - Story
+   =Part01_10.Story=
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Story {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+
+    Desired output
+    #+ATTR_LATEX: :options fontsize=\tiny    
+    #+begin_example
+      Sample output
+      I will tell you a story, but I need some information first.
+      What is the main character called?
+      Bob
+      What is their job?
+      a builder
+      Here is the story:
+      Once upon a time there was Bob, who was a builder.
+      On the way to work, Bob reflected on life.
+      Perhaps Bob will not be a builder forever.
+    #+end_example
+*** Narrative                                                      :noexport:
+    Generate a program that prompts that asks for the characters name and their
+    job Then print a short story for them using those strings.
+
 * Variables
 * Calculating with Numbers
 * Conditional Statements and Conditional Operation
