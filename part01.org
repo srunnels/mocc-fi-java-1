@@ -802,7 +802,11 @@
     When you re-use a variable you don't need to indicate that it's a String.
 
 ** Programming Exercise - Story
-   =Part01_10.Story=
+***                                                  :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.65
+    :END:
+    =Part01_10.Story=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java
       import java.util.Scanner;
@@ -817,20 +821,30 @@
       }
     #+end_src
 
-    Desired output
-    #+ATTR_LATEX: :options fontsize=\tiny    
-    #+begin_example
-      Sample output
-      I will tell you a story, but I need some information first.
-      What is the main character called?
-      Bob
-      What is their job?
-      a builder
-      Here is the story:
-      Once upon a time there was Bob, who was a builder.
-      On the way to work, Bob reflected on life.
-      Perhaps Bob will not be a builder forever.
-    #+end_example
+*** Desired output                                                    :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.35
+    :END:
+    #+LaTeX: {\tiny
+    > I will tell you a story, but I need some information first.
+    
+    > What is the main character called?
+      
+    < Bob
+      
+    > What is their job?
+      
+    < a builder
+      
+    > Here is the story:
+      
+    > Once upon a time there was Bob, who was a builder.
+      
+    > On the way to work, Bob reflected on life.
+      
+    > Perhaps Bob will not be a builder forever.
+    #+LaTeX: }
+    
 *** Narrative                                                      :noexport:
     Generate a program that prompts that asks for the characters name and their
     job Then print a short story for them using those strings.
