@@ -175,7 +175,7 @@
    [[./images/part01.011.png]]
    #+beamer: }\only<3>{
    [[./images/part01.012.png]]
-   #+beamer: }\only<4>{
+
    [[./images/part01.013.png]]
    #+beamer: }
 *** Narrative                                                      :noexport:
@@ -1490,7 +1490,7 @@
     double. The result of the evaluation of those two expressions is saved in
     the =value= variable.
 ** Performing Math in Print statements
-*** Creating new strings with =+=
+*** Creating new strings with =+=                                     :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: t
     :BEAMER_env: onlyenv
@@ -1506,13 +1506,14 @@
     : The answer to everything is 42
 
     #+LaTeX: }
-*** Creating new strings with =+=
+*** Creating new strings with =+=                                     :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: t
     :BEAMER_env: onlyenv
     :BEAMER_act: <2>
     :END:
     #+LaTeX: {\footnotesize
+
     #+begin_src java :exports both
       String sampleString = "The answer to everything is " + 42;
       System.out.println(sampleString);
@@ -1520,14 +1521,7 @@
 
     #+RESULTS:
     : The answer to everything is 42
-    #+LaTeX: }       
-*** Creating new strings with =+=
-    :PROPERTIES:
-    :BEAMER_opt: t
-    :BEAMER_env: onlyenv
-    :BEAMER_act: <2>
-    :END:
-    #+LaTeX: {\footnotesize
+
     #+begin_src java :exports both
       System.out.println("Four: " + (2 + 2));
       System.out.println("But! Twenty-two: " + 2 + 2);
@@ -1744,6 +1738,276 @@
       Give the second number:
       8
       2 * 8 = 16    
+    #+end_example
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    This is a repetition of the previous exercise, this time we're going to use
+    multiplication though.
+** Division
+*** Integer dividend and divisor result in integer quotients        :B_block:
+    #+LaTeX: \small{
+    Integer divided by integer results in an integer
+    #+LaTeX: \tiny{
+    #+begin_src java :exports both
+      int result = 3 / 2; 
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS:
+    : 1
+
+    #+begin_src java :exports both
+      int dividend = 2;
+      int divisor = 3;
+      double quotient = divisor / dividend;
+      System.out.println(quotient);
+    #+end_src
+
+    #+RESULTS:
+    : 1.0
+
+    #+begin_src java :exports both
+      double dividend = 2.0;
+      int divisor = 3;
+      double quotient = divisor / dividend;
+      System.out.println(quotient);
+    #+end_src
+
+    #+RESULTS:
+    : 1.5
+    #+LaTeX: }
+#+LaTeX: }    
+*** Narrative                                                      :noexport:
+    Division of integers is slightly trickier. If all the variables in the
+    division expression are integers, then the resulting value will be an
+    integer as well. This is important to remember! Even if we store the result
+    of the division in a double, we get the same answer.
+
+    However, if the dividend or divisor (or both) are a floating point number, the result is a floating point number.
+** Casting
+*** Integer to double
+    #+LaTeX: \tiny{
+    #+begin_src java :exports both
+      int divisor = 3;
+      int dividend = 2;
+
+      double result1 = (double) divisor / dividend;
+      System.out.println(result1);
+      double result2 =  divisor / (double) dividend;
+      System.out.println(result2);
+      double result3 = (double) (divisor / dividend);
+      System.out.println(result3);
+    #+end_src
+
+    #+RESULTS:
+    : 1.5
+    : 1.5
+    : 1.0
+
+    #+begin_src java :exports both
+      int dividend = 3;
+      int divisor = 2;
+
+      double result = 1.0 * dividend / divisor;
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS:
+    : 1.5
+
+    #+begin_src java
+      int dividend = 3;
+      int divisor = 2;
+
+      double result = dividend / divisor * 1.0;
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS:
+    : 1.0
+
+    #+LaTeX: }
+*** Narrative
+    Sometimes you have a variable or the result of an expression which is of one
+    type, but you want it to be in another type. In the case of strings, we used
+    =.valueOf= commands. For some other data structures such as integers and
+    floating point numbers we can /cast/ from type to another type. This
+    converts from type A to type B.
+
+    In this example, while the =divisor= and =dividend= variables are integers,
+    during the division expression, we are casting one, then the other to a
+    floating point integer by including =double= wrapped in parens. On line 8
+    though, we've used parenthesis to wrap the expression and then we cast the
+    result of the expression to a double. This bears some investigation. If you
+    look at the output, we get 1.5, 1.5, and then 1.0. This is because, as we
+    saw on the previous slide, if one of the numbers is a float, we get a float
+    answer. But on line 8, =divisor= and =dividend= are still integers, and
+    while we /cast/ the quotient to a double the precision was already lost. It
+    cannot be retrieved.
+
+    We can also be less explicit in our /casting/ operations. On line 4, by
+    multiplying an integer( in this case =dividend= ) with a float, we get a
+    float which means the resulting expression is division of a float (the
+    product of 3 times 1.0) and an integer (2). This does the same thing as a
+    casting dividend to a double, but is less explicit in what its doing.
+
+    One thing to keep in mind is that order of operations is still in effect. In
+    the last example, because we work left to right in our order of operations,
+    dividend is already divided by the divisor which are both integers - so we
+    lose our precision and thus the .5 falls off. We could correct this with
+    parenthesis to change the order of operations.
+
+** Programming Exercise - Average of Two Numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+
+
+
+    #+LaTeX: \small{
+    =Part01_21.AverageOfTwoNumbers=
+    
+    Write a program that asks the user for two integers and prints their average.
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class AverageOfTwoNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give the first number:
+      8
+      Give the second number:
+      2
+      The average is 5.0
+    #+end_example
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    For this exercise we're going to ask the user for two numbers and then provide the average of the numbers back to the user.
+** Programming Exercise - Average of Three Numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+
+
+    #+LaTeX: \small{
+    =Part01_22.AverageofThreeNumbers=
+
+
+    Write a program that asks the user for three integers and prints their average.
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class AverageOfThreeNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give the first number:
+      8
+      Give the second number:
+      2
+      Give the third number:
+      3
+      The average is 4.333333333333333
+    #+end_example
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    For this exercise we're going to ask the user for three numbers and provide them the average of the three numbers.
+** Programming Exercise - Simple Calculator
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    #+LaTeX: \small{    
+    =Part01_23.SimpleCalculator=
+
+    Write a program that asks the user for two
+    numbers and prints their sum, difference, product, and quotient. Two
+    examples of the execution of the program are given below.
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class SimpleCalculator {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give the first number:
+      8
+      Give the second number:
+      2
+      8 + 2 = 10
+      8 - 2 = 6
+      8 * 2 = 16
+      8 / 2 = 4.0
     #+end_example
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
