@@ -2013,6 +2013,261 @@
 *** Narrative                                                      :noexport:     
 
 * Conditional Statements and Conditional Operation
+** Conditional Statements
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\small,highlightlines={2}
+   #+begin_src java
+     System.out.println("Hello, world!");
+     if (true) {
+         System.out.println("This code is unavoidable!");
+     }
+   #+end_src
+
+   #+RESULTS:
+   : Hello, world!
+   : This code is unavoidable!
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\small,highlightlines={2}
+   #+begin_src java
+     int number = 11;
+     if (number > 10) {
+         System.out.println("The number was greater than 10");
+     }
+   #+end_src
+** Narrative                                                       :noexport:
+   So far, our programs have been linear. They start, they issue commands from
+   top to bottom and then exit. However, much of the core need for programs is
+   to do a thing if something is true. We do this through /conditional
+   statements/. The example here is a very simple example of a conditional
+   statement.
+
+   On line three, we have a condition which starts with the =if= keyword and is
+   followed by an expression which once evaluated will determine the flow of the
+   program. If the expression evaluates to =true= then the body of the
+   conditional statement - the portion between the curly braces - is evaluated.
+   In our first example, our conditional statement is simply the =true= command
+   which is, hopefully obviously, truthy. In the second example our conditional
+   statement is =number > 10= which, since number is 11, evaluates to =11 > 10=
+   which evaluates to =true= which is, again, truthy. In both cases, if the
+   condition is truthy the body of the =if= statement is evaluated - in this
+   case, it's just print statements.
+
+   Do note, that =if= statements do _not_ end in parenthesis but the statements
+   within the body do unless they are, themselves, if statements.
+
+** Programming Exercise - Speeding Ticket
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    =Part01_23.SpeedingTicket=
+
+    Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
+    #+LaTeX: \small{
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class SpeedingTicket {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here. 
+          }
+      }
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give speed:
+      15
+    #+end_example
+    #+LaTeX: }
+
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give speed:
+      135
+      Speeding ticket!
+    #+end_example
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this exercise, we ask the user for an integer and if it's greater than 120 we print the statmeent "Speeding ticket".
+** Code Indentation and Block Statements
+*** Code Blocks
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}
+    #+begin_src java :results output
+      public class ProgramName {
+          public static void main(String[] args) {
+              int number = 72;
+              if (number < 100){
+                  System.out.println("Number less than 100");
+              }
+          }
+      }
+    #+end_src
+
+    #+RESULTS:
+    : Number less than 100
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}>
+    #+begin_src java :results output 
+      public class ProgramName {
+      public static void main(String[] args) {
+      int number = 72;
+      if (number < 100){
+      System.out.println("Number less than 100");
+      }
+      }
+      }
+    #+end_src
+
+    #+RESULTS:
+    : Number less than 100
+
+    
+*** Narrative                                                      :noexport:
+    When we say /code block/ in Java, we're referring to a section enclosed by a
+    pair of curly braces. Your code will be made of many code blocks, some
+    nested within each other, and some in serial - one after another.
+
+    The code sample above contains three code blocks. The first starts on line
+    one with the boilerplate bit of code that defines our public class.
+
+    The next one is at line 2, this snippet of code is in fact, the starting
+    point of all programs in Java.
+
+    Then we have a conditional statement - the =if= statement on line 4 which
+    has a code block as well. Here, there are two examples which do the exact
+    same thing the exact same way but look dramatically different. Java doesn't
+    care about white space or indents. It can identify code blocks because they
+    are wrapped in curly braces. The indentation is there for -you- and other
+    programmers who might read your code. It's easier for humans to read.
+
+    In Java it's traditional to indent by either 4 spaces or a tab. Most editors do this for you.
+** Comparison Operators
+*** Common Comparators    
+   | Operator | Use                      |
+   |----------+--------------------------|
+   | >        | Greater Than             |
+   | >=       | Greater Than or Equal To |
+   | <        | Less Than                |
+   | <=       | Less Than or Equal To    |
+   | ==       | Equal To                 |
+   | !=       | Not equal To             |
+*** Narrative                                                      :noexport:
+    This table contains some of the most common comparators used in programming.
+    A few them should look familiar from math but do make a note of the double
+    equals sign as this can trip you up a good number of times. In Java - and in
+    most programming languages - the single equals sign is an assignment
+    operator. Such as we assign the value 10 to an integer variable. The
+    comparator for /equals/ is the /double equals/!
+** Programming Exercise - Ancient 
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    =Part01_26.Ancient=
+
+    Write a program that prompts the user for a year. If the user inputs a number
+    that is smaller than 2015, then the program prints the string "Ancient
+    history!".
+
+
+    #+LaTeX: \small{
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      import java.util.Scanner;
+
+      public class Ancient {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give a year:
+      2017
+    #+end_example
+
+    #+begin_example
+      Give a year:
+      2013
+      Ancient history!
+    #+end_example
+
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this exercise we're going to ask the user for a year and if it's before
+    2015 we print the sentence "Ancient history!"
+** Else
+*** Else statements
+    #+begin_src plantuml :file /tmp/test.png
+      @startuml
+      if (number greater than 5?) then (yes)
+        :Your number is greater than five!;
+      else (no)
+        :Your number is five or less!;
+      endif
+      @enduml
+    #+end_src
+
+    #+RESULTS:
+    [[file:/tmp/test.png]]
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
+    #+begin_src java
+      int number = 4;
+
+      if (number > 5) {
+          System.out.println("Your number is greater than five!");
+      } else {
+          System.out.println("Your number is five or less!");
+      }
+    #+end_src
+
+    #+RESULTS:
+    : Your number is five or less!
+
+*** Narrative
+    We've walked through how to do something if the conditional statement is
+    /truthy/ but that leaves a lot to be desired when it comes to making
+    decisions. In the previous exercise we only printed something if the year
+    was less than 2015, what if we wanted to print something if the year weren't less than 2015 as well?
+
+    That's where /else/ comes in. Else is the other leg of the branch. An if
+    statement is effectively a fork in the road. If the conditional statement is
+    truthy, we follow one leg, if the if statement is falsey we follow the other
+    leg.
+
+    
 * Programming in our Society
 * Testing                                                          :noexport:
   #+begin_src java
