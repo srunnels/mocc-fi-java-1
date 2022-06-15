@@ -206,7 +206,7 @@
 ** Programming Exercise: Ada Lovelace
    =Part01_02.AdaLovelace=
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!
-   #+begin_src java :exports code
+   #+begin_src java :exports code :eval no
      public class AdaLovelace {
          public static void main(String[] args) {
              // Write your program here
@@ -265,7 +265,7 @@
 
 ** Programming Exercise - Once Upon a Time
    =Part01_03.OnceUponATime=
-   #+begin_src java
+   #+begin_src java :eval no
      public class OnceUponATime {
          public static void main(String[] args) {
              // Write your program here
@@ -315,7 +315,7 @@
 ** Programming Exercise - Dinosaur
    =Part01_04.Dinosaur=
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
-   #+begin_src java
+   #+begin_src java :eval no
      public class Dinosaur {
          public static void main(String[] args) {
              // Write your program here
@@ -580,7 +580,7 @@
 ** Programming Exercise - Message
    =Part01_05.Message=
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
-   #+begin_src java
+   #+begin_src java :eval no
      import java.util.Scanner;
 
      public class Message {
@@ -695,7 +695,7 @@
 ** Programming Exercise - Hi Ada Lovelace!
    =Part01_06.HiAdaLovelace=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize,escapeinside=!!   
-    #+begin_src java
+    #+begin_src java :eval no
       public class HiAdaLovelace {
 
           public static void main(String[] args) {
@@ -716,7 +716,7 @@
 ** Programming Exercise - Message Three Times
    =Part01_07.MessageThreeTimes=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class MessageThreeTimes {
@@ -746,7 +746,7 @@
 ** Programming Exercise - Greeting
    =Part01_08.Greeting=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class Greeting {
@@ -772,7 +772,7 @@
 ** Programming Exercise - Conversation
    =Part01_09.Conversation=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class Conversation {
@@ -809,7 +809,7 @@
     :END:
     =Part01_10.Story=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class Story {
@@ -936,7 +936,7 @@
     #+LaTeX: \small{
     =Part01_11.VariousVariables=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       public class VariousVariables {
 
           public static void main(String[] args) {
@@ -1131,7 +1131,7 @@
     #+LaTeX: \small{
     =Part01_12.IntegerInput=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class IntegerInput {
@@ -1268,7 +1268,7 @@
     #+LaTeX: \small{
     =Part01_14.BooleanInput=
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class BooleanInput {
@@ -1329,7 +1329,7 @@
     Write a program that asks the user for a string, an integer, a floating-point number, and a boolean. The program should then print the values given by the user.
     #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class DifferentTypesOfInput {
@@ -1414,7 +1414,7 @@
 
     #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class SecondsInADay {
@@ -1557,7 +1557,7 @@
 
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class SumOfTwoNumbers {
@@ -1609,7 +1609,7 @@
 
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class SumOfThreeNumbers {
@@ -1660,7 +1660,7 @@
 
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class AdditionFormula {
@@ -1706,7 +1706,7 @@
     #+LaTeX: \small{
     Similar to the previous exercise, create a program that multiplies the values stored in two integer variables.
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class MultiplicationFormula {
@@ -1871,7 +1871,7 @@
     
     Write a program that asks the user for two integers and prints their average.
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class AverageOfTwoNumbers {
@@ -1922,7 +1922,7 @@
     Write a program that asks the user for three integers and prints their average.
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class AverageOfThreeNumbers {
@@ -1974,7 +1974,7 @@
     examples of the execution of the program are given below.
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class SimpleCalculator {
@@ -2065,7 +2065,7 @@
     Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
     #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class SpeedingTicket {
@@ -2188,7 +2188,7 @@
 
     #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
       import java.util.Scanner;
 
       public class Ancient {
@@ -2256,7 +2256,7 @@
     #+RESULTS:
     : Your number is five or less!
 
-*** Narrative
+*** Narrative                                                      :noexport:
     We've walked through how to do something if the conditional statement is
     /truthy/ but that leaves a lot to be desired when it comes to making
     decisions. In the previous exercise we only printed something if the year
@@ -2267,7 +2267,58 @@
     truthy, we follow one leg, if the if statement is falsey we follow the other
     leg.
 
-    
+    An =else= statement can only exist with an =if= statement and is placed
+    after the closing curly brace of the if statement.
+
+** Programming Exercise - Positivity 
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    =Part01_28.Positivity=
+
+    Write a program that prompts the user for an integer and informs the user
+    whether or not it is positive (greater than zero).
+
+    #+LaTeX: \small{
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Positivity {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give a number:
+      5
+      The number is positive.    
+    #+end_example
+    #+begin_example
+      Give a number:
+      -2
+      The number is not positive.
+    #+end_example
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
 * Programming in our Society
 * Testing                                                          :noexport:
   #+begin_src java
@@ -2292,7 +2343,7 @@
 
     #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java
+    #+begin_src java :eval no
     #+end_src
     #+LaTeX: }
 *** Outputs                                                           :BMCOL:
