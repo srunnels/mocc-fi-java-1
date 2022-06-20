@@ -1,7 +1,7 @@
 #+TITLE: Intro to Java Programming - Part 01
 #+AUTHOR: Scott Runnels
 #+LANGUAGE: en
-#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:nil f:t *:t <:t
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
 #+BIND: org-latex-caption-above nil
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
@@ -313,7 +313,7 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** *=Part01_02.AdaLovelace=*
+**** Part01_02.AdaLovelace
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
    #+begin_src java :exports code :eval no
      public class AdaLovelace {
@@ -335,7 +335,7 @@
     :BEAMER_opt: T
     :BEAMER_env: block
     :END:
-     #+LaTeX: {\tiny
+    #+LaTeX: {\tiny
     #+begin_resultscode
     Ada Lovelace
     #+end_resultscode
@@ -395,7 +395,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_03.OnceUponATime=
+**** Part01_03.OnceUponATime
 
      Modify the program so that it will print the following text. Use _three_
      =System.out.println()= commands for printing.
@@ -462,7 +462,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_04.Dinosaur=
+**** Part01_04.Dinosaur
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
    #+begin_src java :eval no
      public class Dinosaur {
@@ -748,7 +748,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_05.Message=
+**** Part01_05.Message
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
    #+begin_src java :eval no
      import java.util.Scanner;
@@ -883,7 +883,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_06.HiAdaLovelace=
+**** Part01_06.HiAdaLovelace
      #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
      #+begin_src java :eval no
        public class HiAdaLovelace {
@@ -923,7 +923,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_07.MessageThreeTimes=
+**** Part01_07.MessageThreeTimes
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -970,7 +970,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_08.Greeting=
+**** Part01_08.Greeting
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1015,7 +1015,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_09.Conversation=
+**** Part01_09.Conversation
  #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1067,7 +1067,7 @@
       :BEAMER_opt: T
       :BEAMER_col: 0.60
       :END:
-**** =Part01_10.Story=
+**** Part01_10.Story
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1131,7 +1131,7 @@
      double height = 5.12;
      boolean alive = false;
    #+end_src
-*** Narrative
+*** Narrative                                                      :noexport:
     Think of /variables/ as containers. Inside these containers we can store
     information of various /types/. In the last section we used a lot of text in
     our code which we represented as /String/ types. We often placed those
@@ -1194,13 +1194,12 @@
    :BEAMER_opt: T
    :END:
 *** Code                                                              :BMCOL:
-    
     :PROPERTIES:
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_11.VariousVariables=
-    #+LaTeX: \small{
+**** Part01_11.VariousVariables
+    #+LaTeX: {\small
     
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -1338,7 +1337,7 @@
       }
     #+end_src    
 
-*** Narrative
+*** Narrative                                                      :noexport:
     When we read input from the user, that information is almost always read in
     as a String value. Every variable in Java must be declared, it requires us
     to bring that information in as a string. This means that if we need to
@@ -1397,10 +1396,10 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_12.IntegerInput=
+**** Part01_12.IntegerInput
+    #+LaTeX: {\small
     Write a program that asks the user for a value. The program then should print the value provided by the user.
-    
-    #+LaTeX: \small{
+    #+LaTeX: }    
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1415,7 +1414,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1427,11 +1426,11 @@
     :BEAMER_env: block
     :END:
     #+LaTeX: {\small
-    #+begin_example
+    #+begin_resultscode
     Write a value
     42
     You wrote 42
-    #+end_example
+    #+end_resultscode
     #+LaTeX: }
 **** Break it
      Test your program with non-numeric inputs and observe how it breaks
@@ -1538,10 +1537,11 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_14.BooleanInput=
+**** Part01_14.BooleanInput
+    #+LaTeX: {\small
     Write a program that asks the user for a boolean value. The program should then print the value provided by the user.
-    
-    #+LaTeX: \small{
+    #+LaTeX: }    
+
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1555,7 +1555,7 @@
 
           } }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1567,11 +1567,11 @@
     :BEAMER_env: block
     :END:
     #+LaTeX: {\small
-    #+begin_example
+    #+begin_resultscode
     Write something:
     santa does not exist
     True or false? false
-    #+end_example
+    #+end_resultscode
     #+LaTeX: }
 **** Desired Output                                                 :B_block:
     :PROPERTIES:
@@ -1579,11 +1579,11 @@
     :BEAMER_env: block
     :END:
     #+LaTeX: {\small
-    #+begin_example
+    #+begin_resultscode
     Write something:
     tRuE
     True or false? false
-    #+end_example
+    #+end_resultscode
     #+LaTeX: }
 
 *** Narrative                                                      :noexport:
@@ -1599,10 +1599,10 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_15.BooleanInput=
-
+**** Part01_15.DifferentTypesofInput
+    #+LaTeX: {\small
     Write a program that asks the user for a string, an integer, a floating-point number, and a boolean. The program should then print the values given by the user.
-    #+LaTeX: \small{
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1616,9 +1616,8 @@
 
           }
       }
-
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1630,7 +1629,7 @@
     :BEAMER_env: block
     :END:
     #+LaTeX: {\tiny
-    #+begin_example
+    #+begin_resultscode
     Give a string:
     bye-bye
     Give an integer:
@@ -1643,7 +1642,7 @@
     You gave the integer 11
     You gave the double 4.2
     You gave the boolean true
-    #+end_example
+    #+end_resultscode
     #+LaTeX: }
 
 *** Narrative                                                      :noexport:
@@ -1686,13 +1685,13 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_16.SecondsInADay=
-
+**** Part01_16.SecondsInADay
+    #+LaTeX: {\small
     In the exercise template, implement a program that asks the user for the
     number of days. After that, the program prints the number of seconds in the
     given number of days.
+    #+LaTeX: }
 
-    #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -1707,7 +1706,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1832,13 +1831,12 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_17.SumOfTwoNumbers=
+**** Part01_17.SumOfTwoNumbers
 
-    #+LaTeX: \tiny{
-    
+    #+LaTeX: {\tiny
     Write a program that asks the user for two numbers. After this, the program prints the sum of the numbers given by the user.
     When you ask for multiple numbers, create a separate variable for each:
-
+    #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -1854,7 +1852,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1885,12 +1883,10 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_19.SumofThreeNumbers=
-
-    
-    #+LaTeX: \tiny{
+**** Part01_19.SumofThreeNumbers
+    #+LaTeX: {\tiny
     Write a program that asks the user for three numbers. After this the program prints the sum of the numbers given by the user.
-
+    #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -1906,7 +1902,6 @@
           }
       }
     #+end_src
-    #+LaTeX: }
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1935,13 +1930,13 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_19.AdditionFormula=
+**** Part01_19.AdditionFormula
 
-    #+LaTeX: \tiny{
+    #+LaTeX: {\tiny
     Create a program that can be used to add two integers together. In the
     beginning, the user is asked to give two integers that are to be summed. The
     program then prints the formula that describes the addition of the numbers.
-
+    #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -1957,7 +1952,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -1985,10 +1980,11 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_20.MultiplicationFormula=
+**** Part01_20.MultiplicationFormula
 
-    #+LaTeX: \small{
+    #+LaTeX: {\tiny
     Similar to the previous exercise, create a program that multiplies the values stored in two integer variables.
+    #+LaTeX: }    
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2004,7 +2000,7 @@
       }
 
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2029,10 +2025,10 @@
     multiplication though.
 ** Division
 *** Integer dividend and divisor result in integer quotients        :B_block:
-    #+LaTeX: \small{
+    #+LaTeX: {\tiny
     Integer divided by integer results in an integer
-    #+LaTeX: \tiny{
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+LaTeX: }    
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :exports both :wrap resultscode :cache yes
       int result = 3 / 2; 
       System.out.println(result);
@@ -2043,7 +2039,7 @@
     1
     #+end_resultscode
 
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :exports both :wrap resultscode :cache yes
       int dividend = 2;
       int divisor = 3;
@@ -2055,7 +2051,7 @@
     #+begin_resultscode
     1.0
     #+end_resultscode
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :exports both :wrap resultscode :cache yes
       double dividend = 2.0;
       int divisor = 3;
@@ -2068,8 +2064,6 @@
     1.5
     #+end_resultscode
 
-    #+LaTeX: }
-#+LaTeX: }    
 *** Narrative                                                      :noexport:
     Division of integers is slightly trickier. If all the variables in the
     division expression are integers, then the resulting value will be an
@@ -2079,8 +2073,8 @@
     However, if the dividend or divisor (or both) are a floating point number, the result is a floating point number.
 ** Casting
 *** Integer to double
-    #+LaTeX: \tiny{
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+LaTeX: {\tiny
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :exports both :wrap resultscode :cache yes
       int divisor = 3;
       int dividend = 2;
@@ -2100,7 +2094,7 @@
     1.0
     #+end_resultscode
 
-       #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+       #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :exports both :wrap resultscode :cache yes
       int dividend = 3;
       int divisor = 2;
@@ -2113,7 +2107,7 @@
     #+begin_resultscode
     1.5
     #+end_resultscode
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java  :exports both :wrap resultscode :cache yes
       int dividend = 3;
       int divisor = 2;
@@ -2164,9 +2158,10 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_21.AverageOfTwoNumbers=
-    #+LaTeX: \small{    
+**** Part01_21.AverageOfTwoNumbers
+    #+LaTeX: {\small 
     Write a program that asks the user for two integers and prints their average.
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no 
       import java.util.Scanner;
@@ -2182,7 +2177,7 @@
       }
 
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2211,11 +2206,11 @@
     :BEAMER_col: 0.60
     :END:
 
-**** =Part01_22.AverageofThreeNumbers=
-    #+LaTeX: \small{
+**** Part01_22.AverageofThreeNumbers
+    #+LaTeX: {\small
 
     Write a program that asks the user for three integers and prints their average.
-
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2231,7 +2226,7 @@
       }
 
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2262,12 +2257,12 @@
     :BEAMER_col: 0.60
     :END:
 
-**** =Part01_23.SimpleCalculator=
-    #+LaTeX: \small{    
+**** Part01_23.SimpleCalculator
+    #+LaTeX: {\small
     Write a program that asks the user for two
     numbers and prints their sum, difference, product, and quotient. Two
     examples of the execution of the program are given below.
-
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2282,7 +2277,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2338,7 +2333,7 @@
    #+begin_resultscode
    The number was greater than 10
    #+end_resultscode
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
    #+begin_src java  :exports both :wrap resultscode :cache yes
      int number = 11;
      boolean greaterThan10 = number > 10; 
@@ -2383,10 +2378,10 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-****  =Part01_23.SpeedingTicket=
-
+**** Part01_23.SpeedingTicket
+    #+LaTeX: {\tiny
     Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
-    #+LaTeX: \small{
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no :wrap resultscode :cache yes
       import java.util.Scanner;
@@ -2400,7 +2395,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2428,7 +2423,11 @@
 *** Narrative                                                      :noexport:
     In this exercise, we ask the user for an integer and if it's greater than 120 we print the statmeent "Speeding ticket".
 ** Code Indentation and Block Statements
-*** Code Blocks
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}
     #+begin_src java :results output  :exports both :wrap resultscode :cache yes
       public class ProgramName {
@@ -2445,6 +2444,11 @@
     #+begin_resultscode
     Number less than 100
     #+end_resultscode
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}>
     #+begin_src java  :exports both :results output  :wrap resultscode :cache yes
@@ -2463,7 +2467,6 @@
     Number less than 100
     #+end_resultscode
 
-    
 *** Narrative                                                      :noexport:
     When we say /code block/ in Java, we're referring to a section enclosed by a
     pair of curly braces. Your code will be made of many code blocks, some
@@ -2506,14 +2509,13 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-****  =Part01_26.Ancient=
-
+**** Part01_26.Ancient
+    #+LaTeX: {\tiny
     Write a program that prompts the user for a year. If the user inputs a number
     that is smaller than 2015, then the program prints the string "Ancient
     history!".
+    #+LaTeX: }
 
-
-    #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2527,7 +2529,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2556,7 +2558,7 @@
     2015 we print the sentence "Ancient history!"
 ** Else
 *** Else statements
-    #+begin_src plantuml :file /tmp/test.png
+    #+begin_src plantuml :file /tmp/test.png :exports results
       @startuml
       if (number greater than 5?) then (yes)
         :Your number is greater than five!;
@@ -2605,12 +2607,12 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-****  =Part01_28.Positivity=
-
+**** Part01_28.Positivity
+    #+LaTeX: {\tiny
     Write a program that prompts the user for an integer and informs the user
     whether or not it is positive (greater than zero).
+    #+LaTeX: }
 
-    #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2624,7 +2626,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2656,11 +2658,11 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_29.Adulthood=
-
+**** Part01_29.Adulthood
+    #+LaTeX: {\tiny
     Write a program that prompts the user for their age and tells them whether
     or not they are an adult (18 years old or older).
-    #+LaTeX: \small{
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2675,7 +2677,7 @@
       }
 
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2705,7 +2707,7 @@
 ** More conditionals
 *** Else If
     
-    #+begin_src plantuml :file /tmp/test2.png
+    #+begin_src plantuml :file /tmp/test2.png :exports results
       @startuml
       scale .45
       if (number equals 1?) then (yes)
@@ -2762,13 +2764,12 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_30.LargerThanOrEqualTo=
-
+**** Part01_30.LargerThanOrEqualTo
+    #+LaTeX: {\tiny
     Write a program that prompts the user for two integers and prints the larger
     of the two. If the numbers are the same, then the program informs us about
     this as well.
-
-    #+LaTeX: \small{
+    #+LaTeX: }
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2781,7 +2782,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2825,12 +2826,12 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-****  =Part01_31.GradesAndPoints=
+**** Part01_31.GradesAndPoints
     #+LaTeX: {\small
     The table below describes how the grade for a particular course is
     determined. Write a program that gives a course grade according to the
     provided table.
-    
+
     | points |       grade |
     |--------+-------------|
     |    < 0 | impossible! |
@@ -2853,35 +2854,39 @@
     :BEAMER_env: block
     :END:
     #+LaTeX: {\tiny
-    #+begin_resultscode
+    #+begin_example
       Give points [0-100]:
       37
       Grade: failed
-    #+end_resultscode
-    #+begin_resultscode
+    #+end_example
+      
+    #+begin_example
       Give points [0-100]:
       76
       Grade: 3
-    #+end_resultscode
-    #+begin_resultscode
+    #+end_example
+
+    #+begin_example
       Give points [0-100]:
       95
       Grade: 5    
-    #+end_resultscode
-    #+begin_resultscode
+    #+end_example
+    
+    #+begin_example
       Give points [0-100]:
       -3
       Grade: impossible!
-    #+end_resultscode
+    #+end_example
+
     #+LaTeX: }
-    
+
 *** Narrative                                                      :noexport:
     This exercise is an increase in difficulty. We have to make a lot of
     decisions here based on the table provided. Ask the user for the number of
     points and give them their grade.
 ** Remainder Operations
 *** The Modulo (%) Operator   
-    #+LaTeX: {\tiny    
+    #+LaTeX: {\tiny
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
    #+begin_src java  :exports both :wrap resultscode :cache yes
       int remainder = 7 % 2;
@@ -2924,12 +2929,12 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-****  =Part01_31.OddOrEven=                                           :BMCOL:
-
+**** Part01_32.OddOrEven                                              :BMCOL:
+    #+LaTeX: {\tiny
     Write a program that prompts the user for a number and informs us whether it
     is even or odd.
+    #+LaTeX: }
 
-    #+LaTeX: \small{
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
@@ -2941,9 +2946,8 @@
 
           }
       }
-
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -2970,9 +2974,9 @@
 *** Narrative                                                      :noexport:     
     In this exercise we're going to ask for a number and tell the user if it's
     odd or even.
-** Comparing Strings                                               :noexport:
+** Comparing Strings
 *** The .equals() method
-    #+LaTeX: \small{
+    #+LaTeX: {\small
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no :exports code
       boolean compareInts = 10 == 10;            // evalutes to true
@@ -3008,20 +3012,19 @@
     In the second snippet, =sampleString= is our string variable, to compare
     sampleString to any other string, I add dot equals and pass the string we're
     comparing it to as a parameters.
-** Programming Exercise - Password                                 :noexport:
+** Programming Exercise - Password
 *** Code                                                              :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
     
-    #+LaTeX: \small{
-    =Part01_33.Password=
-
+**** Part01_33.Password
+    #+LaTeX: {\tiny
     Write a program that prompts the user for a password. If the password is
     "Caput Draconis" the program prints "Welcome!". Otherwise, the program
     prints "Off with you!"
-
+    #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -3036,7 +3039,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -3061,20 +3064,18 @@
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
-** Programming Exercise - Same                                     :noexport:
+** Programming Exercise - Same
 *** Code                                                              :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-    
-    #+LaTeX: \small{
-    =Part01_34.Same=
-
+**** Part01_34.Same    
+    #+LaTeX: {\tiny
     Write a program that prompts the user for two strings. If the strings are the
     same, then the program prints "Same". Otherwise, it prints "Different".
     prints "Off with you!"
-
+    #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
@@ -3089,7 +3090,7 @@
           }
       }
     #+end_src
-    #+LaTeX: }
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -3119,7 +3120,7 @@
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
     
-** Logical Operators                                               :noexport:
+** Logical Operators
 ***                                                                   :bmcol:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -3199,7 +3200,7 @@
 *** Narrative                                                      :noexport:
     Conditional statements may consist of multiple parts where symbols referred to as /logical operators/ are used.
 
-* Programming in our Society
+* Programming in our Society                                       :noexport:
   :PROPERTIES:
   :header-args: :exports both :cache yes
   :END:
@@ -3221,13 +3222,13 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-    =Part01_15.BooleanInput=
-
-    #+LaTeX: \small{
+**** Part01_15.BooleanInput
+    #+LaTeX: {\tiny
+    DESCRIPTION
+    #+LaTeX: }    
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no
     #+end_src
-    #+LaTeX: }
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -3249,3 +3250,81 @@
    :LOGBOOK:
    - State "DONE"       from "TODO"       [2022-06-20 Mon 14:15]
    :END:
+** TODO Fix table layout for "Fundamentals of Strings"
+   It's ugly
+** STARTED Replace code sections with just the name of the project
+   CLOSED: [2022-06-20 Mon 14:38]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 14:38]
+   :END:
+** STARTED noexport on What is a Variable
+** TODO Fix BEAMERopt in Various Variables (slide 37)
+** DONE Noexport on Reading Different Variable Types from the User (slide 39)
+   CLOSED: [2022-06-20 Mon 16:37]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:37]
+   :END:
+** TODO Fix layout on "Reading Integers" (slide 40)
+** DONE Fix desired layout on Integer Input (slide 41)   
+   CLOSED: [2022-06-20 Mon 16:38]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:38]
+   :END:
+** DONE Fix desired layout on Boolean Input (slide 44)
+   CLOSED: [2022-06-20 Mon 16:38]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:38]
+   :END:
+** DONE Fix desired layout on Different Types of Input (slide 45)
+   CLOSED: [2022-06-20 Mon 16:39]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:39]
+   :END:
+   Also spellin mistakes on double
+** DONE Change font size on description on Seconds in a day exercise (slide 48)
+   CLOSED: [2022-06-20 Mon 16:40]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:40]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Change font size on description on Multiplication exercise (slide 54)
+   CLOSED: [2022-06-20 Mon 16:40]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:40]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** TODO Change layout on Division (slide 55)
+** DONE Change layout on Integer to Double (slide 56)
+   CLOSED: [2022-06-20 Mon 16:43]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:43]
+   :END:
+** DONE Change font size on description on Average of Two Numbers exercise (slide 57)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+   
+** DONE Change font size on description on Average of Three Numbers  exercise (slide 58 )
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Change font size on description on SimpleCalculator exercise (slide 59)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Fix font size on third code block in Conditional Statements (slide 61)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+** TODO Fix layout of Code Blocks (slide 63)
+** STARTED Remove exports both from plantuml entries
+** TODO Fix scaling on Else If Plantuml output.
+   It's fuzzy as fuck
+** TODO Is there text needed for    
