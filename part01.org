@@ -1,7 +1,7 @@
 #+TITLE: Intro to Java Programming - Part 01
 #+AUTHOR: Scott Runnels
 #+LANGUAGE: en
-#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:t -:nil f:t *:t <:t
 #+BIND: org-latex-caption-above nil
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
@@ -18,12 +18,13 @@
 # q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
 #+BEAMER_HEADER: \subsection{}
 #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
 #+LATEX_HEADER: \usepackage{listings}
 #+LATEX_HEADER: \usepackage{minted}
 #+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
 #+LATEX_HEADER: \usepackage{etoolbox}
 #+LATEX_HEADER: \usepackage{local-style}
-#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}]}%
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
 #+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 #+LATEX_HEADER: \usepackage{parskip}
 * Getting Started with Programming
@@ -182,14 +183,15 @@
 
     ::NEXT SLIDE::
     In our case, our parameter was /Hello World/. We call this /passing a parameter/; you'd say /we passed the string 'hello world' to System.out.println()/
-** Program Boilerplate
+** Program Boilerplate v1                                          :noexport:
    #+beamer: \only<1>{
    [[./images/part01.010.png]]
+
    #+beamer: }\only<2>{
    [[./images/part01.011.png]]
    #+beamer: }\only<3>{
    [[./images/part01.012.png]]
-
+   #+beamer: }\only<4>{
    [[./images/part01.013.png]]
    #+beamer: }
 *** Narrative                                                      :noexport:
@@ -198,7 +200,95 @@
     newspapers but in modern vernacular it mostly means something that is copied
     or reused without significant changes.
 
-    In the code we ran in the last section, everything that isn't the comment - the line starting with two forward slashes - and the System.out.println() command
+    In the code we ran in the last section, everything that isn't the comment -
+    the line starting with two forward slashes - and the System.out.println()
+    command
+
+    ::NEXT SLIDE::
+
+    was boilerplate. In this example, the /boilerplate/ parts of our code tell
+    the computer that our program is called /Sandbox/. Java forces you to match
+    the name of the program to the name of the file that contains the source
+    code. Since our program is named /Sandbox/ it has to exist in a file named
+    =Sandbox.java= to work.
+
+    When the program starts, execution begins at the line that says =public static void main=
+
+    ::NEXT SLIDE::
+
+    and ends at the closing curly bracket.
+
+    We'll discuss what the terms /public class/ and /public static void/ mean
+    later on. In our example, we have only one command to execute since comments
+    are ignored.
+** Program Boilerplate
+*** :B_onlyenv:
+:PROPERTIES:
+:BEAMER_env: onlyenv
+:BEAMER_ACT: <1>
+:END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={}
+   #+begin_src java :exports code :eval no
+        public class Sandbox {
+            public static void main(String[] args) {
+                // Write your program here
+                System.out.println("Hello world");
+            }
+        }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={}
+    #+begin_src java :exports code :eval no
+      public class Sandbox {
+          public static void main(String[] args) {
+
+              
+          }
+      }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <3>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2}
+    #+begin_src java :exports code :eval no
+      public class Sandbox {
+          public static void main(String[] args) {
+              // Write your program here
+              System.out.println("Hello world");
+          }
+      }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <4>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
+   #+begin_src java :exports code :eval no
+        public class Sandbox {
+            public static void main(String[] args) {
+                // Write your program here
+                System.out.println("Hello world");
+            }
+        }     
+   #+end_src
+   
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    Java requires a good deal of what programmers call /boilerplate/ it comes
+    from when we used to use hot metal typesetting to make things like
+    newspapers but in modern vernacular it mostly means something that is copied
+    or reused without significant changes.
+
+    In the code we ran in the last section, everything that isn't the comment -
+    the line starting with two forward slashes - and the System.out.println()
+    command
 
     ::NEXT SLIDE::
 
@@ -223,7 +313,7 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** =Part01_02.AdaLovelace=
+**** *=Part01_02.AdaLovelace=*
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
    #+begin_src java :exports code :eval no
      public class AdaLovelace {
@@ -262,7 +352,7 @@
     submit your answer to TMC!
 ** Printing Multiple Lines
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
-   #+begin_src java :results output :exports both  :wrap resultscode :cache yes
+   #+begin_src java :results output :exports both  :wrap resultscode :cache yes :results verbatim
      public class Ohjelma {
          public static void main(String[] args) {
              System.out.println("Hello world!");
@@ -271,11 +361,13 @@
      }
    #+end_src
 
-   #+RESULTS[16ccdcc712a2f534551a9eb05ea3fb3b59e83ba7]:
+   #+RESULTS[f689d1d1b5821641e65d43ec56079302167fadb4]:
    #+begin_resultscode
    Hello world!
    ... and the universe!
    #+end_resultscode
+
+
 
 *** Narrative                                                      :noexport:
     We construct programs command by command but computer generally needs to
@@ -406,7 +498,7 @@
    printing but this time use =sout= instead of typing everything out!
 
 ** Comments
-   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
    #+begin_src java :eval no
      public class Comments {
          public static void main(String[] args) {
@@ -424,7 +516,7 @@
          }
      }
    #+end_src
-*** Narrative
+*** Narrative                                                      :noexport:
     There are two types of comments we can use in Java. Single line comments
     which start with forward slashes like the ones you see on lines 3 and 13 and
     multi-line comments which start with a foward-slash and an asterisk and end
@@ -3107,7 +3199,7 @@
 *** Narrative                                                      :noexport:
     Conditional statements may consist of multiple parts where symbols referred to as /logical operators/ are used.
 
-* Programming in our Society                                       :noexport:
+* Programming in our Society
   :PROPERTIES:
   :header-args: :exports both :cache yes
   :END:
@@ -3151,3 +3243,9 @@
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
+* Action Items                                                     :noexport:
+** DONE Make code box outline same blue as results  
+   CLOSED: [2022-06-20 Mon 14:15]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 14:15]
+   :END:
