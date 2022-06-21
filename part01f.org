@@ -1,0 +1,985 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part01f.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Conditional Statements and Operations}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Conditional Statements and Operations
+** Conditional Statements
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2}
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+     System.out.println("Hello, world!");
+     if (true) {
+         System.out.println("This code is unavoidable!");
+     }
+   #+end_src
+
+   #+RESULTS[9218591844ea50542cdd4244011d0104ebee2d26]:
+   #+begin_resultscode
+   Hello, world!
+   This code is unavoidable!
+   #+end_resultscode
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2}
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+     int number = 11;
+     if (number > 10) {
+         System.out.println("The number was greater than 10");
+     }
+   #+end_src
+
+   #+RESULTS[e6f337e3119ea559dcfeef6157aa455535581e2b]:
+   #+begin_resultscode
+   The number was greater than 10
+   #+end_resultscode
+*** Narrative                                                      :noexport:
+   So far, our programs have been linear. They start, they issue commands from
+   top to bottom and then exit. However, much of the core need for programs is
+   to do a thing if something is true. We do this through /conditional
+   statements/. The example here is a very simple example of a conditional
+   statement.
+
+   We have a condition which starts with the =if= keyword and is followed by an
+   expression which once evaluated will determine the flow of the program. If
+   the expression evaluates to =true= then the body of the conditional
+   statement - the portion between the curly braces - is evaluated. In our first
+   example, our conditional statement is simply the =true= command which is,
+   hopefully obviously, truthy. In the second example our conditional statement
+   is =number > 10= which, since number is 11, evaluates to =11 > 10= which
+   evaluates to =true= which is, again, truthy. In both cases, if the condition
+   is truthy the body of the =if= statement is evaluated - in this case, it's
+   just print statements.
+
+** Conditional Statement (Cont'd)
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+     int number = 11;
+     boolean greaterThan10 = number > 10; 
+     if (greaterThan10) {
+         System.out.println("Greater than 10!");
+     }
+   #+end_src
+
+   #+RESULTS[960d714fe4cf1a77a942edf439d13c8c9f574866]:
+   #+begin_resultscode
+   Greater than 10!
+   #+end_resultscode
+   
+*** Narrative                                                      :noexport:
+
+   In this next example, we're using a boolean - a type that can only hold true
+   or false - as our conditional. Since it evaluates to a truthy value, the
+   associated code block is evaluated.
+
+   Do note, that =if= statements do _not_ end in parenthesis but the statements
+   within the body do unless they are, themselves, if statements.
+
+** Programming Exercise - Speeding Ticket
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_23.SpeedingTicket
+    #+LaTeX: {\tiny
+    Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no :wrap resultscode :cache yes
+      import java.util.Scanner;
+
+      public class SpeedingTicket {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here. 
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give speed:
+      15
+    #+end_resultscode
+    #+LaTeX: }
+
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give speed:
+      135
+      Speeding ticket!
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this exercise, we ask the user for an integer and if it's greater than 120 we print the statmeent "Speeding ticket".
+** Code Indentation and Block Statements
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}
+    #+begin_src java :results output  :exports both :wrap resultscode :cache yes
+      public class ProgramName {
+          public static void main(String[] args) {
+              int number = 72;
+              if (number < 100){
+                  System.out.println("Number less than 100");
+              }
+          }
+      }
+    #+end_src
+
+    #+RESULTS[b3f851d91773fd0b5f94f3e0bb4c0e84d9b93148]:
+    #+begin_resultscode
+    Number less than 100
+    #+end_resultscode
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}>
+    #+begin_src java  :exports both :results output  :wrap resultscode :cache yes
+      public class ProgramName {
+      public static void main(String[] args) {
+      int number = 72;
+      if (number < 100){
+      System.out.println("Number less than 100");
+      }
+      }
+      }
+    #+end_src
+
+    #+RESULTS[5f831a21029988c5aeaadb44fac3ad369765709c]:
+    #+begin_resultscode
+    Number less than 100
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    When we say /code block/ in Java, we're referring to a section enclosed by a
+    pair of curly braces. Your code will be made of many code blocks, some
+    nested within each other, and some in serial - one after another.
+
+    The code sample above contains three code blocks. The first starts on line
+    one with the boilerplate bit of code that defines our public class.
+
+    The next one is at line 2, this snippet of code is in fact, the starting
+    point of all programs in Java.
+
+    Then we have a conditional statement - the =if= statement on line 4 which
+    has a code block as well. Here, there are two examples which do the exact
+    same thing the exact same way but look dramatically different. Java doesn't
+    care about white space or indents. It can identify code blocks because they
+    are wrapped in curly braces. The indentation is there for -you- and other
+    programmers who might read your code. It's easier for humans to read.
+
+    In Java it's traditional to indent by either 4 spaces or a tab. Most editors do this for you.
+** Comparison Operators
+*** Common Comparators    
+   | Operator | Use                      |
+   |----------+--------------------------|
+   | >        | Greater Than             |
+   | >=       | Greater Than or Equal To |
+   | <        | Less Than                |
+   | <=       | Less Than or Equal To    |
+   | ==       | Equal To                 |
+   | !=       | Not equal To             |
+*** Narrative                                                      :noexport:
+    This table contains some of the most common comparators used in programming.
+    A few them should look familiar from math but do make a note of the double
+    equals sign as this can trip you up a good number of times. In Java - and in
+    most programming languages - the single equals sign is an assignment
+    operator. Such as we assign the value 10 to an integer variable. The
+    comparator for /equals/ is the /double equals/!
+** Programming Exercise - Ancient
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_26.Ancient
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for a year. If the user inputs a number
+    that is smaller than 2015, then the program prints the string "Ancient
+    history!".
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Ancient {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give a year:
+      2017
+    #+end_resultscode
+
+    #+begin_resultscode
+      Give a year:
+      2013
+      Ancient history!
+    #+end_resultscode
+
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this exercise we're going to ask the user for a year and if it's before
+    2015 we print the sentence "Ancient history!"
+** Else
+*** Else statements
+    #+begin_src plantuml :file /tmp/test.png :exports results
+      @startuml
+      if (number greater than 5?) then (yes)
+        :Your number is greater than five!;
+      else (no)
+        :Your number is five or less!;
+      endif
+      @enduml
+    #+end_src
+
+    #+RESULTS:
+    [[file:/tmp/test.png]]
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
+    #+begin_src java  :exports both :wrap resultscode :cache yes
+      int number = 4;
+
+      if (number > 5) {
+          System.out.println("Your number is greater than five!");
+      } else {
+          System.out.println("Your number is five or less!");
+      }
+    #+end_src
+
+    #+RESULTS[ed433f7c8915e3bbab89c734c1e202bfa8f5ddac]:
+    #+begin_resultscode
+    Your number is five or less!
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    We've walked through how to do something if the conditional statement is
+    /truthy/ but that leaves a lot to be desired when it comes to making
+    decisions. In the previous exercise we only printed something if the year
+    was less than 2015, what if we wanted to print something if the year weren't less than 2015 as well?
+
+    That's where /else/ comes in. Else is the other leg of the branch. An if
+    statement is effectively a fork in the road. If the conditional statement is
+    truthy, we follow one leg, if the if statement is falsey we follow the other
+    leg.
+
+    An =else= statement can only exist with an =if= statement and is placed
+    after the closing curly brace of the if statement.
+
+** Programming Exercise - Positivity
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_28.Positivity
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for an integer and informs the user
+    whether or not it is positive (greater than zero).
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Positivity {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give a number:
+      5
+      The number is positive.    
+    #+end_resultscode
+    #+begin_resultscode
+      Give a number:
+      -2
+      The number is not positive.
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this exercise, we're going to write code to ask the user for an integer
+    and then inform them if the integer is positive or not.
+** Programming Exercise - Adulthood
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_29.Adulthood
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for their age and tells them whether
+    or not they are an adult (18 years old or older).
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Adulthood {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here 
+          }
+      }
+
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      How old are you?
+      12
+      You are not an adult
+    #+end_resultscode
+    #+begin_resultscode
+      How old are you?
+      32
+      You are an adult
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    Similar to the last exercise, we're going to ask for an integer but we're
+    going to tell the user if they are an adult. An adult is anyone who is 18
+    years or older.
+** More conditionals                                               :B_column:
+   :PROPERTIES:
+   :BEAMER_env: column
+   :END:
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java  :exports both :wrap resultscode :cache yes
+      int number = 3;
+
+      if (number == 1) {
+          System.out.println("The number is one");
+      } else if (number == 2) {
+          System.out.println("The given number is two");
+      } else if (number == 3) {
+          System.out.println("The number must be three!");
+      } else {
+          System.out.println("Something else!");
+      }
+    #+end_src
+
+    #+RESULTS[329aaba90b1be85fc6f3be8b956d153c0cf41109]:
+    #+begin_resultscode
+    The number must be three!
+    #+end_resultscode
+   
+*** Else If
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+    #+begin_src plantuml :file /tmp/test2.png :exports results
+      @startuml
+      scale .45
+      if (number equals 1?) then (yes)
+              :The number is one;
+      else (no)
+              if (number equals 2?) then (yes)
+                      :The given number is two;
+              else (no)
+                      if (number equals 3?) then (yes)
+                              :The number must be three!;
+                      else (no)
+                              :Something else!;
+                      endif
+              endif
+      endif
+      @enduml
+    #+end_src
+
+    #+RESULTS:
+    [[file:/tmp/test2.png]]
+
+*** Narrative                                                      :noexport:
+    Sometimes a single condition isn't enough for the question we want to
+    answer. Sometimes our logic takes a more branching path. To do that, you can
+    use the =else if= command. Much like =else=, =else if= allows us to add a
+    conditional - basically ask another question. =else if= follows an =if= and
+    comes before and =else=.
+
+    Comparisons are made top down and *stop* once they've found a truthy
+    statement.
+** Programming Exercise - Larger Than or Equal To
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_30.LargerThanOrEqualTo
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for two integers and prints the larger
+    of the two. If the numbers are the same, then the program informs us about
+    this as well.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class LargerThanOrEqualTo {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      5
+      Give the second number:
+      3
+      Greater number is: 5
+    #+end_resultscode
+    #+begin_resultscode
+      Give the first number:
+      5
+      Give the second number:
+      8
+      Greater number is: 8
+    #+end_resultscode
+    #+begin_resultscode
+      Give the first number:
+      5
+      Give the second number:
+      5
+      The numbers are equal!
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    In this example, we need to ask the user for two integers and print the
+    larger of the two integers but if the integers are the same, we print the
+    string /The numbers are equal!/
+** Programming Exercise - Grades and Points
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_31.GradesAndPoints
+    #+LaTeX: {\tiny
+    The table below describes how the grade for a particular course is
+    determined. Write a program that gives a course grade according to the
+    provided table.
+    #+LaTeX: }
+    | points |       grade |
+    |--------+-------------|
+    |    < 0 | impossible! |
+    |   0-49 |      failed |
+    |  50-59 |           1 |
+    |  60-69 |           2 |
+    |  70-79 |           3 |
+    |  80-89 |           4 |
+    | 90-100 |           5 |
+    |  > 100 | incredible! |
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+      Give points [0-100]:
+      37
+      Grade: failed
+    #+end_example
+      
+    #+begin_example
+      Give points [0-100]:
+      76
+      Grade: 3
+    #+end_example
+
+    #+begin_example
+      Give points [0-100]:
+      95
+      Grade: 5    
+    #+end_example
+    
+    #+begin_example
+      Give points [0-100]:
+      -3
+      Grade: impossible!
+    #+end_example
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    This exercise is an increase in difficulty. We have to make a lot of
+    decisions here based on the table provided. Ask the user for the number of
+    points and give them their grade.
+** Programming Exercise - Grades and Points                        :noexport:
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_31.GradesAndPoints
+     Foo
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give points [0-100]:
+      37
+      Grade: failed
+    #+end_resultscode
+      
+    #+begin_resultscode
+      Give points [0-100]:
+      76
+      Grade: 3
+    #+end_resultscode
+
+    #+begin_resultscode
+      Give points [0-100]:
+      95
+      Grade: 5    
+    #+end_resultscode
+    
+    #+begin_resultscode
+      Give points [0-100]:
+      -3
+      Grade: impossible!
+    #+end_resultscode
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    This exercise is an increase in difficulty. We have to make a lot of
+    decisions here based on the table provided. Ask the user for the number of
+    points and give them their grade.
+** Remainder Operations
+*** The Modulo (%) Operator   
+    #+LaTeX: {\tiny
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+      int remainder = 7 % 2;
+      System.out.println(remainder);
+   #+end_src
+
+   #+RESULTS[ba43abe9f4893f50a92dc06db95d755124bc1fee]:
+   #+begin_resultscode
+   1
+   #+end_resultscode
+
+   #+begin_src java :exports both :wrap resultscode :cache yes
+     int number = 800;
+
+     if (number % 400 == 0) {
+         System.out.println("The number " + number + " is divisible by four hundred.");
+     } else {
+         System.out.println("The number " + number + " is not divisible by four hundred.");
+     }
+   #+end_src
+
+   #+RESULTS[1a86c3b3f36baafb810ecc54c046ce9dab339528]:
+   #+begin_resultscode
+   The number 800 is divisible by four hundred.
+   #+end_resultscode
+
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    The modulo operator - the percent sign - is not used terribly often but does
+    come in handy if you want to check the divisibility of a number! The modulo
+    operator performs division on the two operands and returns the REMAINDER of
+    the operation. When a number is divisible evenly by another there is no
+    remainder so, a modulo operation would be 0.
+
+    In the second snippet to check if a number is divisible by 400, we use
+    modulo 400 and check if it evaluates to 0. If so, it's divisible by 400.
+** Programming Exercise - Odd or Even
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_32.OddOrEven                                              :BMCOL:
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for a number and informs us whether it
+    is even or odd.
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class OddOrEven {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give a number:
+      2
+      Number 2 is even.
+    #+end_resultscode
+
+    #+begin_resultscode
+      Give a number:
+      7
+      Number 7 is odd.
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    In this exercise we're going to ask for a number and tell the user if it's
+    odd or even.
+** Comparing Strings
+*** The .equals() method
+    #+LaTeX: {\small
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no :exports code
+      boolean compareInts = 10 == 10;            // evalutes to true
+      boolean compareDoubles = 42.42 == 42.42;   // evaluates to true
+      boolean compareStrings = "this" == "this"; //evaluates to false
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
+    #+begin_src java :eval no :exports code
+      String sampleString = "this is my string";
+      boolean compareStrings = sampleString.equals("this is my string");      // evaluates to true
+      compareStrings = sampleString.equals("this is not my string");          // evaluates to false
+    #+end_src
+    #+latex: }
+*** Narrative                                                      :noexport:
+    When comparing integers, doubles, and booleans, we're not asking much of
+    Java. It's fairly simple to test if 10 is 10. Things get a little more
+    interesting when we ask Java to compare two strings!
+
+    This has to do with the internal workings of strings in Java. There's a lot
+    more information to be compared against. We'll get more into this in later
+    sections but suffice to say that we can't simply use the double equals
+    comparator on two strings. Instead, we're going to use the =.equals()=
+    method.
+
+    If we want to get technical, the equals() method is method of the String
+    type. I promise we'll make that make sense later but for now, you just need
+    to know that if you have a String variable, you compare it to another string
+    using =.equals()=. Think of it as saying "I have a string which I have
+    stored in this variable and I can compare it to other strings but asking if
+    my variable equals another string". 
+
+    In the second snippet, =sampleString= is our string variable, to compare
+    sampleString to any other string, I add dot equals and pass the string we're
+    comparing it to as a parameters.
+** Programming Exercise - Password
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+    
+**** Part01_33.Password
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for a password. If the password is
+    "Caput Draconis" the program prints "Welcome!". Otherwise, the program
+    prints "Off with you!"
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Password {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here 
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Password?
+      Wattlebird
+      Off with you!
+    #+end_resultscode
+
+    #+begin_resultscode
+      Password?
+      Caput Draconis
+      Welcome!
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+** Programming Exercise - Same
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_34.Same    
+    #+LaTeX: {\tiny
+    Write a program that prompts the user for two strings. If the strings are the
+    same, then the program prints "Same". Otherwise, it prints "Different".
+    prints "Off with you!"
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Same {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here. 
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Enter the first string:
+      hello
+      Enter the second string:
+      hello
+      Same
+    #+end_resultscode
+
+    #+begin_resultscode
+      Enter the first string:
+      hello
+      Enter the second string:
+      world
+      Different
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    
+** Logical Operators
+***                                                                   :bmcol:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java :exports both :wrap resultscode :cache yes
+     System.out.println(true && true);
+   #+end_src
+
+   #+RESULTS[fa6fb09d93add0562fcff28f3abbb8ad2d3b2fcb]:
+   #+begin_resultscode
+   true
+   #+end_resultscode
+   
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
+   #+begin_src java :exports both :wrap resultscode :cache yes
+     System.out.println(true && false);
+   #+end_src
+
+   #+RESULTS[e7068e6d6f7b775e665dc293ca69209ee45cfb3d]:
+   #+begin_resultscode
+   false
+   #+end_resultscode
+
+   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java :exports both  :wrap resultscode :cache yes
+     System.out.println(false || true);
+   #+end_src
+
+   #+RESULTS[b26c1d1f5b644e321124436352be2976d1baf016]:
+   #+begin_resultscode
+   true
+   #+end_resultscode
+
+   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java :exports both :wrap resultscode :cache yes
+     System.out.println(true || false);
+   #+end_src
+
+   #+RESULTS[032de42706ff24aea93522c6ad2da4975ea6e0c3]:
+   #+begin_resultscode
+   true
+   #+end_resultscode
+
+   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java :exports both  :wrap resultscode :cache yes
+     System.out.println(false || false);
+   #+end_src
+
+   #+RESULTS[33e0cddce8d8290df0b740f4c1ba4dbd408d4737]:
+   #+begin_resultscode
+   false
+   #+end_resultscode
+
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
+   #+begin_src java :exports both :wrap resultscode :cache yes
+     System.out.println(!false);
+   #+end_src
+
+   #+RESULTS[dcd38f405b42971d13ce86b47a723e291d2484a8]:
+   #+begin_resultscode
+   true
+   #+end_resultscode
+
+*** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+    | Logic | Symbol     |
+    |-------+------------|
+    | and   | &&         |
+    | or    | \vert\vert |
+    | not   | !          |
+
+*** Narrative                                                      :noexport:
+    Conditional statements may consist of multiple parts where symbols referred to as /logical operators/ are used.

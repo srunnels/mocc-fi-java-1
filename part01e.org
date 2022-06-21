@@ -1,0 +1,701 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part01e.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Calculating with Numbers}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Calculating with Numbers
+  :PROPERTIES:
+  :header-args: :exports both :cache yes
+  :END:
+** Precedence and Parenthesis
+*** Parenthesis are an easy way to control flow of operations
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java  :exports both :wrap resultscode :cache yes
+      int calculationWithParens = (1 + 1) + 3 * (2 + 5);
+      System.out.println(calculationWithParens);
+
+      int calculationWithoutParens = 1 + 1 + 3 * 2 + 5;
+      System.out.println(calculationWithoutParens);
+    #+end_src
+
+    #+RESULTS[90836f8f768f867e89ca9d2aeb0942c598c6ff4c]:
+    #+begin_resultscode
+    23
+    13
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    It's easy to do basic math in Java - and in almost any programming language
+    really! Java will respect precedence - the order of operations are performed
+    from left to right with parenthesis taken into account. Multiplication and
+    Division are calculated before those involving addition and subtraction.
+    Just like you learned in grade school.
+
+    
+
+    
+** Programming Exercise - Seconds in a day
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_16.SecondsInADay
+    #+LaTeX: {\tiny
+    In the exercise template, implement a program that asks the user for the
+    number of days. After that, the program prints the number of seconds in the
+    given number of days.
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class SecondsInADay {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    How many days would you like to convert to seconds?
+    1
+    86400
+    #+end_resultscode
+    #+LaTeX: }
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    How many days would you like to convert to seconds?
+    3
+    259200
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    We learned earlier that we could read an integer using by using
+    Integer.valueOf() and the =scanner.nextLine()= commands. If you need to,
+    refresh your memory with recent code you've written.
+
+    In this example we're going to ask the user for an integer which represents
+    the number of days to convert to seconds and then we'll print the number of
+    seconds.
+** Expressions and Statements
+*** 
+    [[./images/part01.014.png]]
+*** 
+    [[./images/part01.015.png]]
+*** Narrative                                                      :noexport:
+    An /expression/ is a combination of values that is turned into another value
+    through a calculation or an evaluation. The /statement/ below includes the
+    expression =1 + 1 + 3 * 2 + 5= which is _evaluated= prior to its assignment
+    to the variable.
+
+    The evaluation of an expression is _always_ performed before its value is
+    assigned to a variable. As such the calculation =1 + 1 + 3 * 2 + 5= is only
+    performed once.
+
+    An /expression/ is evaluated where it occurs in the source code. So far,
+    you've mostly seen expressions in two places. To the right of an equals sign
+    when we assign a variable a value and inline with commands such as
+    =Integer.valueOf()= and =System.out.println()=. In fact, in the second
+    example here, there are _two_ expressions in our assignment statement! First
+    the expression scanner.nextLine() is evaluated which results in a string,
+    _then_ =Double.valueOf()= is evaluated which converts that string to a
+    double. The result of the evaluation of those two expressions is saved in
+    the =value= variable.
+** Performing Math in Print statements
+*** Creating new strings with =+=                                     :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      String sampleString = "The answer to everything is " + 42;
+      System.out.println(sampleString);
+    #+end_src
+
+    #+RESULTS[647344faf9faa82e77089ad91dabf276e70eb924]:
+    #+begin_resultscode
+    The answer to everything is 42
+    #+end_resultscode
+
+*** Creating new strings with =+=                                     :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      String sampleString = "The answer to everything is " + 42;
+      System.out.println(sampleString);
+    #+end_src
+
+    #+RESULTS[647344faf9faa82e77089ad91dabf276e70eb924]:
+    #+begin_resultscode
+    The answer to everything is 42
+    #+end_resultscode
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      System.out.println("Four: " + (2 + 2));
+      System.out.println("But! Twenty-two: " + 2 + 2);
+    #+end_src
+
+    #+RESULTS[b975dc52811d151040542e3b3cb4250c9d797a45]:
+    #+begin_resultscode
+    Four: 4
+    But! Twenty-two: 22
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    We learned in a previous section that we could create new strings by using
+    the "+" operation along with a string. When one of the operands in a +
+    operation is a string, the other operand will be changed into a string. This
+    is really convenient but it can create some dark corners in our code if we
+    don't think them through. If we want to perform an actual addition operation
+    we need to ensure we jump the line for precedence by using parenthesis! In
+    this example, the /expression/ - there's that word again - 2 + 2 is
+    evaluated first because its in parenthesis.
+    
+** Programming Exercise - Sum of Two Numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_17.SumOfTwoNumbers
+
+    #+LaTeX: {\tiny
+    Write a program that asks the user for two numbers. After this, the program prints the sum of the numbers given by the user.
+    When you ask for multiple numbers, create a separate variable for each:
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class SumOfTwoNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    Give the first number:
+    8
+    Give the second number:
+    3
+    The sum of the numbers is 11
+    
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    In this exercise we'll use the skills we learned in previous
+    sections to read input from the user and then sum the numbers the user
+    provides.
+** Programming Exercise - Sum of three numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_19.SumofThreeNumbers
+    #+LaTeX: {\tiny
+    Write a program that asks the user for three numbers. After this the program prints the sum of the numbers given by the user.
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class SumOfThreeNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      8
+      Give the second number:
+      3
+      Give the third number:
+      3
+      The sum of the numbers is 14
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:        
+** Programming Exercise - Addition formula
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_19.AdditionFormula
+
+    #+LaTeX: {\tiny
+    Create a program that can be used to add two integers together. In the
+    beginning, the user is asked to give two integers that are to be summed. The
+    program then prints the formula that describes the addition of the numbers.
+    #+LaTeX: }
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class AdditionFormula {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      5
+      Give the second number:
+      4
+      5 + 4 = 9
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    In this exercise we are going to print our formula and the answer as well!
+** Programming Exercise - Multiplication Formula
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_20.MultiplicationFormula
+
+    #+LaTeX: {\tiny
+    Similar to the previous exercise, create a program that multiplies the values stored in two integer variables.
+    #+LaTeX: }    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class MultiplicationFormula {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      2
+      Give the second number:
+      8
+      2 * 8 = 16    
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    This is a repetition of the previous exercise, this time we're going to use
+    multiplication though.
+** Division
+*** Integer dividend and divisor result in integer quotients        :B_block:
+    #+LaTeX: {\tiny
+    Integer divided by integer results in an integer
+    #+LaTeX: }    
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      int result = 3 / 2; 
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS[a131390fb77b46f4464e356f71484194865c24f4]:
+    #+begin_resultscode
+    1
+    #+end_resultscode
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      int dividend = 2;
+      int divisor = 3;
+      double quotient = divisor / dividend;
+      System.out.println(quotient);
+    #+end_src
+
+    #+RESULTS[203da20f28036d005840c9db0443a55a8f734d33]:
+    #+begin_resultscode
+    1.0
+    #+end_resultscode
+*** Narrative
+    Division of integers is slightly trickier. If all the variables in the
+    division expression are integers, then the resulting value will be an
+    integer as well. This is important to remember! Even if we store the result
+    of the division in a double, we get the same answer.    
+** Greater Division Accuracy
+*** A double results in greater precision
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      double dividend = 2.0;
+      int divisor = 3;
+      double quotient = divisor / dividend;
+      System.out.println(quotient);
+    #+end_src
+
+    #+RESULTS[caa97ca456677d32bd60d04582ece11604c925ff]:
+    #+begin_resultscode
+    1.5
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+
+    However, if the dividend or divisor (or both) are a floating point number, the result is a floating point number.
+
+** Casting
+*** Integer to double                                                               :B_column:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :END:
+**** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+
+    #+LaTeX: {\tiny
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      int divisor = 3;
+      int dividend = 2;
+
+      double result1 = (double) divisor / dividend;
+      System.out.println(result1);
+      double result2 =  divisor / (double) dividend;
+      System.out.println(result2);
+      double result3 = (double) (divisor / dividend);
+      System.out.println(result3);
+    #+end_src
+
+    #+RESULTS[af5c00ad1e0949891b3b22089b72c5836df47d77]:
+    #+begin_resultscode
+    1.5
+    1.5
+    1.0
+    #+end_resultscode
+**** 
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+
+       #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      int dividend = 3;
+      int divisor = 2;
+
+      double result = 1.0 * dividend / divisor;
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS[504f320c6ff92a51bb4776e517da361ffed4b8c7]:
+    #+begin_resultscode
+    1.5
+    #+end_resultscode
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java  :exports both :wrap resultscode :cache yes
+      int dividend = 3;
+      int divisor = 2;
+
+      double result = dividend / divisor * 1.0;
+      System.out.println(result);
+    #+end_src
+
+    #+RESULTS[971149dc100a21d2afc800cbe089a152e37a1f45]:
+    #+begin_resultscode
+    1.0
+    #+end_resultscode
+
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    Sometimes you have a variable or the result of an expression which is of one
+    type, but you want it to be in another type. In the case of strings, we used
+    =.valueOf= commands. For some other data structures such as integers and
+    floating point numbers we can /cast/ from type to another type. This
+    converts from type A to type B.
+
+    In this example, while the =divisor= and =dividend= variables are integers,
+    during the division expression, we are casting one, then the other to a
+    floating point integer by including =double= wrapped in parens. On line 8
+    though, we've used parenthesis to wrap the expression and then we cast the
+    result of the expression to a double. This bears some investigation. If you
+    look at the output, we get 1.5, 1.5, and then 1.0. This is because, as we
+    saw on the previous slide, if one of the numbers is a float, we get a float
+    answer. But on line 8, =divisor= and =dividend= are still integers, and
+    while we /cast/ the quotient to a double the precision was already lost. It
+    cannot be retrieved.
+
+    We can also be less explicit in our /casting/ operations. On line 4, by
+    multiplying an integer( in this case =dividend= ) with a float, we get a
+    float which means the resulting expression is division of a float (the
+    product of 3 times 1.0) and an integer (2). This does the same thing as a
+    casting dividend to a double, but is less explicit in what its doing.
+
+    One thing to keep in mind is that order of operations is still in effect. In
+    the last example, because we work left to right in our order of operations,
+    dividend is already divided by the divisor which are both integers - so we
+    lose our precision and thus the .5 falls off. We could correct this with
+    parenthesis to change the order of operations.
+
+** Programming Exercise - Average of Two Numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_21.AverageOfTwoNumbers
+    #+LaTeX: {\tiny
+    Write a program that asks the user for two integers and prints their average.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no 
+      import java.util.Scanner;
+
+      public class AverageOfTwoNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      8
+      Give the second number:
+      2
+      The average is 5.0
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+    For this exercise we're going to ask the user for two numbers and then provide the average of the numbers back to the user.
+** Programming Exercise - Average of Three Numbers
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+
+**** Part01_22.AverageofThreeNumbers
+    #+LaTeX: {\tiny
+
+    Write a program that asks the user for three integers and prints their average.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class AverageOfThreeNumbers {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      8
+      Give the second number:
+      2
+      Give the third number:
+      3
+      The average is 4.333333333333333
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    For this exercise we're going to ask the user for three numbers and provide them the average of the three numbers.
+** Programming Exercise - Simple Calculator
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+
+**** Part01_23.SimpleCalculator
+    #+LaTeX: {\tiny
+    Write a program that asks the user for two
+    numbers and prints their sum, difference, product, and quotient. Two
+    examples of the execution of the program are given below.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class SimpleCalculator {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+      Give the first number:
+      8
+      Give the second number:
+      2
+      8 + 2 = 10
+      8 - 2 = 6
+      8 * 2 = 16
+      8 / 2 = 4.0
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     

@@ -1,0 +1,290 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part01a.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Getting Started with Programming}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Getting Started with Programming
+  :PROPERTIES:
+  :header-args: :exports both :cache yes
+  :END:
+** Objectives
+   1. Become familiar with the 'NetBeans with TMC' development environment used in this course.
+   2. Learn to download and submit programming exercises.
+*** Narrative                                                      :noexport:
+    For the first part of this course we're going to dive right into some very
+    basic usage examples of the tools you'll be using to write your code, test
+    for accuracy, and even submit the code for exercises to see if you got the
+    correct answer!
+
+    To do this, we'll be using what is called "Netbeans with TMC". Netbeans is
+    a very common Integrated Development Environment or "IDE" used by Java
+    developers. It will help you organize your code, remind you of things you
+    might not wish to simply memorize, and even give you little shortcuts that
+    help make the experience of being a developer a little more enjoyable!
+    There are lots of different IDEs and most developers feel pretty strongly
+    about the one they use since it's what they spend most of their day in!
+    Over time, as you do more more development and explore other options you
+    may find you prefer a different IDE than the one we use here; however
+    there's a very good reason why we'll be using this one. This course is
+    based on the content at mooc.fi and they have a service which allows you to
+    complete the exercises in the course in Netbeans and submit them for
+    "grading". In this case, it's a test that takes your code, runs it and
+    checks the output. If the output passes, you pass! This saves us from
+    setting up our environment and having to troubleshoot - this lets you focus
+    on one thing: Learning Java.
+** The tmcbeans interface
+   [[./images/part01.000.png]]
+*** Narrative                                                      :noexport:
+    Once you have `tmcbeans` installed, when you open tmcbeans for the first
+    time you'll be asked for the username and password of your Mooc.fi account;
+    enter these values and select /Log In/. The next screen should show you the
+    organizational selection screen and ask for a course selection. We're using
+    /Mooc.fi/ and /Java Programming I/. Once you've selected both, you can
+    accept the default settings supplied by tmcbeans and when the follow-up
+    /Download exercises/ screen pops up, we can make sure all options are
+    selected and click on /Download/. After a short period of time, the IDE
+    will open with some pre-populated projects on the left. Like you see here.
+** Selecting a project
+   #+beamer: \only<1>{
+   #+attr_latex: :width 0.5\textwidth
+   [[./images/part01.001.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.002.png]]
+   #+beamer: }
+
+*** Narrative                                                      :noexport:
+    From here we can use the /Files/ tab to select the first project we'll look
+    at. Select the project which says /Part01_01.Sandbox/ by double-clicking
+    then double click through /src/, /main/, and /java/ to find /Sandbox.java/
+
+    ::NEXT SLIDE::
+    In the right hand quadrant of the screen there is some introductory source
+    code pre-filled for you. This is where we will be entering the source code
+    for our projects; where you will be typing commands to instruct the
+    computer what to do. The first line in our /main/ function begins with two
+    forward-slash characters; this denotes a comment. A comment is used to
+    document your code -- think of it as a message to yourself when you come
+    back to this code in six months or to the next person who reads your code.
+    Anything that happens after the comment on the same line will not be
+    processed by Java.
+** Writing our first Java code
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :wrap resultscode :cache yes
+     public class Sandbox {
+         public static void main(String[] args) {
+             // Write your program here
+             System.out.println("Hello world"); 
+         }
+     }
+   #+end_src
+
+   #+RESULTS[76f518f560acc2c3c5f3223101c35004a4a01e05]:
+   #+begin_resultscode
+   Hello world
+   #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    We're going to fill in some code of our own. In this case we're
+    going to tell Java to generate text output using the command
+    =System.out.println()=.  Inside of the parenthesis we'll include a
+    string - which is text between quotation marks - in this case
+    "Hello World". Take a few minutes to insert the line here into
+    the Sandbox.java file you opened in the last step.  Notice how I
+    put a ";" character at the end of the line. This tells the
+    computer "this is the end of the line".
+
+    You might have noticed some windows popping up when you filled
+    out your code. These windows are /helper/ functions from your
+    Integrated Development Environment or IDE. It's trying to guess
+    what you're going to write and supplying options which might help
+    you or provide useful documentation for what you're doing.
+
+    With the line filled in, you /should/ have a working Java
+    program. We just need to compile and run it. We'll cover what the
+    word /compile/ means later.
+     
+** Run Your Code
+   [[./images/part01.004.png]]
+*** Narrative                                                      :noexport:
+    select the Run bputton and the computer will compile and execute your code!
+** Check Your Output
+   [[./images/part01.005.png]]
+*** Narrative                                                      :noexport:
+    You should see your output in the /Output/ dialog box at the bottom
+    of the screen! You've now written, compiled, and executed your
+    first Java program.
+    
+** What does TMC stand for?
+   #+beamer: \only<1>{
+   [[./images/part01.006.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.007.png]]
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    The TMC package is "Test My Code". If your code executed and
+    generated output without errors you can Submit the code by
+    clicking on "TMC" and then selecting "Submit". This will submit
+    our code to TestMyCode which compares the output of the code to
+    the desired output TMC expects. Take a minute and click on /TMC/ at
+    the top and then select /Submit/.
+
+    You should see a dialog box that tells you the progress of the submission
+
+    ::NEXT SLIDE::
+    
+    If everything went well, the bottom right hand portion of the
+    screen should show a green "100%" indicator.
+
+* Programming in our Society                                       :noexport:
+  :PROPERTIES:
+  :header-args: :exports both :cache yes
+  :END:
+* Testing                                                          :noexport:
+  #+begin_src java
+    public class Program {
+        public static void main(String[] args) {
+            String testInput = "1,50";
+            System.out.println("You wrote " + Double.valueOf(testInput));
+        }
+    }    
+  #+end_src
+
+  #+RESULTS:
+
+** Programming Exercise Template 
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_15.BooleanInput
+    #+LaTeX: {\tiny
+    DESCRIPTION
+    #+LaTeX: }    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+    #+end_src
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:     
+* Action Items                                                     :noexport:
+** DONE Make code box outline same blue as results  
+   CLOSED: [2022-06-20 Mon 14:15]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 14:15]
+   :END:
+** TODO Fix table layout for "Fundamentals of Strings"
+   It's ugly
+** STARTED Replace code sections with just the name of the project
+   CLOSED: [2022-06-20 Mon 14:38]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 14:38]
+   :END:
+** STARTED noexport on What is a Variable
+** TODO Fix BEAMERopt in Various Variables (slide 37)
+** DONE Noexport on Reading Different Variable Types from the User (slide 39)
+   CLOSED: [2022-06-20 Mon 16:37]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:37]
+   :END:
+** TODO Fix layout on "Reading Integers" (slide 40)
+** DONE Fix desired layout on Integer Input (slide 41)   
+   CLOSED: [2022-06-20 Mon 16:38]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:38]
+   :END:
+** DONE Fix desired layout on Boolean Input (slide 44)
+   CLOSED: [2022-06-20 Mon 16:38]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:38]
+   :END:
+** DONE Fix desired layout on Different Types of Input (slide 45)
+   CLOSED: [2022-06-20 Mon 16:39]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:39]
+   :END:
+   Also spellin mistakes on double
+** DONE Change font size on description on Seconds in a day exercise (slide 48)
+   CLOSED: [2022-06-20 Mon 16:40]
+   :LOGBOOK:
+   - State "DONE"       from "STARTED"    [2022-06-20 Mon 16:40]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Change font size on description on Multiplication exercise (slide 54)
+   CLOSED: [2022-06-20 Mon 16:40]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:40]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** TODO Change layout on Division (slide 55)
+** DONE Change layout on Integer to Double (slide 56)
+   CLOSED: [2022-06-20 Mon 16:43]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:43]
+   :END:
+** DONE Change font size on description on Average of Two Numbers exercise (slide 57)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+   
+** DONE Change font size on description on Average of Three Numbers  exercise (slide 58 )
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Change font size on description on SimpleCalculator exercise (slide 59)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+   Ref layout in Sum of Two Numbers which is better
+** DONE Fix font size on third code block in Conditional Statements (slide 61)
+   CLOSED: [2022-06-20 Mon 16:44]
+   :LOGBOOK:
+   - State "DONE"       from "TODO"       [2022-06-20 Mon 16:44]
+   :END:
+** TODO Fix layout of Code Blocks (slide 63)
+** STARTED Remove exports both from plantuml entries
+** TODO Fix scaling on Else If Plantuml output.
+   It's fuzzy as fuck
+** TODO Is there text needed for    

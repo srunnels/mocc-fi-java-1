@@ -1,0 +1,574 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part01d.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Variables}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Variables
+  :PROPERTIES:
+  :header-args: :exports both :cache yes
+  :END:
+** Objective
+   1. Learn about built-in types
+   2. Learn how to set variables
+   3. Learn how to read numbers
+   4. Learn to read /truthy/ values
+*** Narrative                                                      :noexport:
+    In this section we're going to learn about the other variable /types/ which are commonly used in Java.
+** What is a variable?
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :eval no 
+     String name = "Ada Lovelace";
+     int age = 42;
+     double height = 5.12;
+     boolean alive = false;
+   #+end_src
+*** Narrative                                                      :noexport:
+    Think of /variables/ as containers. Inside these containers we can store
+    information of various /types/. In the last section we used a lot of text in
+    our code which we represented as /String/ types. We often placed those
+    /Strings/ in containers for later use.
+
+    We can store quite a few different types in Java. For example, we already
+    covered how we store /text/ in =String= variables. We can also store whole
+    numbers as =int= values; floating-point numbers as =double= values; and even
+    whether or not something is /true/ or /false/ as =boolean= values. A value
+    is /assigned/ to a variable by using the equals sign. When we use this
+    pattern of TYPE VARIABLE_NAME EQUAL_SIGN VALUE we are said to have
+    /declared/ our variable.
+    
+** Variables names are unique
+***   
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :eval no 
+     String name = "Ada Lovelace";
+     String name = "Dennis Ritchie";
+   #+end_src
+*** 
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :eval no 
+     String name = "Ada Lovelace";
+     name = "Dennis Ritchie";
+   #+end_src
+   
+*** Narrative                                                      :noexport:
+    
+    Variable names are unique, no two variables can have the same name. If you
+    try to /declare/ a variable with the same name twice, Java will generate an
+    error when you go to compile your code.
+
+   NEXT SLIDE
+
+   You can, however, simply reassign a variable you've already declared. Here
+   we've /assigned/ =name= to another value. But since we didn't /declare/ our
+   variable again, Java won't mind. Do keep in mind that once you have declared
+   a variable, while you _can_ change the value, the type cannot change. This
+   means you can't declare a String variable and then store an Integer in that
+   variable. There are a few exceptions to this rule however. If Java knows how
+   to convert the value, it can store a value of a different type in a variable
+   whose type doesn't match. It does this by converting the initial value. So if
+   you stored the integer 10 in a variable whose type was =double= it would
+   simply convert the whole number into a floating point. However, a floating
+   point value cannot be stored as an Int because Java doesn't know what to do
+   with it as removing the values after the period would constitute a loss of
+   information.
+
+** Programming Exercise - Various Variables
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :END:
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_11.VariousVariables
+    #+LaTeX: {\small
+    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      public class VariousVariables {
+
+          public static void main(String[] args) {
+              // MODIFY THESE:
+
+              int numberOfChicken = 3;
+              double baconWeight = 5.5;
+              String tractor = "None!";
+
+              // DON'T MODIFY THESE:
+              System.out.println("Chicken:");
+              System.out.println(numberOfChicken);
+              System.out.println("Bacon (kg):");
+              System.out.println(baconWeight);
+              System.out.println("Tractor:");
+              System.out.println(tractor);
+              System.out.println("");
+              System.out.println("And finally, a summary:");
+              System.out.println(numberOfChicken);
+              System.out.println(baconWeight);
+              System.out.println(tractor);
+          }
+      }
+    #+end_src
+    #+LaTeX: }
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\small
+    #+begin_resultscode
+    Chicken:
+    9000
+    Bacon (kg):
+    0.1
+    Tractor:
+    Zetor
+
+    And finally, a summary:
+    9000
+    0.1
+    Zetor
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    If you open the project Part01_11.VariousVariables you'll see we have the code displayed here.
+
+    If we run this code we get the output show in the middle. However, we don't
+    want this output. We want to change the code so we get the output on the right.
+** Naming Variables 
+   :PROPERTIES:   
+   :BEAMER_opt: t
+   :END:
+*** Bad                                                               :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.50
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :wrap resultscode :cache yes
+      double a = 3.14;
+      double b = 22.0;
+      double c = a * b * b;
+
+      System.out.println(c);
+    #+end_src    
+
+    #+RESULTS[e2c29c08717128441dd0a105100423965081f18a]:
+    #+begin_resultscode
+    1519.76
+    #+end_resultscode
+
+*** Good                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.50
+    :BEAMER_opt: T
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :wrap resultscode :cache yes
+      double pi = 3.14;
+      double radius = 22.0;
+      double surfaceArea = pi * radius * radius;
+
+      System.out.println(surfaceArea);
+    #+end_src    
+
+    #+RESULTS[b1b4065510a46b92314ae61f41925210866459a2]:
+    #+begin_resultscode
+    1519.76
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    Both examples here do the same thing but the example on the right is more
+    explanatory when read. We can understand just from seeing the variable names
+    that we're dealing with pi and a radius and calculating the surface area.
+
+    Variable names do have some constraints. For example, variables names cannot
+    contain symbols like exclamation marks and spaces are not allowed. Instead,
+    at least in Java, it's common to use what is called 'mixedCase' or
+    'camelCase' where the variable name starts with a lower case character and
+    each new word is capitalized.
+    
+    Variable names should be short yet meaningful. The choice of a variable name
+    should be mnemonic- that is, designed to indicate to the casual observer the
+    intent of its use. One-character variable names should be avoided except for
+    temporary "throwaway" variables. Common names for temporary variables are i,
+    j, k, m, and n for integers; c, d, and e for characters.
+
+    These kinds of norms are called a 'naming convention'.
+    
+** Reading Different Variable Types from the User
+*** User input comes in as a string
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={9}
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Program {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              System.out.println("Write text and press enter ");
+              String text = scanner.nextLine();
+              System.out.println("You wrote " + text);
+          }
+      }
+    #+end_src    
+
+*** Narrative                                                      :noexport:
+    When we read input from the user, that information is almost always read in
+    as a String value. Every variable in Java must be declared, it requires us
+    to bring that information in as a string. This means that if we need to
+    gather input from the user that /isn't/ a string - let's say we're asking
+    for someone's age - we have to start with the string representation and then
+    be converted to the correct type.
+
+** Reading Integers
+*** =Integer.valueOf()=   
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java  :wrap resultscode :cache yes
+      String valueAsString = "42";
+      int value = Integer.valueOf(valueAsString);
+
+      System.out.println(value);
+    #+end_src    
+
+    #+RESULTS[ca8e20691802e9d33eef63dec3db2c063d91e13a]:
+    #+begin_resultscode
+    42
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    We can use =Integer.valueOf= to convert a string to an integer. It takes a
+    string to be converted as the argument.
+
+** Reading Integers inline
+*** Using =Integer.valueOf()= inline
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={9}
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class Program {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              System.out.println("Write a value ");
+              int value = Integer.valueOf(scanner.nextLine());
+              System.out.println("You wrote " + value);
+          }
+      }
+    #+end_src    
+    
+*** Narrative                                                      :noexport:
+
+    We can also use =Integer.valueOf= inline. If we consider that we usually
+    store the results of =scanner.nextLine()= in a string variable it's a
+    reasonable assumption to say that =scanner.nextLine()= returns a String
+    value. Since =Integer.valueOf()= _takes_ a String, and =scanner.nextLine()=
+    _produces_ a string, we can simply use =scanner.nextLine()= as the argument
+    to =Integer.valueOf= without having to create an intermediary variable.
+** Programming Exercise - Integer Input
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :END:
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_12.IntegerInput
+    #+LaTeX: {\small
+    Write a program that asks the user for a value. The program then should print the value provided by the user.
+    #+LaTeX: }    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class IntegerInput {
+
+          public static void main(String[] args) {
+              Scanner scanner = new Scanner(System.in);
+
+              // write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\small
+    #+begin_resultscode
+    Write a value
+    42
+    You wrote 42
+    #+end_resultscode
+    #+LaTeX: }
+**** Break it
+     Test your program with non-numeric inputs and observe how it breaks
+*** Narrative                                                      :noexport:
+    For this exercise we're going to request the user input a number, read that
+    input with a =Scanner= and then print the value back out. One key difference
+    is, once we get this working correctly, we're going to feed it non-number
+    inputs and watch the way it breaks!
+** Reading Doubles
+*** =Double.valueOf()=    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :wrap resultscode :cache yes
+      String valueAsString = "42.42";
+      double value = Double.valueOf(valueAsString);
+      System.out.println(value);
+    #+end_src    
+
+    #+RESULTS[10376882e2fda974874fb3523f482f95ba38d628]:
+    #+begin_resultscode
+    42.42
+    #+end_resultscode
+*** Narrative                                                      :noexport:
+     The =Double.valueOf()= command, much like =Integer.valueOf()=, converts a
+     string to a double. 
+
+** Reading Doubles inline
+*** Inline Use 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={7}
+    #+begin_src java 
+          import java.util.Scanner;
+
+          public class Program {
+              public static void main(String[] args) {
+                  Scanner scanner = new Scanner(System.in);
+                  System.out.println("Write a value ");
+                  double value = Double.valueOf(scanner.nextLine());
+                  System.out.println("You wrote " + value);
+              }
+          }
+    #+end_src    
+
+*** Narrative                                                      :noexport:
+
+     And just like before we can also use it inline.
+
+** Reading Booleans
+*** Booleans very similar to casting strings to numbers
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+        #+LaTeX: {\footnotesize
+   #+CAPTION: Sample inputs and outputs for .valueOf() variants
+   | String                      | .valueOf()        | Value |
+   |-----------------------------+-------------------+-------|
+   | "100"                       | Integer.valueOf() | 100   |
+   | "1,000"                     | Integer.valueOf() | ERROR |
+   | "42.42"                     | Double.valueOf()  | 42.42 |
+   | "42,42"                     | Double.valueOf()  | ERROR |
+    #+LaTeX: }
+*** Booleans very similar to casting strings to numbers
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+        #+LaTeX: {\footnotesize
+   #+CAPTION: Sample inputs and outputs for .valueOf() variants
+   | String                      | .valueOf()        | Value |
+   |-----------------------------+-------------------+-------|
+   | "100"                       | Integer.valueOf() | 100   |
+   | "1,000"                     | Integer.valueOf() | ERROR |
+   | "42.42"                     | Double.valueOf()  | 42.42 |
+   | "42,42"                     | Double.valueOf()  | ERROR |
+   | "true"                      | Boolean.valueOf() | true  |
+   | "True"                      | Boolean.valueOf() | true  |
+   | "TrUe"                      | Boolean.valueOf() | true  |
+   | "false"                     | Boolean.valueOf() | false |
+   | "False"                     | Boolean.valueOf() | false |
+   | "FaLsE"                     | Boolean.valueOf() | false |
+   | "It's not raining outside!" | Boolean.valueOf() | false |
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    When we're converting strings to numbers as Integers or Doubles, there's not
+    many blind alley ways. While there are various gotchas like /how do you make
+    a number out of a string which has comma separator in the thousands place?/
+    or /How do you represent floating points in a european way where they use
+    comma instead of a period?/, casting strings to numbers is relatively
+    straight-forward once you wrap your brain around it.
+
+    Similarly, though significantly more restrictive, we can turn strings into
+    boolean representations as well. However, it's important to understand that
+    we can only turn the strings 'true' and 'false' into boolean values. We
+    can't turn sentiments into boolean values. So if your program asks the user
+    'Is it raining outside' and the user inputs 'It is!', that won't count as a
+    truthy boolean. While we don't have to worry about the case of the word,
+    lower case true is the same as capitalized true or spongebob tRuE, anything
+    that is NOT true is false!
+** Programming Exercise - Boolean Input
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :END:
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_14.BooleanInput
+    #+LaTeX: {\small
+    Write a program that asks the user for a boolean value. The program should then print the value provided by the user.
+    #+LaTeX: }    
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class BooleanInput {
+
+          public static void main(String[] args) { Scanner scanner = new
+              Scanner(System.in);
+
+              // write your program here
+
+          } }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\small
+    #+begin_resultscode
+    Write something:
+    santa does not exist
+    True or false? false
+    #+end_resultscode
+    #+LaTeX: }
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\small
+    #+begin_resultscode
+    Write something:
+    tRuE
+    True or false? false
+    #+end_resultscode
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    For this exercise we're going to request the user input a string and we'll
+    check it for a very basic truthyness!
+
+** Programming Exercise - Different Types of Input
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :END:
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_15.DifferentTypesofInput
+    #+LaTeX: {\tiny
+    Write a program that asks the user for a string, an integer, a floating-point number, and a boolean. The program should then print the values given by the user.
+    #+LaTeX: }
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class DifferentTypesOfInput {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+              // Write your program here
+
+          }
+      }
+    #+end_src
+
+*** Outputs                                                           :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    Give a string:
+    bye-bye
+    Give an integer:
+    11
+    Give a doulbe
+    4.2
+    Give a boolean:
+    true
+    You gave the string bye-bye
+    You gave the integer 11
+    You gave the double 4.2
+    You gave the boolean true
+    #+end_resultscode
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    For this exercise we're going to combine all the different ways we take a string a cast it to a different value by asking the user for a string, an integer, a doulbe, and a boolean, then we'll spit them back out!

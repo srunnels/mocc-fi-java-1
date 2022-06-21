@@ -1,0 +1,416 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part01b.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Printing}
+#+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+#+BEAMER_HEADER: \subsection{}
+#+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Printing
+  :PROPERTIES:
+  :header-args: :exports both :cache yes
+  :END:
+** Objectives
+   1. Learn to write a program that prints text
+   2. Become familiar with executing programs
+   3. Know what the term /parameter/ means
+*** Narrative                                                      :noexport:
+    In this section we're going to focus on writing a program that prints text,
+    becoming more familiar with executing programs, and understanding what the
+    term /parameter/ means.
+** The System.out.println() command
+   #+beamer: \only<1>{
+   [[./images/part01.009.png]]
+   #+beamer: }\only<2>{
+   [[./images/part01.008.png]]
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    In the last section we added the =System.out.println()= command to a java
+    file and made it output the text we chose. When we added the =System.out.println()= command we needed to tell it what to print, to do that, we had to provide what is called a /parameter/ between the parenthesis. 
+
+    ::NEXT SLIDE::
+    In our case, our parameter was /Hello World/. We call this /passing a parameter/; you'd say /we passed the string 'hello world' to System.out.println()/
+** Program Boilerplate v1                                          :noexport:
+   #+beamer: \only<1>{
+   [[./images/part01.010.png]]
+
+   #+beamer: }\only<2>{
+   [[./images/part01.011.png]]
+   #+beamer: }\only<3>{
+   [[./images/part01.012.png]]
+   #+beamer: }\only<4>{
+   [[./images/part01.013.png]]
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    Java requires a good deal of what programmers call /boilerplate/ it comes
+    from when we used to use hot metal typesetting to make things like
+    newspapers but in modern vernacular it mostly means something that is copied
+    or reused without significant changes.
+
+    In the code we ran in the last section, everything that isn't the comment -
+    the line starting with two forward slashes - and the System.out.println()
+    command
+
+    ::NEXT SLIDE::
+
+    was boilerplate. In this example, the /boilerplate/ parts of our code tell
+    the computer that our program is called /Sandbox/. Java forces you to match
+    the name of the program to the name of the file that contains the source
+    code. Since our program is named /Sandbox/ it has to exist in a file named
+    =Sandbox.java= to work.
+
+    When the program starts, execution begins at the line that says =public static void main=
+
+    ::NEXT SLIDE::
+
+    and ends at the closing curly bracket.
+
+    We'll discuss what the terms /public class/ and /public static void/ mean
+    later on. In our example, we have only one command to execute since comments
+    are ignored.
+** Program Boilerplate
+*** :B_onlyenv:
+:PROPERTIES:
+:BEAMER_env: onlyenv
+:BEAMER_ACT: <1>
+:END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={}
+   #+begin_src java :exports code :eval no
+        public class Sandbox {
+            public static void main(String[] args) {
+                // Write your program here
+                System.out.println("Hello world");
+            }
+        }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={}
+    #+begin_src java :exports code :eval no
+      public class Sandbox {
+          public static void main(String[] args) {
+
+              
+          }
+      }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <3>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2}
+    #+begin_src java :exports code :eval no
+      public class Sandbox {
+          public static void main(String[] args) {
+              // Write your program here
+              System.out.println("Hello world");
+          }
+      }     
+   #+end_src
+*** :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_ACT: <4>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
+   #+begin_src java :exports code :eval no
+        public class Sandbox {
+            public static void main(String[] args) {
+                // Write your program here
+                System.out.println("Hello world");
+            }
+        }     
+   #+end_src
+   
+   #+beamer: }
+*** Narrative                                                      :noexport:
+    Java requires a good deal of what programmers call /boilerplate/ it comes
+    from when we used to use hot metal typesetting to make things like
+    newspapers but in modern vernacular it mostly means something that is copied
+    or reused without significant changes.
+
+    In the code we ran in the last section, everything that isn't the comment -
+    the line starting with two forward slashes - and the System.out.println()
+    command
+
+    ::NEXT SLIDE::
+
+    was boilerplate. In this example, the /boilerplate/ parts of our code tell
+    the computer that our program is called /Sandbox/. Java forces you to match
+    the name of the program to the name of the file that contains the source
+    code. Since our program is named /Sandbox/ it has to exist in a file named
+    =Sandbox.java= to work.
+
+    When the program starts, execution begins at the line that says =public static void main=
+
+    ::NEXT SLIDE::
+
+    and ends at the closing curly bracket.
+
+    We'll discuss what the terms /public class/ and /public static void/ mean
+    later on. In our example, we have only one command to execute since comments
+    are ignored.
+** Programming Exercise - Ada Lovelace
+*** Code                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_02.AdaLovelace
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :exports code :eval no
+     public class AdaLovelace {
+         public static void main(String[] args) {
+             // Write your program here
+
+         }
+     }     
+   #+end_src
+    
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    Ada Lovelace
+    #+end_resultscode
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    It's time to do an exercise. In =tmcbeans=, open the project
+    =Part01_02.AdaLovelace= by double clicking, and continue to double click
+    through /src/, /main/, /java/, and /AdaLovelace.java/
+
+    Notice how the file named /AdaLovelace.java/ has a 'public class
+    AdaLovelace' as part of the boilerplate! Our job is to write a program that
+    outputs the string "Ada LoveLace". When you think you have the answer,
+    submit your answer to TMC!
+** Printing Multiple Lines
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :results output :exports both  :wrap resultscode :cache yes :results verbatim
+     public class Ohjelma {
+         public static void main(String[] args) {
+             System.out.println("Hello world!");
+             System.out.println("... and the universe!");
+         }
+     }
+   #+end_src
+
+   #+RESULTS[f689d1d1b5821641e65d43ec56079302167fadb4]:
+   #+begin_resultscode
+   Hello world!
+   ... and the universe!
+   #+end_resultscode
+
+
+
+*** Narrative                                                      :noexport:
+    We construct programs command by command but computer generally needs to
+    know when one command ends and another command begins. While computers are
+    quite complex there are places where it needs some /help/ to understand what
+    humans are telling it to do. Different languages use different means to tell
+    the computer /this is the end of a command/. In Java, a command usually ends
+    with a semicolon.
+
+    Here we have a program with two commands. Since the =System.out.println()=
+    command prints /LINES/ of text we get two lines when this code executes. 
+
+    ::NEXT SLIDE::
+
+    If we didn't have the semicolons at the end of lines 3 and 4 this would
+    generated an error instead of text. In fact, you don't really need to start
+    a every command on a new line in Java. The newlines are really there for
+    humans, not the computer! The computer will understand it if it's all on one
+    line as long as the semicolons are in the right place but humans are VERY
+    like to get a headache if they try to read it that way.
+
+** Programming Exercise - Once Upon a Time
+*** Code
+      :PROPERTIES:
+      :BEAMER_opt: T
+      :BEAMER_col: 0.60
+      :END:
+**** Part01_03.OnceUponATime
+
+     #+LATEX: {\tiny
+     Modify the program so that it will print the following text. Use _three_
+     =System.out.println()= commands for printing.
+     #+LATEX: }
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny   
+    #+begin_src java :eval no
+     public class OnceUponATime {
+         public static void main(String[] args) {
+             // Write your program here
+
+         }
+     }
+   #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+     #+LaTeX: {\tiny
+    #+begin_resultscode
+     Once upon a time
+     there was
+     a program
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:
+    The next exercise is =Part01_03.OnceUponATime=. Load the project in tmcbeans
+    and try to solve it! When you think you have it right, run your code, and
+    check the output. If it looks right, submit it to TMC.
+** Letting the IDE help you a bit
+*** Python
+    #+begin_src python :eval no
+      print("Hello World")
+    #+end_src
+*** Java
+    #+begin_src java :eval no
+      System.out.println("Hello World")
+    #+end_src
+*** Narrative                                                      :noexport:
+    Java is a notoriously /wordy/ language. A lot of languages, when they want
+    to print output, the command is just "print()" but Java makes you type 22
+    characters at minimum just to write =System.out.println("")=.
+
+    Thankfully, Netbeans - and just about every editor - provides you with some
+    shortcuts you can use to make your day to day use of Java just a bit better.
+    Let's take a look at a quick one. In whatever, Source code file you happen
+    to enter, go to the next line and type the word "sout" and hit the <TAB> key.
+
+    :: WAIT ::
+
+    The IDE expands sout to System.out.println("") AND moves your cursor to the
+    spot between the quotes. That reduces those 22 keypresses to no more than
+    five! It doesn't feel like a lot but your fingers will thank you later.
+** nProgramming Exercise - Dinosaur
+*** Code
+      :PROPERTIES:
+      :BEAMER_opt: T
+      :BEAMER_col: 0.60
+      :END:
+**** Part01_04.Dinosaur
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :eval no
+     public class Dinosaur {
+         public static void main(String[] args) {
+             // Write your program here
+         }
+     }
+   #+end_src
+   
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+     #+LaTeX: {\tiny
+    #+begin_resultscode
+     Once upon a time
+     there was
+     a dinosaur
+    #+end_resultscode
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+
+    Open the project =Part01_04.Dinosaur=. Modify the program so that it will
+   print the following text. Use _three_ =System.out.println()= commands for
+   printing but this time use =sout= instead of typing everything out!
+
+** Comments
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :eval no
+     public class Comments {
+         public static void main(String[] args) {
+             // Printing
+             System.out.println("Text to print");
+             System.out.println("More text to print!");
+             /* Next:
+                - more on printing
+                - more practice
+                - variables
+                - ...
+             ,*/
+             System.out.println("Some other text to print");
+             // System.out.println("Trying stuff out")
+         }
+     }
+   #+end_src
+*** Narrative                                                      :noexport:
+    There are two types of comments we can use in Java. Single line comments
+    which start with forward slashes like the ones you see on lines 3 and 13 and
+    multi-line comments which start with a foward-slash and an asterisk and end
+    with an asterisk and a forward slash - like what you see starting on line 6
+    and ending on line 11.
+
+    Comments are very useful in code. While they don't do anything - the
+    compiler simply ignores them - they exist to act as reminders to the person
+    reading the code. There are two axiomatic statements - axiomatic means it is
+    self-evident and always true.
+
+    The first is that it is always easier to write code than it is to read code.
+    All things being equal, reading code that other people write will take more
+    time than it would have for you to write.
+
+    The second axiomatic statement is that you will certainly not remember that
+    thing you think you will remember. Sometimes you come back to code a week
+    later or six months later and it seems like an alien wrote the code you
+    wrote previously. It's very difficult to maintain /context/ about a thing.
+
+    Comments exist to help smooth over those issues. Using comments is a good
+    way to note when something about the code is not immediately evident to a
+    beginner who would be reading your code!  Sometimes, you're that beginner!
+
+    Comments can also be used to remove a command from the code that you think
+    you might want to add back later. We call this /commenting out code/. Line
+    13 is a commented-out print statement!
