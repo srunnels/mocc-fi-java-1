@@ -9,30 +9,32 @@
 #+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
 #+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
 #+BEAMER_THEME: metropolis
-#+BEAMER_OUTER_THEME: miniframes [subsection=false]
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
 #+BEAMER_HEADER: \subtitle{Conditional Statements and Operations}
-#+BEAMER_HEADER: \AtBeginSection[]{
+# #+BEAMER_HEADER: \AtBeginSection[]{
 # This line inserts a table of contents with the current section highlighted at
 # the beginning of each section
-#+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
 # In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
 # q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
-#+BEAMER_HEADER: \subsection{}
-#+BEAMER_HEADER: }
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
 #+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
 #+LATEX_HEADER: \usepackage{listings}
 #+LATEX_HEADER: \usepackage{minted}
 #+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
 #+LATEX_HEADER: \usepackage{etoolbox}
 #+LATEX_HEADER: \usepackage{local-style}
 #+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
 #+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
 #+LATEX_HEADER: \usepackage{parskip}
-* Conditional Statements and Operations
-** Objectives
+* Objectives
+** What we will cover 
    - Understand what a conditional statement is
    - Learn how to perform comparison
    - Understand branching flow
+* Conditional Statements
 ** Conditional Statements
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2}
    #+begin_src java  :exports both :wrap resultscode :cache yes
@@ -104,7 +106,6 @@
    #+end_resultscode
    
 *** Narrative                                                      :noexport:
-
    In this next example, we're using a boolean - a type that can only hold true
    or false - as our conditional. Since it evaluates to a truthy value, the
    associated code block is evaluated.
@@ -115,57 +116,57 @@
 ** Programming Exercise - Speeding Ticket
 *** Code                                                              :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.60
     :END:
 **** Part01_23.SpeedingTicket
-    #+LaTeX: {\tiny
-    Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
-    #+LaTeX: }
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java :eval no :wrap resultscode :cache yes
-      import java.util.Scanner;
+     #+LaTeX: {\tiny
+     Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
+     #+LaTeX: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no :wrap resultscode :cache yes
+       import java.util.Scanner;
 
-      public class SpeedingTicket {
+       public class SpeedingTicket {
 
-          public static void main(String[] args) {
-              Scanner scanner = new Scanner(System.in);
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
 
-              // Write your program here. 
-          }
-      }
-    #+end_src
+               // Write your program here. 
+           }
+       }
+     #+end_src
 
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
-    #+LaTeX: {\tiny
-    #+begin_resultscode
-      Give speed:
-      15
-    #+end_resultscode
-    #+LaTeX: }
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+       Give speed:
+       15
+     #+end_resultscode
+     #+LaTeX: }
 
-    #+LaTeX: {\tiny
-    #+begin_resultscode
-      Give speed:
-      135
-      Speeding ticket!
-    #+end_resultscode
-    #+LaTeX: }
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+       Give speed:
+       135
+       Speeding ticket!
+     #+end_resultscode
+     #+LaTeX: }
 *** Narrative                                                      :noexport:
-    In this exercise, we ask the user for an integer and if it's greater than 120 we print the statmeent "Speeding ticket".
-** Code Indentation and Block Statements
-*** 
+     In this exercise, we ask the user for an integer and if it's greater than 120 we print the statmeent "Speeding ticket".
+* Indentation
+** Indentation is for humans
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.50
     :END:
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,2,4}
@@ -184,7 +185,7 @@
     #+begin_resultscode
     Number less than 100
     #+end_resultscode
-*** 
+** A lack of indentation is ugly but sometimes still works!
     :PROPERTIES:
     :BEAMER_opt: T
     :BEAMER_col: 0.50
@@ -226,37 +227,41 @@
     programmers who might read your code. It's easier for humans to read.
 
     In Java it's traditional to indent by either 4 spaces or a tab. Most editors do this for you.
-** Comparison Operators
-*** Common Comparators    
-   | Operator | Use                      |
-   |----------+--------------------------|
-   | >        | Greater Than             |
-   | >=       | Greater Than or Equal To |
-   | <        | Less Than                |
-   | <=       | Less Than or Equal To    |
-   | ==       | Equal To                 |
-   | !=       | Not equal To             |
+* Comparison Operators
+** Common Comparators
+   #+begin_export latex
+   \begin{tcolorbox}[tab2,tabularx={X|X}]
+     \rowcolor{myblue!75}\textcolor{white}{\textbf{Operator}} & \textcolor{white}{\textbf{Use}} \\\hline
+     > & Greater Than \\\hline 
+     >= & Greater Than or Equal To\\\hline
+     < & Less Than\\\hline
+     <= & Less Than or Equal To\\\hline
+     == & Equal To\\\hline
+     != & Not equal To\\\hline
+   \end{tcolorbox}
+   #+end_export
 *** Narrative                                                      :noexport:
-    This table contains some of the most common comparators used in programming.
-    A few them should look familiar from math but do make a note of the double
-    equals sign as this can trip you up a good number of times. In Java - and in
-    most programming languages - the single equals sign is an assignment
-    operator. Such as we assign the value 10 to an integer variable. The
-    comparator for /equals/ is the /double equals/!
+   This table contains some of the most common comparators used in programming.
+   A few them should look familiar from math but do make a note of the double
+   equals sign as this can trip you up a good number of times. In Java - and in
+   most programming languages - the single equals sign is an assignment
+   operator. Such as we assign the value 10 to an integer variable. The
+   comparator for /equals/ is the /double equals/!
 ** Programming Exercise - Ancient
 *** Code                                                              :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.60
+    :BEAMER_opt: t
+    :BEAMER_col: 0.70
     :END:
 **** Part01_26.Ancient
     #+LaTeX: {\tiny
-    Write a program that prompts the user for a year. If the user inputs a number
-    that is smaller than 2015, then the program prints the string "Ancient
-    history!".
+    Write a program that prompts the user for a year.
+
+    If the user inputs a number that is smaller than 2015, then the program
+    prints the string "Ancient history!".
     #+LaTeX: }
 
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,breakanywhere,autogobble=true
     #+begin_src java :eval no
       import java.util.Scanner;
 
@@ -272,14 +277,14 @@
 
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.40
+    :BEAMER_opt: t
+    :BEAMER_col: 0.30
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
       Give a year:
@@ -296,64 +301,67 @@
 *** Narrative                                                      :noexport:
     In this exercise we're going to ask the user for a year and if it's before
     2015 we print the sentence "Ancient history!"
-** Else
-*** Else statements
-    #+begin_src plantuml :file /tmp/test.png :exports results
-      @startuml
-      if (number greater than 5?) then (yes)
-        :Your number is greater than five!;
-      else (no)
-        :Your number is five or less!;
-      endif
-      @enduml
-    #+end_src
+* Else
+** Else statements
+   #+begin_src plantuml :file /tmp/test.png :exports results
+     @startuml
+     if (number greater than 5?) then (yes)
+       :Your number is greater than five!;
+     else (no)
+       :Your number is five or less!;
+     endif
+     @enduml
+   #+end_src
 
-    #+RESULTS:
-    [[file:/tmp/test.png]]
+   #+RESULTS:
+   [[file:/tmp/test.png]]
 
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
-    #+begin_src java  :exports both :wrap resultscode :cache yes
-      int number = 4;
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+     int number = 4;
 
-      if (number > 5) {
-          System.out.println("Your number is greater than five!");
-      } else {
-          System.out.println("Your number is five or less!");
-      }
-    #+end_src
+     if (number > 5) {
+         System.out.println("Your number is greater than five!");
+     } else {
+         System.out.println("Your number is five or less!");
+     }
+   #+end_src
 
-    #+RESULTS[ed433f7c8915e3bbab89c734c1e202bfa8f5ddac]:
-    #+begin_resultscode
-    Your number is five or less!
-    #+end_resultscode
+   #+RESULTS[ed433f7c8915e3bbab89c734c1e202bfa8f5ddac]:
+   #+begin_resultscode
+   Your number is five or less!
+   #+end_resultscode
 
 *** Narrative                                                      :noexport:
-    We've walked through how to do something if the conditional statement is
-    /truthy/ but that leaves a lot to be desired when it comes to making
-    decisions. In the previous exercise we only printed something if the year
-    was less than 2015, what if we wanted to print something if the year weren't less than 2015 as well?
+   We've walked through how to do something if the conditional statement is
+   /truthy/ but that leaves a lot to be desired when it comes to making
+   decisions. In the previous exercise we only printed something if the year
+   was less than 2015, what if we wanted to print something if the year weren't less than 2015 as well?
 
-    That's where /else/ comes in. Else is the other leg of the branch. An if
-    statement is effectively a fork in the road. If the conditional statement is
-    truthy, we follow one leg, if the if statement is falsey we follow the other
-    leg.
+   That's where /else/ comes in. Else is the other leg of the branch. An if
+   statement is effectively a fork in the road. If the conditional statement is
+   truthy, we follow one leg, if the if statement is falsey we follow the other
+   leg.
 
-    An =else= statement can only exist with an =if= statement and is placed
-    after the closing curly brace of the if statement.
+   An =else= statement can only exist with an =if= statement and is placed
+   after the closing curly brace of the if statement.
 
 ** Programming Exercise - Positivity
 *** Code                                                              :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.60
     :END:
-**** Part01_28.Positivity
-    #+LaTeX: {\tiny
+**** Part01_28.Positivity                                           :B_block:
+     :PROPERTIES:
+     :BEAMER_env: block
+     :END:
+
     Write a program that prompts the user for an integer and informs the user
     whether or not it is positive (greater than zero).
-    #+LaTeX: }
 
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :eval no
       import java.util.Scanner;
 
@@ -369,26 +377,26 @@
 
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
-    #+LaTeX: {\tiny
-    #+begin_resultscode
-      Give a number:
-      5
-      The number is positive.    
-    #+end_resultscode
-    #+begin_resultscode
-      Give a number:
-      -2
-      The number is not positive.
-    #+end_resultscode
-    #+LaTeX: }
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+   #+begin_resultscode
+     Give a number:
+     5
+     The number is positive.    
+   #+end_resultscode
+   #+begin_resultscode
+     Give a number:
+     -2
+     The number is not positive.
+   #+end_resultscode
+
+
 *** Narrative                                                      :noexport:
     In this exercise, we're going to write code to ask the user for an integer
     and then inform them if the integer is positive or not.
@@ -424,10 +432,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
       How old are you?
@@ -444,71 +452,70 @@
     Similar to the last exercise, we're going to ask for an integer but we're
     going to tell the user if they are an adult. An adult is anyone who is 18
     years or older.
-** More conditionals                                               :B_column:
-   :PROPERTIES:
-   :BEAMER_env: column
-   :END:
+* More conditionals
+** Else If
 *** 
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.60
-    :END:
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-    #+begin_src java  :exports both :wrap resultscode :cache yes
-      int number = 3;
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :BEAMER_col: 0.60
+   :END:
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+   #+begin_src java  :exports both :wrap resultscode :cache yes
+     int number = 3;
 
-      if (number == 1) {
-          System.out.println("The number is one");
-      } else if (number == 2) {
-          System.out.println("The given number is two");
-      } else if (number == 3) {
-          System.out.println("The number must be three!");
-      } else {
-          System.out.println("Something else!");
-      }
-    #+end_src
+     if (number == 1) {
+         System.out.println("The number is one");
+     } else if (number == 2) {
+         System.out.println("The given number is two");
+     } else if (number == 3) {
+         System.out.println("The number must be three!");
+     } else {
+         System.out.println("Something else!");
+     }
+   #+end_src
 
-    #+RESULTS[329aaba90b1be85fc6f3be8b956d153c0cf41109]:
-    #+begin_resultscode
-    The number must be three!
-    #+end_resultscode
-   
+   #+RESULTS[329aaba90b1be85fc6f3be8b956d153c0cf41109]:
+   #+begin_resultscode
+   The number must be three!
+   #+end_resultscode
 *** Else If
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.40
-    :END:
-    #+begin_src plantuml :file /tmp/test2.png :exports results
-      @startuml
-      scale .45
-      if (number equals 1?) then (yes)
-              :The number is one;
-      else (no)
-              if (number equals 2?) then (yes)
-                      :The given number is two;
-              else (no)
-                      if (number equals 3?) then (yes)
-                              :The number must be three!;
-                      else (no)
-                              :Something else!;
-                      endif
-              endif
-      endif
-      @enduml
-    #+end_src
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :BEAMER_col: 0.40
+   :END:
 
-    #+RESULTS:
-    [[file:/tmp/test2.png]]
+   #+begin_src plantuml :file /tmp/test2.png :exports results
+     @startuml
+     scale .45
+     if (number equals 1?) then (yes)
+             :The number is one;
+     else (no)
+             if (number equals 2?) then (yes)
+                     :The given number is two;
+             else (no)
+                     if (number equals 3?) then (yes)
+                             :The number must be three!;
+                     else (no)
+                             :Something else!;
+                     endif
+             endif
+     endif
+     @enduml
+   #+end_src
+
+   #+RESULTS:
+   [[file:/tmp/test2.png]]
+
 
 *** Narrative                                                      :noexport:
-    Sometimes a single condition isn't enough for the question we want to
-    answer. Sometimes our logic takes a more branching path. To do that, you can
-    use the =else if= command. Much like =else=, =else if= allows us to add a
-    conditional - basically ask another question. =else if= follows an =if= and
-    comes before and =else=.
+   Sometimes a single condition isn't enough for the question we want to
+   answer. Sometimes our logic takes a more branching path. To do that, you can
+   use the =else if= command. Much like =else=, =else if= allows us to add a
+   conditional - basically ask another question. =else if= follows an =if= and
+   comes before and =else=.
 
-    Comparisons are made top down and *stop* once they've found a truthy
-    statement.
+   Comparisons are made top down and *stop* once they've found a truthy
+   statement.
 ** Programming Exercise - Larger Than or Equal To
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -540,10 +547,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
       Give the first number:
@@ -571,7 +578,7 @@
     In this example, we need to ask the user for two integers and print the
     larger of the two integers but if the integers are the same, we print the
     string /The numbers are equal!/
-** Programming Exercise - Grades and Points
+** Programming Exercise - Grades and Points                        :noexport:
 *** Code                                                              :BMCOL:
     :PROPERTIES:
     :BEAMER_opt: T
@@ -600,10 +607,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_example
       Give points [0-100]:
@@ -634,56 +641,71 @@
     This exercise is an increase in difficulty. We have to make a lot of
     decisions here based on the table provided. Ask the user for the number of
     points and give them their grade.
-** Programming Exercise - Grades and Points                        :noexport:
+** Programming Exercise - Grades and Points
 *** Code                                                              :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.60
     :END:
 **** Part01_31.GradesAndPoints
-     Foo
+    #+LaTeX: {\tiny
+    The table below describes how the grade for a particular course is determined. Write a program that gives a course grade according to the provided table.
+    #+LaTeX: }
+    | points |       grade |
+    |--------+-------------|
+    |    < 0 | impossible! |
+    |   0-49 |      failed |
+    |  50-59 |           1 |
+    |  60-69 |           2 |
+    |  70-79 |           3 |
+    |  80-89 |           4 |
+    | 90-100 |           5 |
+    |  > 100 | incredible! |
+
 *** Outputs                                                           :BMCOL:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
-    #+LaTeX: {\tiny
-    #+begin_resultscode
-      Give points [0-100]:
-      37
-      Grade: failed
-    #+end_resultscode
-      
-    #+begin_resultscode
-      Give points [0-100]:
-      76
-      Grade: 3
-    #+end_resultscode
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     # What ever you do don't delete this python block or it breaks latex - SAR 2022/06/21
+     #+begin_src python :exports code
+     #+end_src
+     #+begin_resultscode
+     Give points [0-100]:
+     37
+     Grade: failed
+     #+end_resultscode
+     
+     #+begin_resultscode
+     Give points [0-100]:
+     76
+     Grade: 3
+     #+end_resultscode
 
-    #+begin_resultscode
-      Give points [0-100]:
-      95
-      Grade: 5    
-    #+end_resultscode
+     #+begin_resultscode
+     Give points [0-100]:
+     95
+     Grade: 5    
+     #+end_resultscode
     
-    #+begin_resultscode
-      Give points [0-100]:
-      -3
-      Grade: impossible!
-    #+end_resultscode
-    #+LaTeX: }
+     #+begin_resultscode
+     Give points [0-100]:
+     -3
+     Grade: impossible!
+     #+end_resultscode
 
 *** Narrative                                                      :noexport:
     This exercise is an increase in difficulty. We have to make a lot of
     decisions here based on the table provided. Ask the user for the number of
     points and give them their grade.
-** Remainder Operations
-*** The Modulo (%) Operator   
+* Remainder Operations
+** Modulo  
+*** The % Operator   
     #+LaTeX: {\tiny
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
    #+begin_src java  :exports both :wrap resultscode :cache yes
@@ -696,6 +718,7 @@
    1
    #+end_resultscode
 
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
    #+begin_src java :exports both :wrap resultscode :cache yes
      int number = 800;
 
@@ -713,14 +736,14 @@
 
     #+LaTeX: }
 *** Narrative                                                      :noexport:
-    The modulo operator - the percent sign - is not used terribly often but does
-    come in handy if you want to check the divisibility of a number! The modulo
-    operator performs division on the two operands and returns the REMAINDER of
-    the operation. When a number is divisible evenly by another there is no
-    remainder so, a modulo operation would be 0.
+   The modulo operator - the percent sign - is not used terribly often but does
+   come in handy if you want to check the divisibility of a number! The modulo
+   operator performs division on the two operands and returns the REMAINDER of
+   the operation. When a number is divisible evenly by another there is no
+   remainder so, a modulo operation would be 0.
 
-    In the second snippet to check if a number is divisible by 400, we use
-    modulo 400 and check if it evaluates to 0. If so, it's divisible by 400.
+   In the second snippet to check if a number is divisible by 400, we use
+   modulo 400 and check if it evaluates to 0. If so, it's divisible by 400.
 ** Programming Exercise - Odd or Even
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -752,10 +775,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
       Give a number:
@@ -772,8 +795,9 @@
 *** Narrative                                                      :noexport:     
     In this exercise we're going to ask for a number and tell the user if it's
     odd or even.
-** Comparing Strings
-*** The .equals() method
+* Comparing Strings
+** The .equals() method
+*** .equals()
     #+LaTeX: {\small
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
     #+begin_src java :eval no :exports code
@@ -789,27 +813,27 @@
       compareStrings = sampleString.equals("this is not my string");          // evaluates to false
     #+end_src
     #+latex: }
-*** Narrative                                                      :noexport:
-    When comparing integers, doubles, and booleans, we're not asking much of
-    Java. It's fairly simple to test if 10 is 10. Things get a little more
-    interesting when we ask Java to compare two strings!
+**** Narrative                                                     :noexport:
+     When comparing integers, doubles, and booleans, we're not asking much of
+     Java. It's fairly simple to test if 10 is 10. Things get a little more
+     interesting when we ask Java to compare two strings!
 
-    This has to do with the internal workings of strings in Java. There's a lot
-    more information to be compared against. We'll get more into this in later
-    sections but suffice to say that we can't simply use the double equals
-    comparator on two strings. Instead, we're going to use the =.equals()=
-    method.
+     This has to do with the internal workings of strings in Java. There's a lot
+     more information to be compared against. We'll get more into this in later
+     sections but suffice to say that we can't simply use the double equals
+     comparator on two strings. Instead, we're going to use the =.equals()=
+     method.
 
-    If we want to get technical, the equals() method is method of the String
-    type. I promise we'll make that make sense later but for now, you just need
-    to know that if you have a String variable, you compare it to another string
-    using =.equals()=. Think of it as saying "I have a string which I have
-    stored in this variable and I can compare it to other strings but asking if
-    my variable equals another string". 
+     If we want to get technical, the equals() method is method of the String
+     type. I promise we'll make that make sense later but for now, you just need
+     to know that if you have a String variable, you compare it to another string
+     using =.equals()=. Think of it as saying "I have a string which I have
+     stored in this variable and I can compare it to other strings but asking if
+     my variable equals another string". 
 
-    In the second snippet, =sampleString= is our string variable, to compare
-    sampleString to any other string, I add dot equals and pass the string we're
-    comparing it to as a parameters.
+     In the second snippet, =sampleString= is our string variable, to compare
+     sampleString to any other string, I add dot equals and pass the string we're
+     comparing it to as a parameters.
 ** Programming Exercise - Password
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -844,21 +868,21 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Password?
-      Wattlebird
-      Off with you!
+      > Password?
+      < Wattlebird
+      > Off with you!
     #+end_resultscode
 
     #+begin_resultscode
-      Password?
-      Caput Draconis
-      Welcome!
+      > Password?
+      < Caput Draconis
+      > Welcome!
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -895,10 +919,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
       Enter the first string:
@@ -918,65 +942,67 @@
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
     
-** Logical Operators
+* Logical Operators
+** Logical Operators  
 *** Code
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.75
-    :END:
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :BEAMER_col: 0.75
+   :END:
     
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
-    #+begin_src java :wrap resultscode :cache yes :exports both
-      String gender = "M";
-      int age = 45;
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
+   #+begin_src java :wrap resultscode :cache yes :exports both
+     String gender = "M";
+     int age = 45;
 
-      if (gender.equals("M")){
-          if (age > 40){
-              System.out.println("You are quite old!");
-          }
-      }
-    #+end_src
+     if (gender.equals("M")){
+         if (age > 40){
+             System.out.println("You are quite old!");
+         }
+     }
+   #+end_src
 
-    #+RESULTS[3f25a5f1a19fe1e8a9aa34d9833ca09c8df8869e]:
-    #+begin_resultscode
-    You are quite old!
-    #+end_resultscode
+   #+RESULTS[3f25a5f1a19fe1e8a9aa34d9833ca09c8df8869e]:
+   #+begin_resultscode
+   You are quite old!
+   #+end_resultscode
 
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true        
-    #+begin_src java :wrap resultscode :cache yes :exports both
-      String gender = "M";
-      int age = 42;
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true        
+   #+begin_src java :wrap resultscode :cache yes :exports both
+     String gender = "M";
+     int age = 42;
 
-      if (gender.equals("M") && age > 40)  {
-          System.out.println("You are quite old!");
-      }
-    #+end_src
+     if (gender.equals("M") && age > 40)  {
+         System.out.println("You are quite old!");
+     }
+   #+end_src
 
-    #+RESULTS[fbf7b4488026bec82f46f99a5cad49cb981ac04d]:
-    #+begin_resultscode
-    You are quite old!
-    #+end_resultscode
+   #+RESULTS[fbf7b4488026bec82f46f99a5cad49cb981ac04d]:
+   #+begin_resultscode
+   You are quite old!
+   #+end_resultscode
 
 *** Operators   
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_col: 0.25
-    :END:
+   :PROPERTIES:
+   :BEAMER_opt: T
+   :BEAMER_col: 0.25
+   :END:
 
-    | Logic | Symbol     |
-    |-------+------------|
-    | and   | &&         |
-    | or    | \vert\vert |
-    | not   | !          |
+   | Logic | Symbol     |
+   |-------+------------|
+   | and   | &&         |
+   | or    | \vert\vert |
+   | not   | !          |
 
 *** Narrative                                                      :noexport:
-    In the sense of logic there are three major operations we can take on any
-    /set/ of conditions. A condition, on its own, only ever resolves in a truthy
-    or falsey value, however you might want to make multiple comparison and
-    instead of, say, nesting a bunch of =if= statements like we have in the
-    first example here, you can combine comparisons using logic operators AND,
-    OR, and NOT.
+   In the sense of logic there are three major operations we can take on any
+   /set/ of conditions. A condition, on its own, only ever resolves in a truthy
+   or falsey value, however you might want to make multiple comparison and
+   instead of, say, nesting a bunch of =if= statements like we have in the
+   first example here, you can combine comparisons using logic operators AND,
+   OR, and NOT.
 ** Logical Operators: AND
+*** AND
     #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
    #+begin_src java :exports both :wrap resultscode :cache yes
      System.out.println(true && true);
@@ -1013,88 +1039,90 @@
     of conditions evaluates to false.
 
 ** Logical Operators: OR
-   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
-   #+begin_src java :exports both  :wrap resultscode :cache yes
-     System.out.println(false || true);
-   #+end_src
+*** OR
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :exports both  :wrap resultscode :cache yes
+      System.out.println(false || true);
+    #+end_src
 
-   #+RESULTS[b26c1d1f5b644e321124436352be2976d1baf016]:
-   #+begin_resultscode
-   true
-   #+end_resultscode
+    #+RESULTS[b26c1d1f5b644e321124436352be2976d1baf016]:
+    #+begin_resultscode
+    true
+    #+end_resultscode
 
-   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
-   #+begin_src java :exports both :wrap resultscode :cache yes
-     System.out.println(true || false);
-   #+end_src
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      System.out.println(true || false);
+    #+end_src
 
-   #+RESULTS[032de42706ff24aea93522c6ad2da4975ea6e0c3]:
-   #+begin_resultscode
-   true
-   #+end_resultscode
+    #+RESULTS[032de42706ff24aea93522c6ad2da4975ea6e0c3]:
+    #+begin_resultscode
+    true
+    #+end_resultscode
 
-   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
-   #+begin_src java :exports both  :wrap resultscode :cache yes
-     System.out.println(false || false);
-   #+end_src
+    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :exports both  :wrap resultscode :cache yes
+      System.out.println(false || false);
+    #+end_src
 
-   #+RESULTS[33e0cddce8d8290df0b740f4c1ba4dbd408d4737]:
-   #+begin_resultscode
-   false
-   #+end_resultscode
-*** Narrative                                                      :noexport:
-    OR is much more lax. As long as ANY condition resolves to true, the group
-    resolves to true. This means ALL conditions will be evaluated until either a
-    TRUE statement is found OR they run out of conditions to evaluate.
+    #+RESULTS[33e0cddce8d8290df0b740f4c1ba4dbd408d4737]:
+    #+begin_resultscode
+    false
+    #+end_resultscode
+**** Narrative                                                     :noexport:
+     OR is much more lax. As long as ANY condition resolves to true, the group
+     resolves to true. This means ALL conditions will be evaluated until either a
+     TRUE statement is found OR they run out of conditions to evaluate.
 ** Logical Operators: NOT   
+*** NOT   
+     #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
+    #+begin_src java :exports both :wrap resultscode :cache yes
+      System.out.println(!true);
+    #+end_src
+
+    #+RESULTS[8f6b90de13cdabdb79c418e1c2eef20726ee0312]:
+    #+begin_resultscode
+    false
+    #+end_resultscode
+
+     #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
+    #+begin_src java :exports none :wrap resultscode :cache yes
+      System.out.println(!false);
+    #+end_src
+
+    #+RESULTS[dcd38f405b42971d13ce86b47a723e291d2484a8]:
+    #+begin_resultscode
+    true
+    #+end_resultscode
+
     #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
-   #+begin_src java :exports both :wrap resultscode :cache yes
-     System.out.println(!true);
-   #+end_src
+    #+begin_src java :exports both :cache yes :wrap resultscode
+      public static boolean isRightAngle(int angle){
+          if (angle == 90) {
+              return true;
+          } else {
+              return false;
+          }
+      }
 
-   #+RESULTS[8f6b90de13cdabdb79c418e1c2eef20726ee0312]:
-   #+begin_resultscode
-   false
-   #+end_resultscode
+      public static void main(String[] args){
+          if (!isRightAngle(89)) {
+              System.out.println("Not a right angle!");
+          }
+      }
+    #+end_src
 
-    #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
-   #+begin_src java :exports none :wrap resultscode :cache yes
-     System.out.println(!false);
-   #+end_src
-
-   #+RESULTS[dcd38f405b42971d13ce86b47a723e291d2484a8]:
-   #+begin_resultscode
-   true
-   #+end_resultscode
-
-   #+ATTR_LATEX: :options numbersep=5pt,breaklines=true,fontsize=\tiny,autogobble=true   
-   #+begin_src java :exports both :cache yes :wrap resultscode
-     public static boolean isRightAngle(int angle){
-         if (angle == 90) {
-             return true;
-         } else {
-             return false;
-         }
-     }
-
-     public static void main(String[] args){
-         if (!isRightAngle(89)) {
-             System.out.println("Not a right angle!");
-         }
-     }
-   #+end_src
-
-   #+RESULTS[d5b9edeed23c847a03fa38632546db8cf154466c]:
-   #+begin_resultscode
-   Not a right angle!
-   #+end_resultscode
-*** Narrative                                                      :noexport:
-    When we use not, it reverses the truthyness of the condition. While in this
-    example we're just saying "NOT true" and "NOT false", in use, what you'd
-    probably have is some functionality that performs a check and you might want
-    to use it to effectively say "the opposite of this test". For example if you
-    had a test to check if an angle was a right angle, which returned 'true' if
-    the angle was 90 and 'false' otherwise, you could negate that with "NOT"
+    #+RESULTS[d5b9edeed23c847a03fa38632546db8cf154466c]:
+    #+begin_resultscode
+    Not a right angle!
+    #+end_resultscode
+**** Narrative                                                     :noexport:
+     When we use not, it reverses the truthyness of the condition. While in this
+     example we're just saying "NOT true" and "NOT false", in use, what you'd
+     probably have is some functionality that performs a check and you might want
+     to use it to effectively say "the opposite of this test". For example if you
+     had a test to check if an angle was a right angle, which returned 'true' if
+     the angle was 90 and 'false' otherwise, you could negate that with "NOT"
 
 ** Programming Exercise - Checking the Age
 *** Code                                                              :BMCOL:
@@ -1126,10 +1154,10 @@
     :BEAMER_col: 0.40
     :END:
 **** Desired Output                                                 :B_block:
-    :PROPERTIES:
-    :BEAMER_opt: T
-    :BEAMER_env: block
-    :END:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
     > How old are you?
@@ -1156,68 +1184,76 @@
 *** Narrative                                                      :noexport:     
     In this exercise we're going to ask the user to provide their age. Depending
     on what the user supplies, we'll tell them if it's OK or Impossible!
-** Execution Order of Conditional Statements
-*** FizzBuzz
-**** What is Fizz Buzz?    
-    :PROPERTIES:
-    :BEAMER_opt: t
-    :BEAMER_env: onlyenv
-    :BEAMER_act: <1>
-    :END:
-    'Write a program that prompts the user for a number between one and one
-    hundred, and prints that number. If the number is divisible by three, then
-    print "Fizz" instead of the number. If the number is divisible by five, then
-    print "Buzz" instead of the number. If the number is divisible by both three
-    and five, then print "FizzBuzz" instead of the number.'
-**** The Steps to solve Fizz Buzz in PseudoCode
-    :PROPERTIES:
-    :BEAMER_opt: t
-    :BEAMER_env: onlyenv
-    :BEAMER_act: <2>
-    :END:
-    - Write a program that prompts the user for a number and prints that number.
-    - If the number is divisible by three, then print =Fizz= instead of the number.
-    - If the number is divisible by five, then print =Buzz= instead of the number.
-    - If the number is divisible by both three and five, then print =FizzBuzz= instead of the number.
-**** An example that fails
-    :PROPERTIES:
-    :BEAMER_opt: t
-    :BEAMER_env: onlyenv
-    :BEAMER_act: <3>
-    :END:
-*** Code                                                              :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 0.55
-    :END:
-    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
-     #+begin_src java :exports code :eval no 
-      Scanner reader = new Scanner(System.in);
+* Execution Order of Conditional Statements
+** Example: FizzBuzz
 
-      int number = Integer.valueOf(reader.nextLine());
+*** Description
+  'Write a program that prompts the user for a number between one and one
+  hundred, and prints that number. If the number is divisible by three, then
+  print "Fizz" instead of the number. If the number is divisible by five, then
+  print "Buzz" instead of the number. If the number is divisible by both three
+  and five, then print "FizzBuzz" instead of the number.'
+** The Steps to solve Fizz Buzz in PseudoCode
+*** Pseudocode   
+  - Write a program that prompts the user for a number and prints that number.
+  - If the number is divisible by three, then print =Fizz= instead of the number.
+  - If the number is divisible by five, then print =Buzz= instead of the number.
+  - If the number is divisible by both three and five, then print =FizzBuzz= instead of the number.
+** An example that fails
+*** Buggy                                                             :BMCOL:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_col: 0.55
+     :END:
+**** Code      
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+      #+begin_src java :exports code :eval no 
+       Scanner reader = new Scanner(System.in);
 
-      if (number % 3 == 0) {
-          System.out.println("Fizz");
-      } else if (number % 5 == 0) {
-          System.out.println("Buzz");
-      } else if (number % 3 == 0 && number % 5 == 0) {
-          System.out.println("FizzBuzz");
-      } else {
-          System.out.println(number);
-     #+end_src
+       int number = Integer.valueOf(reader.nextLine());
+
+       if (number % 3 == 0) {
+           System.out.println("Fizz");
+       } else if (number % 5 == 0) {
+           System.out.println("Buzz");
+       } else if (number % 3 == 0 && number % 5 == 0) {
+           System.out.println("FizzBuzz");
+       } else {
+           System.out.println(number);
+      #+end_src
 *** Results                                                           :BMCOL:
-    :PROPERTIES:
-    :BEAMER_col: 45
-    :END:
-*** Narrative                                                      :noexport:
-    To understand the execution order of conditional statements, we're going to
-    walk through a very common exercise you might see during an interview for a
-    programming job: Fizz Buzz.
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_col: 0.45
+     :END:
+**** Output
+     #+begin_resultscode
+     < 3
+     > Fizz
+     #+end_resultscode
+     #+begin_resultscode
+     < 4
+     > 4
+     #+end_resultscode
+     #+begin_resultscode
+     < 5
+     > Buzz
+     #+end_resultscode
+     #+begin_resultscode
+     < 15
+     > Fizz
+     #+end_resultscode
 
-    'Write a program that prompts the user for a number between one and one
-    hundred, and prints that number. If the number is divisible by three, then
-    print "Fizz" instead of the number. If the number is divisible by five, then
-    print "Buzz" instead of the number. If the number is divisible by both three
-    and five, then print "FizzBuzz" instead of the number.'
+** Narrative                                                       :noexport:
+   To understand the execution order of conditional statements, we're going to
+   walk through a very common exercise you might see during an interview for a
+   programming job: Fizz Buzz.
+
+   'Write a program that prompts the user for a number between one and one
+   hundred, and prints that number. If the number is divisible by three, then
+   print "Fizz" instead of the number. If the number is divisible by five, then
+   print "Buzz" instead of the number. If the number is divisible by both three
+   and five, then print "FizzBuzz" instead of the number.'
 
     
     
