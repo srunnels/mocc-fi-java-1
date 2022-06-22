@@ -14,8 +14,8 @@
     arc=0pt,
     colframe=myblue,
     colback=white,
-    font=\tiny,
-    margin,left=1mm,
+%%     font=\tiny,
+%%     margin.left=1mm,
 %%     attach boxed title to top left,
     attach boxed title to bottom right={yshift=0pt}, 
     boxed title style={
@@ -104,3 +104,21 @@
 %%   },
 %%   fonttitle=\tiny % Sets the font size of the title of the box.
 %% }
+
+%% Table Style
+%% \usepackage[usenames,dvipsnames]{xcolor}
+%% \usepackage{tcolorbox}
+%% \usepackage{tabularx}
+%% \usepackage{array}
+\usepackage{colortbl}
+\tcbuselibrary{skins}
+
+\tcbset{tab2/.style={
+    enhanced,
+    fonttitle=\bfseries,
+    fontupper=\normalsize\sffamily,
+    colback=yellow!10!white,
+%%     colframe=red!50!black,
+    colframe=myblue,
+%%     colbacktitle=Salmon!40!white,
+    coltitle=black,center title}}
