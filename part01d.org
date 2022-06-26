@@ -38,7 +38,9 @@
    3. Learn how to read numbers
    4. Learn to read /truthy/ values
 *** Narrative                                                      :noexport:
-    In this section we're going to learn about the other variable /types/ which are commonly used in Java.
+    In this section we're going to learn about the other variable /types/ which are commonly used in Java and how to store data in those variable types.
+
+    We're also going to learn how to read numbers from the user using the Scanner library and we're going to explore what makes something true!
 ** What is a variable?
     :PROPERTIES:
     :BEAMER_env: onlyenv
@@ -59,11 +61,11 @@
 
     We can store quite a few different types in Java. For example, we already
     covered how we store /text/ in =String= variables. We can also store whole
-    numbers as =int= values; floating-point numbers as =double= values; and even
-    whether or not something is /true/ or /false/ as =boolean= values. A value
-    is /assigned/ to a variable by using the equals sign. When we use this
-    pattern of TYPE VARIABLE_NAME EQUAL_SIGN VALUE we are said to have
-    /declared/ our variable.
+    numbers as =int= values like you see on line 2; floating-point numbers as
+    =double= values on like 3; and even whether or not something is /true/ or
+    /false/ as =boolean= values on line 4. A value is /assigned/ to a variable
+    by using the equals sign. When we use this pattern of TYPE VARIABLE_NAME
+    EQUAL_SIGN VALUE we are said to have /declared/ a variable.
     
 ** Variables names are unique
 ***   
@@ -176,8 +178,7 @@
 *** Narrative                                                      :noexport:
     If you open the project Part01_11.VariousVariables you'll see we have the code displayed here.
 
-    If we run this code we get the output show in the middle. However, we don't
-    want this output. We want to change the code so we get the output on the right.
+    The code on display here has some bugs. Modify the code so it matches the Desired Output
 ** Naming Variables 
    :PROPERTIES:   
    :BEAMER_opt: t
@@ -187,6 +188,7 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.50
     :END:
+**** Bad Style    
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :wrap resultscode :cache yes
       double a = 3.14;
@@ -206,6 +208,7 @@
     :BEAMER_col: 0.50
     :BEAMER_opt: T
     :END:
+**** Better Style
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
     #+begin_src java :wrap resultscode :cache yes
       double pi = 3.14;
@@ -259,8 +262,9 @@
 
 *** Narrative                                                      :noexport:
     When we read input from the user, that information is almost always read in
-    as a String value. Every variable in Java must be declared, it requires us
-    to bring that information in as a string. This means that if we need to
+    as a String value. And we must either bring that string into a variable
+    we've declared as type String or we have to use the output of
+    scanner.nextLine() in place of a string. This means that if we need to
     gather input from the user that /isn't/ a string - let's say we're asking
     for someone's age - we have to start with the string representation and then
     be converted to the correct type.

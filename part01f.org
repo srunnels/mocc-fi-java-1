@@ -515,7 +515,7 @@
    comes before and =else=.
 
    Comparisons are made top down and *stop* once they've found a truthy
-   statement.
+   statement. This kind of structure is often called an 'else if ladder'
 ** Programming Exercise - Larger Than or Equal To
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -1193,12 +1193,61 @@
   print "Fizz" instead of the number. If the number is divisible by five, then
   print "Buzz" instead of the number. If the number is divisible by both three
   and five, then print "FizzBuzz" instead of the number.'
+*** Narrative                                                      :noexport:
+   To understand the execution order of conditional statements, we're going to
+   walk through a very common exercise you might see during an interview for a
+   programming job: Fizz Buzz.
+
+   FizzBuzz is a test such that you Write a program that prompts the user for a
+   number between one and one hundred, and prints that number. If the number is
+   divisible by three, then print "Fizz" instead of the number. If the number is
+   divisible by five, then print "Buzz" instead of the number. If the number is
+   divisible by both three and five, then print "FizzBuzz" instead of the
+   number.'
+
+   
+    
 ** The Steps to solve Fizz Buzz in PseudoCode
-*** Pseudocode   
+   
+*** Left 
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Pseudocode
+#+latex: {\small     
   - Write a program that prompts the user for a number and prints that number.
   - If the number is divisible by three, then print =Fizz= instead of the number.
   - If the number is divisible by five, then print =Buzz= instead of the number.
   - If the number is divisible by both three and five, then print =FizzBuzz= instead of the number.
+    #+latex: }
+*** Right
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Logic Tree
+    #+begin_src plantuml :file /tmp/test.png :exports results
+      @startuml
+      !pragma useVerticalIf on
+      start
+      if (number % 3 == 0 ) then (yes)
+              :Fizz;
+      elseif (number % 5 == 0) then (yes)
+              :Buzz;
+      elseif (number % 5 == 0 \n && number % 3 == 0 ) then (yes)
+              :FizzBuzz;
+      else ()
+              :number;
+      endif
+      @enduml
+    #+end_src
+    
+*** Narrative                                                      :noexport:
+    If we break this problem down into discrete tasks we might have something
+    like this. Pseudocode is code that is written like your native language - in
+    this case English. Obviously it wouldn't run but you can see we have things
+    like if statements!
 ** An example that fails
 *** Buggy                                                             :BMCOL:
      :PROPERTIES:
@@ -1244,17 +1293,241 @@
      > Fizz
      #+end_resultscode
 
-** Narrative                                                       :noexport:
-   To understand the execution order of conditional statements, we're going to
-   walk through a very common exercise you might see during an interview for a
-   programming job: Fizz Buzz.
+*** Narrative                                                      :noexport:
+    Now lets take a look at an example that does what we laid out in our
+    pseudocode, but we'll notice a problems with our output.
 
-   'Write a program that prompts the user for a number between one and one
-   hundred, and prints that number. If the number is divisible by three, then
-   print "Fizz" instead of the number. If the number is divisible by five, then
-   print "Buzz" instead of the number. If the number is divisible by both three
-   and five, then print "FizzBuzz" instead of the number.'
+    Let's walk the logic tree for our first output. Line 3 sets the integer
+    variable /number/ by calling Ingteger.valueOf() on the output of
+    reader.nextLine() which we know is a string. So Integer.valueOf() will
+    convert that string into an integer. In this case, the user provided the value '3'.
 
+    On line 5 we use the modulo operator to test if the number is evenly
+    divisible by 3 which it is and as a result we print Fizz.
+
+    the next example, the user provides a value of 4. If we start on line five
+    we test if number is evently divisible by 3 which it is not, so we go to the
+    next branch which is the next else if statement on line 7 where we test is
+    number is evenly divisible by 5 which it is not and as such we move to the
+    next branch on line 9 where we test 4 is evenly divisible by both three and
+    5 which it is not, which leads us to the next branch on line 11 our final
+    else statement which prints the number.
+
+    While the first three outputs are correct, the fourth output is incorrect.
+
+    Looking at the code, can you can you tell why?
+
+    :Give the students a chance to answer:
+
+    It's important to understand that a if else if ladder like you see here,
+    bails out after the first /truthy/ statement. So if the number is, say 15,
+    then line 5 is truthy, so line 6 executes and then we bail out. There's not
+    logical path to print "fizzbuzz" for any number that is evenly divisible by
+    both three and five will match on line 5 because it's evenly divisible by 5.
+
+** An working example
+*** Left                                                              :BMCOL:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_col: 0.55
+     :END:
+**** Code      
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+      #+begin_src java :exports code :eval no 
+       Scanner reader = new Scanner(System.in);
+
+       int number = Integer.valueOf(reader.nextLine());
+
+       if (number % 3 == 0 && number % 5 == 0) {
+           System.out.println("FizzBuzz");
+       } else if (number % 3 == 0) {
+           System.out.println("Fizz");
+       } else if (number % 5 == 0) {
+           System.out.println("Buzz");
+       } else {
+           System.out.println(number);
+       }
+      #+end_src
+*** Right                                                             :BMCOL:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_col: 0.45
+     :END:
+**** Output
+     #+begin_resultscode
+     < 3
+     > Fizz
+     #+end_resultscode
+     #+begin_resultscode
+     < 4
+     > 4
+     #+end_resultscode
+     #+begin_resultscode
+     < 5
+     > Buzz
+     #+end_resultscode
+     #+begin_resultscode
+     < 15
+     > FizzBuzz
+     #+end_resultscode
+
+*** Narrative                                                      :noexport:
+
+    A common way to fix this problem is to place the most demanding condition at
+    the top of our ladder and work our way down to the least demanding
+    condition. Because the /fizzbuzz/ condition has two conditions to be met
+    (that of being evenly divisible by 5 and by 3) its our most demanding
+    condition and should be the first thing we check.
+** Programming Exercise - Leap Year 
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_36.LeapYear
+    #+LaTeX: {\tiny
+    A year is a leap year if it is divisible by 4. However, if the year is
+    divisible by 100, then it is a leap year only when it is also divisible
+    by 400.
+
+    Write a program that reads a year from the user, and checks whether or not
+    it is a leap year.
+    #+LaTeX: }    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+      import java.util.Scanner;
+
+      public class LeapYear {
+
+          public static void main(String[] args) {
+              Scanner scan = new Scanner(System.in);
+
+          }
+      }
+    #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    Give a year: 2011
+    The year is not a leap year.
+    #+end_resultscode
+    #+begin_resultscode
+    Give a year: 2012
+    The year is a leap year.
+    #+end_resultscode
+    #+begin_resultscode
+    Give a year: 1800
+    The year is not a leap year.
+    #+end_resultscode
+    #+begin_resultscode
+    Give a year: 2000
+    The year is a leap year.
+    #+end_resultscode    
+    #+LaTeX: }
+
+*** Narrative                                                      :noexport:       
+    Here's our current programming challenge. Remember, to test a number for
+    divisibility by another number use the modulo operator and check for a
+    result of 0.
+
+    Also, remember your else if latter and comparisons and start from the most
+    demanding condition.
     
-    
-    
+** Programming Exercise - Gift Tax
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part01_37.GiftTax
+    #+LaTeX: {\tiny
+    A gift is a transfer of property to another person against no compensation or payment. If the total value of the gifts you receive from the same donor in the course of 3 years is €5,000 or more, you must pay gift tax.
+
+    When a gift is given by a close relative or a family member, the amount of gift tax is determined by the following table (source vero.fi):
+
+    Write a program that calculates the gift tax for a gift from a close relative or a family member. This is how the program should work:    
+    | Value of gift       | Tax at the lower limit | Tax rate(%) |
+    |---------------------+------------------------+-------------|
+    | 5 000 — 25 000      | 100                    |           8 |
+    | 25 000 — 55 000     | 1 700                  |          10 |
+    | 55 000 — 200 000    | 4 700                  |          12 |
+    | 200 000 — 1 000 000 | 22 100                 |          15 |
+    | 1 000 000 —         | 142 100                |          17 |
+    #+LaTeX: }    
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                        :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_example
+    #+end_example
+    #+begin_resultscode
+    Value of the gift?
+    3500
+    No tax!
+    #+end_resultscode
+    #+begin_resultscode
+    Value of the gift?
+    3500
+    No tax!
+    #+end_resultscode
+
+     #+begin_resultscode
+    Value of the gift?
+    5000
+    Tax: 100.0
+    #+end_resultscode
+    #+begin_resultscode
+    Value of the gift?
+    27500
+    Tax: 1950.0
+    #+end_resultscode    
+
+    #+LaTeX: }
+**** Dump                                                          :noexport:
+
+*** Narrative                                                      :noexport:       
+* Exercise Template                                                :noexport:
+** Programming Exercise Template 
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** PROJECT NAME
+    #+LaTeX: {\tiny
+    DESCRIPTION
+    #+LaTeX: }    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+    #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_env: block
+    :END:
+    #+LaTeX: {\tiny
+    #+begin_resultscode
+    #+end_resultscode
+    #+LaTeX: }
+*** Narrative                                                      :noexport:       
