@@ -1,0 +1,455 @@
+#+TITLE: AP Java Programming Introduction
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: classes-and-objects.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Classes and Objects}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objects
+** SLIDE
+   - An Object has _state_ and _behaviors_
+   - ex: Books as an object
+     - State:
+       - Author
+       - Title
+       - Is On A Shelf
+     - Behavior:
+       - Going out of Print
+   - Objects in Java
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       String testVariable = "FooBar";
+     #+end_src
+
+*** Narrative                                                      :noexport:
+    Java uses a type of programming called "Object Oriented Programming". Object
+    Oriented Programming is the nascent form of programming used today.
+    Languages like Java, Python, and Javascript are "Object Oriented". This
+    means we need to understand what Objects are, why they exist, how they are
+    built and how we can use them.
+
+    Objects have STATE and BEHAVIORS.
+
+    Objects usually correspond to some real-world object that is being
+    represented by the program. Sometimes these are very basic things like, "a
+    square", sometimes they are very very complex things.
+
+    In java when we declare a variable that represents an object it is called an
+    /object reference/.
+** Classes
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.5
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      class Book {
+          /* Instance Variables */
+          private String title;
+          private String author;
+
+          /* Methods */
+          public Book (String bookTitle, String bookAuthor) {
+              title = bookTitle;
+              author = bookAuthor;
+          }
+
+          public String getTitle() {
+              return title;
+          }
+
+          public String getAuthor() {
+              return author;
+          }
+      }
+    #+end_src
+
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.5
+    :END:
+**** Instance Variables
+     #+latex: \footnotesize{
+     Data about a specific object
+     #+latex: }     
+**** Methods
+     #+latex: \footnotesize{
+     Behaviors of the objects and operations that manipulate the object
+     #+latex: }
+**** Diagram
+     :PROPERTIES:
+     :ORDERED:  t
+     :END:
+     #+begin_src plantuml :file /tmp/book-class.png :exports none
+       @startuml
+       skinparam dpi 300
+       scale 100*100
+       class Book {
+               # title: String
+               # author: String
+               + String getTitle()
+               + String getAuthor()
+       }
+       @enduml
+     #+end_src
+
+     #+RESULTS:
+     [[file:/tmp/book-class.png]]
+
+     #+ATTR_LATEX: :scale 0.3
+     [[/tmp/book-class.png]]
+
+    
+*** Narrative                                                      :noexport:
+    A class is a blueprint for an object. In OOP an object is a single instance of the class.
+
+    The current state of a given object is maintained in its data fields which
+    we call /instance variables/. So if we have a Book object we might track the
+    /instance variables/ title and author.
+
+    Similarly, we probably want to be able to get those values from the object
+    so we have methods in our class to access the title and author of each
+    object called getTitle and getAuthor.
+
+    When we take these - the instance variables and the methods - and combine
+    them in a class we form a concept called /data encapsulation/. This means the
+    data is effectively hidden and we control how that data is accessed.
+
+* Public, Private, and Static
+** Narrative                                                       :noexport:
+   You've seen some instances of the use of keywords like 'public', 'private', and
+   'static' as we have been learning Java. So it's time to finally sit down and
+   figure out what those mean, what benefits they have and what restrictions
+   they provide.
+   
+** The =public= keyword
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={11,12}
+    #+name: public-example
+    #+begin_src java :results output :exports code
+      class Main {
+          public static void main (String[] args){
+              Book book01 = new Book("Last of the Sandwalkers");
+              System.out.println("Added " + book01.title);
+              book01.title = "First of the Sandwalkers";
+              System.out.println("Now it's " + book01.title);
+          }
+      }
+
+      class Book {
+          public String title;
+          public String author;
+
+          public Book (String bookTitle) {
+              title = bookTitle;
+          }
+      }
+    #+end_src
+
+    #+RESULTS: public-example
+    : Added Last of the Sandwalkers
+    : The book is now called First of the Sandwalkers
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+CALL: public-example() :wrap resultscode
+
+**** Public Access Type
+     - Lots of freedom
+     - Less control
+*** Narrative                                                      :noexport:
+    The public keyword preceding a class declaration signals that the class is
+    usable by all /client programs/. Basically, pieces of code outside the class
+    that use the class.
+
+    If a class is NOT public it can be used only by classes in its own package.
+    
+    For methods, if they are public, they are accessible to all client programs
+    as well.
+
+    You can think of public as "I don't care who uses this, it don't bother me".
+    Let's look at an example, here we have two classes, Main and Book. In Book,
+    I've set the access specifier for the title instance variables as "public".
+    This means that in the class Main I can access Book's instance variables
+    directly. I do this by writing the name of the variable (or object
+    reference) followed by a period and the instance variable name. So
+    =book01.title=. I can access it but I can also change it. This _might_ not be
+    behavior I want to support. Maybe people shouldn't be able to just change
+    the title of the books objects I create.
+
+    So while public allows us more freedom it also represents more risk and more
+    chances for things to go wrong.
+
+** The =private= keyword
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={9,10}
+    #+name: private-example
+    #+begin_src java :results output :exports code
+      class Main {
+          public static void main (String[] args){
+              Book book01 = new Book("Last of the Sandwalkers");
+              // This would create an error
+              // System.out.println(book01.title); 
+              System.out.println("Added " + book01.getTitle());
+          }
+      }
+
+      class Book {
+          private String title;
+
+          public Book (String bookTitle) {
+              title = bookTitle;
+          }
+          /* Accessor Method */
+          public String getTitle(){
+              return title;
+          }
+      }
+    #+end_src
+
+    #+RESULTS: private-example
+    : Total Books: 0
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+CALL: private-example() :wrap resultscode
+**** Private Access Type
+     - Less Freedom
+     - More Control
+
+*** Narrative                                                      :noexport:
+    A =private= method or variable in a class can only be accessed by methods of
+    that class. This lets us control the access to the title instance variable,
+    if we tried to access the instance variable =title= directly, we would get an
+    error and our program wouldn't compile.
+
+    So we have to have what is called an /accessor method/ or a "getter" whose
+    only job is to return the value of the private instance variable. We could
+    also have 'setters' which would control how we set the instance variable but
+    the important part is that it all has to happen within the Book class
+    because those instance variables are private.
+** The =static= keyword
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={12}
+    #+name: static-example
+    #+begin_src java :results output :exports code
+      class Main {
+          public static void main (String[] args){
+              Book book01 = new Book("Last of the Sandwalkers");
+              System.out.println("Total Books: " + book01.total);
+              Book book02 = new Book("Zita the Spacegirl");
+              System.out.println("Total Books: " + book01.total);
+          }
+      }
+
+      class Book {
+          private String title;
+          public static int total = 0;
+          public Book (String bookTitle) {
+              title = bookTitle;
+              total++;
+          }
+          /* Accessor Method */
+          public String getTitle(){
+              return title;
+          }
+      }
+    #+end_src
+
+    #+RESULTS: static-example
+    : Total Books: 1
+    : Total Books: 2
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+CALL: static-example() :wrap resultscode
+**** static Access Type
+     - Shared by all instances
+     - Memory allocated _once_
+     - Common uses:
+       - Counters
+       - Statistics
+       - Provide customized id values
+
+
+*** Narrative                                                      :noexport:
+    A =static= variable contains a value that is shared by all instances of the
+    class. /static/ means that memory allocation happens once regardless of how
+    many objects are created.
+
+    Static variables are often used to keep track of statistics regarding the
+    objects of the class, accumulate a total,
+* Types of Methods
+** Constructor Methods                                                
+*** LEFT                                                              :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.5
+   :BEAMER_opt: t
+   :END:
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={4-7}   
+    #+begin_src java :results output :exports code
+      class Book {
+          private String title;
+          private String author;
+          public static int total = 0;
+          public Book() {
+              title = "";
+              author = "";
+          }
+          public Book(String bookTitle) {
+              title = bookTitle;
+              total++;
+          }
+          public Book(String bookTitle, String bookAuthor) {
+              title = bookTitle;
+              author = bookAuthor;
+              total++;
+          }
+
+          /* Accessor Method */
+          public String getTitle(){
+              return title;
+          }
+      }
+
+    #+end_src
+
+*** RIGHT                                                             :BMCOL:
+   :PROPERTIES:
+   :BEAMER_col: 0.5
+   :BEAMER_opt: t
+   :END:
+   - Constructors do not have a return type
+   - Constructors are named after the class
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+     Book book01 = new Book();
+     #+end_src
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+     Book book02 = new Book("Zita the Spacegirl");
+     #+end_src
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+     Book book01 = new Book("Last of the Sandwalkers", "Jay Hosler");
+     #+end_src
+
+*** Narrative                                                      :noexport:
+    Constructor methods, well, construct our objects. When we say something like
+    =new Book= it will call the constructor method of the class every time. The
+    constructor method has some consistent artifacts. For example, the
+    constructor does not have a return type. Effectively, it returns a reference
+    to the object. That's why we call the variables we declare of Class
+    instances /object references/. They refer to a section of memory where the
+    data specific to that object is.
+
+    Constructors are also named after the class. So the constructor for the Book
+    class is the Book method. Make sure you get the capitalization correct too!
+
+    Constructors can have MANY different forms in the same class. This class has
+    THREE constructors. The default constructor takes no parameters and sets
+    some sane defaults as decided by the programmer. One constructor takes the
+    title, and another takes the title and author.
+
+    We call this "overloading" a method. When we have the same method name with different parameters the method is overloaded.
+* SLUSH                                                            :noexport:
+** Building a Library
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+    Books
+    #+begin_src plantuml :file /tmp/uml.png
+      @startuml
+      class Book {
+              String author
+              String Title
+              String getTitle()
+              String getAuthor()
+              boolean isOnShelf()
+              boolean isFiction()
+              void goOutOfPrint()
+      }
+
+      class ListOfBooks {
+              Book search
+              void addBook
+              void removeBook
+              Book[] sortByAuthor
+      }
+      @enduml
+    #+end_src
+
+    #+RESULTS:
+    [[file:/tmp/uml.png]]
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+      

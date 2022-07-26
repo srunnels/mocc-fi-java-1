@@ -1,0 +1,1015 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part02c.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{More Loops}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** Goals for the section
+   - Become more familiar with =while= loops
+   - Introduce the =for= loop
+   - Recognize situations where you might use a =while= loop over a =for= loop.
+     
+  
+* =while= loops continued
+** Non-infinite loops
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny   
+   #+begin_src java :wrap resultscode :exports both
+     int number = 1;
+
+     while (number < 6) {
+         System.out.println(number);
+         number++;
+     }     
+   #+end_src
+
+   #+RESULTS:
+   #+begin_resultscode
+   1
+   2
+   3
+   4
+   5
+   #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    Only using true and then breaks
+
+    The condition of a while loop can contain any expression which will resolve
+    to a truthy or falsey value.
+
+    This example prints the numbers one through five. You'll notice there's no
+    break. It just exists when the condition is no longer truthy.It can be read
+    as "as long as the value of =number= is less than 6, print the value of number
+    and increase the value of number by one".
+
+    
+* The =for= loop
+** The core structure of loops
+*** Introduce a variable                                          :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1}
+    #+begin_src java :eval no :exports code
+      int i = 0;
+      while (i < 10) {
+          System.out.println(i);
+          i++;
+      }      
+    #+end_src
+*** Define the loop                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={2,5}
+    #+begin_src java :eval no :exports code
+      int i = 0;
+      while (i < 10) {
+          System.out.println(i);
+          i++;
+      }      
+    #+end_src
+*** Supply the body of the loop                                   :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <3>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={3,4}
+    #+begin_src java :eval no :exports code
+      int i = 0;
+      while (i < 10) {
+          System.out.println(i);
+          i++;
+      }      
+    #+end_src
+*** Narrative                                                      :noexport:
+    When we build a while loop it is generally constructed in a basic set of
+    steps. First we introduce or declare our control variable. In this case,
+    we're going to call our variable =i=. This is a very common name for a
+    throw-away variable used for counting.
+
+    :: Next Slide ::
+
+    Then we define our loop and it's condition. The loop will continue to
+    execute as long as i less than 10.
+
+    :: Next slide ::
+
+    Then we have the body of our loop where the work is done. In this case we
+    print the value of =i= and we increment is using this shorthand of double plus
+    which is the equivalent of saying =i = i + 1=. This lets us alter the value of
+    our control variable which will be evaluated when the loop iterates -
+    remember that iterate means to repeat and an interation is one repetition.
+
+    There is another type of loop we can use called the =for= loop which does much
+    of the same thinpg but combines some of the steps into one line.
+    
+    
+** Introducing the =for= loop
+*** Quick and easy
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1}    
+    #+begin_src java :exports both :wrap resultscode
+      for (int i = 0; i < 10; i++) {
+          System.out.println(i);
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    The for loop is comprised of /four/ - the number - parts.
+
+    First, we introduce our control variable, in this case we use the common counting variable name =i= and set it to zero.
+
+    Then we set our condition, which is i is less than 1000
+
+    Then we set an action to perform on the control variable after for every
+    iteration of the loop, here we increment =i=. It's important to understand
+    that on the FIRST iteration the action we've defined doesn't execute. So for
+    the first iteration i will be 0. On the second iteration, i will increment
+    and be one.
+
+    Finally we have the functionality of the loop - in this case printing
+** Using variables in a =for= loop
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports both :wrap resultscode
+      int start = 3;
+      int end = 7;
+      int i = 0;
+      for (i = start; i < end; i++) {
+          System.out.println(i);
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    3
+    4
+    5
+    6
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    The declaration of your control variable doesn't have to be declared IN the
+    for statement. For example, we can declare our variables before they are
+    used in the =for= loop!
+** Programming Exercise - Counting
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_14.Counting
+     #+LaTeX: {\tiny
+     Write a program that reads an integer from the user. Next, the program prints
+     numbers from 0 to the number given by the user. You can assume that the user
+     always gives a positive number. Below are some examples of the expected
+     functionality.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class Counting {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     < 4
+     > 0
+     > 1
+     > 2
+     > 3
+     > 4
+     #+end_resultscode
+    #+begin_resultscode
+     < 1
+     > 0
+     > 1
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+
+** Programming Exercise - Counting to Hundred
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_15.CountingToHundred
+     #+LaTeX: {\tiny
+     Write a program, which reads an integer from the user. Then the program prints
+     numbers from that number to 100. You can assume that the user always gives a
+     number less than 100. Below are some examples of the expected functionality.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class CountingToHundred {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+< 99
+> 99
+> 100
+     #+end_resultscode
+     #+begin_resultscode
+< -4
+> -4
+> -3
+> -2
+> -1
+> 0
+> 1
+.....
+> 98
+> 99
+> 100
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+
+** Programming Exercise - From where to where (part1)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_16.FromWhereToWhere
+     #+LaTeX: {\tiny
+     Write a program which prints the integers from 1 to a number given by the user.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class FromWhereToWhere {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+               // Write your program here
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Where to?
+< 3
+> 1
+> 2
+> 3
+     #+end_resultscode
+     #+begin_resultscode
+> Where to?
+< 5
+> 1
+> 2
+> 3
+> 4
+> 5
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+
+** Programming Exercise - From where to where (part2)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_16.FromWhereToWhere
+     #+LaTeX: {\tiny
+     Write a program which prints the integers from 1 to a number given by the user.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class FromWhereToWhere {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+               // Write your program here
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Where to? 
+< 8
+> Where from? 
+< 5
+> 5
+> 6
+> 7
+> 8
+     #+end_resultscode
+     If the upper limit is smaller than the starting point, nothing is printed:
+
+     #+begin_resultscode
+> Where to? 
+< 12
+> Where from? 
+< 16
+#+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+** Stopping a loop execution
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
+    #+begin_src java :exports code :wrap resultscode :eval no
+      int number = 1;
+
+      while (number != 2) {
+          System.out.println(number);
+          number = 2;
+          System.out.println(number);
+          number = 1;
+      }      
+    #+end_src
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
+    #+begin_src java :exports code :wrap resultscode :eval no
+      for (int i = 0; i != 100; i++) {
+          System.out.println(i);
+          i = 100;
+          System.out.println(i);
+          i = 0;
+      }
+    #+end_src
+
+*** Narrative                                                      :noexport:
+    The condition of a loop is evaluated when the execution of a loop starts and
+    when the execution of the loop body has reached the closing curly bracket.
+
+    Both of the success criteria for the loop stopping are met in the body of
+    the loop at ONE point but by the time the loop has iterated the stopping
+    condition is no longer true. The loops will only stop if the condition
+    matches at the TIME it is evaluated.
+** Programming Exercise - Sum of a Sequence
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_17.SumOfASequence
+     #+LaTeX: {\tiny
+     Implement a program, which calculates the sum 1+2+3+...+n where n is given as user input.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class SumOfASequence {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Last number?
+     < 3
+     > The sum is 6
+     #+end_resultscode
+     #+begin_resultscode
+     > Last number?
+     < 7
+     > The sum is 28
+     #+end_resultscode
+
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+** Programming Exercise - Name
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_18.SumOfASequenceTheSequel
+     #+LaTeX: {\tiny
+     Implement a program which calculates the sum of a closed interval, and prints it. Expect the user to write the smaller number first and then the larger number.
+
+     You can base your solution to this exercise to the solution of last exercise — add the functionality for the user to enter the starting point as well.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+import java.util.Scanner;
+
+public class SumOfASequenceTheSequel {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+    }
+}
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> First number? 
+< 3
+> Last number? 
+< 5
+> The sum is 12
+     #+end_resultscode
+     #+begin_resultscode
+> First number? 
+< 2
+> Last number? 
+< 8
+> The sum is 35
+     #+end_resultscode
+
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+** Programming Exercise - Factorial
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_19.Factorial
+     #+LaTeX: {\tiny
+     Implement a program which calculates the factorial of a number given by the
+     user.
+
+     Factorial of n, denoted n!, is calculated as 1 * 2 * 3 * ... * n. For example,
+     the factorial of 4 is 24 or 4! = 1 * 2 * 3 * 4 = 24. Additionally, it has been
+     specified that the factorial of 0 is 1, so 0! = 1.
+
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class Factorial {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give a number:
+< 3
+> Factorial: 6
+     #+end_resultscode
+     #+begin_resultscode
+> Give a number:
+< 10
+> Factorial: 3628800
+     #+end_resultscode
+
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+** The Structure of Programs Using Loops
+*** Where to perform certain steps                                :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={11,16}
+    #+begin_src java :eval no
+       Scanner reader = new Scanner(System.in);
+
+       System.out.print("Write numbers, negative numbers are invalid: ");
+       int sum = 0;
+       int validNumbers = 0;
+       int invalidNumbers = 0;
+
+       while (true) {
+           int input = Integer.valueOf(reader.nextLine());
+
+           if (input == 0) {
+               System.out.println("Sum of valid numbers: " + sum);
+               System.out.println("Valid numbers: " + validNumbers);
+               System.out.println("Invalid numbers: " + invalidNumbers);
+               break;
+           }
+
+           if (input < 0) {
+               invalidNumbers++;
+               continue;
+           }
+
+           sum += input;
+           validNumbers++;
+       }      
+    #+end_src
+  
+  
+  
+*** Where to perform certain steps                                :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+       Scanner reader = new Scanner(System.in);
+
+       // Create variables needed for the loop
+
+       while (true) {
+           // read input
+
+           // end the loop -- break
+
+           // check for invalid input -- continue
+
+           // handle valid input
+       }
+
+       // functionality to execute after the loop ends
+    #+end_src
+  
+  
+  
+*** Where to perform certain steps                                :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <3>
+    :END:
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :eval no
+       Scanner reader = new Scanner(System.in);
+
+       System.out.print("Write numbers, negative numbers are invalid: ");
+       int sum = 0;
+       int validNumbers = 0;
+       int invalidNumbers = 0;
+
+       while (true) {
+           int input = Integer.valueOf(reader.nextLine());
+
+           if (input == 0) {
+               break;
+           }
+
+           if (input < 0) {
+               invalidNumbers++;
+               continue;
+           }
+
+           sum += input;
+           validNumbers++;
+       }
+       System.out.println("Sum of valid numbers: " + sum);
+       System.out.println("Valid numbers: " + validNumbers);
+       System.out.println("Invalid numbers: " + invalidNumbers);
+    #+end_src
+*** Narrative                                                      :noexport:
+    First slide works but is overly complex and may lead to bad structure when more steps are added.
+
+    Slide two shows a framework thatworks better
+
+    Slide three shows an example using that framework.
+  
+** Programming Exercise - Repeating, Breaking, and Remembering (Part 1)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.RepeatingBreakingAndRememberin
+     #+LaTeX: {\tiny
+     Implement a program that asks the user for numbers (the program first
+     prints "Write numbers: ") until the user gives the number -1. When the user
+     writes -1, the program prints "Thx! Bye!" and ends.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class RepeatingBreakingAndRemembering {
+
+           public static void main(String[] args) {
+        
+               // This exercise is worth five exercise points, and it is 
+               // gradually extended part by part.
+        
+               // If you want, you can send this exercise to the server
+               // when it's just partially done. In that case the server will complain about 
+               // the parts you haven't done, but you'll get points for the finished parts.
+        
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give numbers:
+< 5
+< 2
+< 4
+< -1
+> Thx! Bye!
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+  
+** Programming Exercise - Repeating, Breaking, and Remembering (Part 2)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.RepeatingBreakingAndRememberin
+     #+LaTeX: {\tiny
+     Extend the program so that it prints the sum of the numbers (not including
+     the -1) the user has written.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class RepeatingBreakingAndRemembering {
+
+           public static void main(String[] args) {
+        
+               // This exercise is worth five exercise points, and it is 
+               // gradually extended part by part.
+        
+               // If you want, you can send this exercise to the server
+               // when it's just partially done. In that case the server will complain about 
+               // the parts you haven't done, but you'll get points for the finished parts.
+        
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give numbers:
+< 5
+< 2
+< 4
+< -1
+> Thx! Bye!
+> Sum: 11
+     #+end_resultscode     
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+  
+** Programming Exercise - Repeating, Breaking, and Remembering (Part 3)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.RepeatingBreakingAndRememberin
+     #+LaTeX: {\tiny
+     Extend the program so that it also prints the number of numbers (not
+     including the -1) the user has written.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class RepeatingBreakingAndRemembering {
+
+           public static void main(String[] args) {
+        
+               // This exercise is worth five exercise points, and it is 
+               // gradually extended part by part.
+        
+               // If you want, you can send this exercise to the server
+               // when it's just partially done. In that case the server will complain about 
+               // the parts you haven't done, but you'll get points for the finished parts.
+        
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give numbers:
+< 5
+< 2
+< 4
+< -1
+> Thx! Bye!
+> Sum: 11
+> Numbers: 3
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+  
+** Programming Exercise - Repeating, Breaking, and Remembering (Part 4)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.RepeatingBreakingAndRememberin
+     #+LaTeX: {\tiny
+     Extend the program so that it prints the mean of the numbers (not including the -1) the user has written.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class RepeatingBreakingAndRemembering {
+
+           public static void main(String[] args) {
+        
+               // This exercise is worth five exercise points, and it is 
+               // gradually extended part by part.
+        
+               // If you want, you can send this exercise to the server
+               // when it's just partially done. In that case the server will complain about 
+               // the parts you haven't done, but you'll get points for the finished parts.
+        
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give numbers:
+< 5
+< 2
+< 4
+< -1
+> Thx! Bye!
+> Sum: 11
+> Numbers: 3
+> Average: 3.666666666
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+  
+** Programming Exercise - Repeating, Breaking, and Remembering (Part 5)
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.RepeatingBreakingAndRememberin
+     #+LaTeX: {\tiny
+     Extend the program so that it prints the number of even and odd numbers
+     (excluding the -1).
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class RepeatingBreakingAndRemembering {
+
+           public static void main(String[] args) {
+        
+               // This exercise is worth five exercise points, and it is 
+               // gradually extended part by part.
+        
+               // If you want, you can send this exercise to the server
+               // when it's just partially done. In that case the server will complain about 
+               // the parts you haven't done, but you'll get points for the finished parts.
+        
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+> Give numbers:
+< 5
+< 2
+< 4
+< -1
+> Thx! Bye!
+> Sum: 11
+> Numbers: 3
+> Average: 3.666666666
+> Even: 2
+> Odd: 1
+     #+end_resultscode     
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+  
+
+
+* Templates                                                        :noexport:
+** Programming Exercise - Name
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_
+     #+LaTeX: {\tiny
+
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+  
+

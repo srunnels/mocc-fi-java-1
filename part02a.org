@@ -1,0 +1,48 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part02a.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Recurring Problems and Patterns to Solve Them}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** Learning Objectives  
+   - You recognize that certain sub-problems, such as reading input or calculations, recur in programs.
+   - You're aware of solution models to certain sub-problems.
+   - You practice combining solution patterns used on sub-problems to solve broader ones.
+*** Narrative                                                      :noexport:
+    You may have noticed that many small problems or tasks in the programs you've
+    written so far appear in our code again and again. Problems like 'read input
+    from the user', or 'calculate the sum of values'.
+
+    Programming is a means to solve problems, so, its only reasonable that most
+    if not all programming languages seek to address this problem. Let's take a
+    look at a few of these problems.
+
+* Problem: Reading User Input
+** Reading User Input
+*** Narrative                                                      :noexport:

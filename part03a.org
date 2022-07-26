@@ -1,0 +1,126 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part03a.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Discovering Errors}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** What we'll cover in this section
+   - Ways to identify where our program went wrong
+* Print Debugging
+**                                                                :B_onlyenv:
+   :PROPERTIES:
+   :BEAMER_env: onlyenv
+   :BEAMER_act: <1>
+   :END:
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :wrap resultscode :exports both
+      public class Example {
+          public static void main(String[] args){
+              printFiveX();
+          }
+          public static void printFiveX(){
+              for (int i = 1; i < 5; i++){
+                  System.out.print("x");
+              }
+          }
+
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    xxxx
+    #+end_resultscode
+
+   
+
+**                                                                :B_onlyenv:
+   :PROPERTIES:
+   :BEAMER_env: onlyenv
+   :BEAMER_act: <2>
+   :END:
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :wrap resultscode
+      public class Example {
+          public static void main(String[] args){
+              printFiveX();
+          }
+          public static void printFiveX(){
+              for (int i = 1; i < 5; i++){
+                  System.out.print("x");
+              }
+          }
+
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    xxxx
+    #+end_resultscode
+
+   
+*** Narrative                                                      :noexport:
+    Print debugging feels gross. You're working with a computer, there *has* to be
+    some fancy technology that can let you walk the steps in your program and
+    see the values changes as you step through each line.
+
+    There are - in fact - tools that do this. They are an unholy assache to set up, manage, and use.
+
+    More commonly, 
+* Print Debugging
+** SLIDE
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :eval no
+     /*
+       Prints the numbers from ten to one.
+       Each number is printed on its own line.
+     ,*/
+
+     // We create an integer variable named value,
+     // assigning the value 10 to it.
+     int value = 10;
+
+     // The loop execution continues until
+     // the value of the variable named value is less than or equal to
+     // zero. The excution doesn't stop _immediately_ when the value zero
+     // is assigned to the variable, but only when the condition of the
+     // loop is evaluated the following time.
+     // This always happens after the loop has executed
+     while (value > 0) {
+         // we print out the value in the variable and a new line
+         System.out.println(value);
+         // we decrement the value by one
+         value = value - 1;
+     }
+   #+end_src
+

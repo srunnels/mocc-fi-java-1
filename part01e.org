@@ -57,8 +57,6 @@
     Just like you learned in grade school.
 
     
-
-    
 ** Programming Exercise - Seconds in a day
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -99,9 +97,9 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-    How many days would you like to convert to seconds?
-    1
-    86400
+    > How many days would you like to convert to seconds?
+    < 1
+    > 86400
     #+end_resultscode
     #+LaTeX: }
 **** Desired Output                                                 :B_block:
@@ -111,9 +109,9 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-    How many days would you like to convert to seconds?
-    3
-    259200
+    > How many days would you like to convert to seconds?
+    < 3
+    > 259200
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:
@@ -245,11 +243,11 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-    Give the first number:
-    8
-    Give the second number:
-    3
-    The sum of the numbers is 11
+    > Give the first number:
+    < 8
+    > Give the second number:
+    < 3
+    > The sum of the numbers is 11
     
     #+end_resultscode
     #+LaTeX: }
@@ -263,7 +261,7 @@
     :BEAMER_opt: T
     :BEAMER_col: 0.60
     :END:
-**** Part01_19.SumofThreeNumbers
+**** Part01_18.SumofThreeNumbers
     #+LaTeX: {\tiny
     Write a program that asks the user for three numbers. After this the program prints the sum of the numbers given by the user.
     #+LaTeX: }
@@ -294,13 +292,13 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      8
-      Give the second number:
-      3
-      Give the third number:
-      3
-      The sum of the numbers is 14
+    >  Give the first number:
+    <  8
+    >  Give the second number:
+    <  3
+    >  Give the third number:
+    <  3
+    >  The sum of the numbers is 14
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:        
@@ -345,11 +343,11 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      5
-      Give the second number:
-      4
-      5 + 4 = 9
+    >  Give the first number:
+    <  5
+    >  Give the second number:
+    <  4
+    >  5 + 4 = 9
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -393,11 +391,11 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      2
-      Give the second number:
-      8
-      2 * 8 = 16    
+    >  Give the first number:
+    <  2
+    >  Give the second number:
+    <  8
+    >  2 * 8 = 16    
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -431,7 +429,7 @@
     #+begin_resultscode
     1.0
     #+end_resultscode
-*** Narrative
+*** Narrative                                                      :noexport:
     Division of integers is slightly trickier. If all the variables in the
     division expression are integers, then the resulting value will be an
     integer as well. This is important to remember! Even if we store the result
@@ -588,11 +586,11 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      8
-      Give the second number:
-      2
-      The average is 5.0
+    > Give the first number:
+    < 8
+    > Give the second number:
+    < 2
+    >  The average is 5.0
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -637,13 +635,13 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      8
-      Give the second number:
-      2
-      Give the third number:
-      3
-      The average is 4.333333333333333
+    > Give the first number:
+    < 8
+    > Give the second number:
+    < 2
+    > Give the third number:
+    <  3
+    >  The average is 4.333333333333333
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:
@@ -683,19 +681,19 @@
     :END:
 **** Desired Output                                                 :B_block:
     :PROPERTIES:
-    :BEAMER_opt: T
+    :BEAMER_opt: t
     :BEAMER_env: block
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      8
-      Give the second number:
-      2
-      8 + 2 = 10
-      8 - 2 = 6
-      8 * 2 = 16
-      8 / 2 = 4.0
+    > Give the first number:
+    < 8
+    > Give the second number:
+    < 2
+    >  8 + 2 = 10
+    >  8 - 2 = 6
+    >  8 * 2 = 16
+    >  8 / 2 = 4.0
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     

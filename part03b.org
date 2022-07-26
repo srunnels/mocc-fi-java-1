@@ -1,0 +1,1016 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part03b.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Lists}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** 
+   - Introduce Lists
+     - Iterate over every element in a list
+     - Check if an item is in a List
+     - Remove items from a List
+   - Introduce the concept of an /index/
+   - Introduce Reference-type variables
+     
+*** Narrative                                                      :noexport:
+* The ArrayList
+** Pre-made datatypes
+*** Datastructures
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :eval no
+      int counter = 0;
+      double temperature = 42.4;
+      String name = "Oji";
+    #+end_src
+
+    Implicit
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      String x = "foo";
+    #+end_src
+
+
+    Explicit
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      String x = new String();
+      x = "foo";
+    #+end_src
+
+
+*** Narrative                                                      :noexport:
+    You may have noticed that some types look different than others when we
+    declare them. For instance, =int= and =double= are lowercase but =String= is
+    uppercased. Without getting too much into _WHY_ this is the case, an
+    uppercased type is what is called a class and when classes are defined the
+    programmer can tie actions to those objects of those class in the form of
+    methods. If you think of =Car= as a class, we might have a method =drive()= that
+    changes the car's coordinates. We'll get into this more in later chapters.
+    What you need to know going forward is some types, like =String=, are more
+    complex than the built-in datatypes like =int= but are still provided for us
+    by the creators of Java. You don't have to understand the in's and out's of
+    this right now, just be able to recognize its use.
+
+    Another to understand is that declaration of variables doesn't _HAVE_ to
+    include the variables value. Up until now we've been declaring a variable
+    and giving it its value. We call this /implicit declaration/. But remember: a
+    variable is a CONTAINER. We can just define the container and fill it later.
+    We call this /explicit declaration/. Explicit declaration comes in handy when
+    it would be difficult to type out how to fill a data structure!
+
+    One such data type will be the =ArrayList= data type.
+
+** ArrayList
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Left                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :eval no
+      String student0;
+      String student1;
+      String student2;
+      // ...
+      String student30;
+
+    #+end_src
+
+*** Right                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<String> students = new ArrayList<>();
+    #+end_src
+
+
+*** Narrative                                                      :noexport:
+
+    Lists are very useful - probably the most used data structure in all of
+    programming. Instead of creating a variable for every student in a class, we
+    might have a list of Strings which contains the students names. This
+    provides us with much more flexibility in use. If I have a class of 30
+    students I don't have to make
+
+    
+    An ArrayList is a pre-made tool in Java that helps when dealing with Lists.
+    It offers us various methods, including how tno add or remove items from our
+    list and it can help us retrieve values from a specified place inthe list.
+** Creating Lists
+   Import the Library first!
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :eval no
+     // import the list to make it available to the program
+     import java.util.ArrayList;
+
+     public class Program {
+
+         public static void main(String[] args) {
+             // no implementation yet
+         }
+     }
+   #+end_src
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+   #+begin_src java :eval no
+     // TYPE           VAR      = new TYPE
+     ArrayList<String> students = new ArrayList<>();
+   #+end_src
+
+
+*** Narrative                                                      :noexport:
+    We first have to import the ArrayList library. We do this by using the
+    =import= command at the top of our file. We've used the import command in the
+    past, we've imported the Scanner library into just about every program we've
+    written.
+
+    Importing the =ArrayList= library makes available to the programmer the
+    ArrayList data type and all the associated methods. We define our list in an
+    explicit declaration form.
+
+    Here we are defining our the type of our variable named =students= to be an
+    ArrayList of Strings. That's why we have =String= in the angle brackets. When
+    an arraylist is initialized the type of values to be stored in the list must
+    also be declared and ALL values stored in the list must be of that type.
+    
+    =students= type is =ArrayList= and we would say that /the =student= variable is an
+    =ArrayList= of Strings/ or /list of Strings/ when speaking about it.
+** Defining value Types in a List
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+
+*** Lists of X                                                        :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<Integer> list = new ArrayList<>();
+      list.add(1);
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<Double> list = new ArrayList<>();
+      list.add(4.2);
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<Boolean> list = new ArrayList<>();
+      list.add(true);
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<String> list = new ArrayList<>();
+      list.add("String is a reference-type variable");
+    #+end_src
+*** Value Type vs Reference Type                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<Integer> integers = new ArrayList<>();
+      int integer = 1; // Value Type
+      integers.add(integer); // Reference Type
+
+      ArrayList<Double> doubles = new ArrayList<>();
+      double d = 4.2; // Value Type
+      doubles.add(d); // Reference Type
+    #+end_src
+
+
+*** Narrative                                                      :noexport:
+    When we declare the type of values that can be placed in an Array List we
+    have to be careful not to mix up what are called the /primitive/ types with
+    the /class types/.
+
+    A /primitive/ type is a very low-level type. You've used them regularly when
+    you use =int=, =double=, =boolean=. - The lowercase versions. 
+
+    You've also used the /class types/ when you've done conversions of strings to
+    a type such as Integer. When you Integer.valueOf()
+
+    Another way that Java refers to these types of variables is /value-type/ and
+    /reference-type/. value type variables can hold very limited amounts of
+    information where a reference type can store a near limitless amount. When
+    we define our List the type of value is the /object/ or /class/ type. The
+    reference type. When we add elements to our list we can add them as
+    primitive (or value types) and Java will handle the conversion. Same as when
+    we get values out of our list, they are stored as the reference-type but we
+    are returned the value-type.
+
+** Adding and Getting Elements to a List
+*** Adding elements with .add()
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<String> students = new ArrayList<>();
+      students.add("Mawce");
+      students.add("Oji");
+      students.add("AJ");
+    #+end_src
+*** Getting elements with .get()
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :exports both :wrap resultscode
+      ArrayList<String> students = new ArrayList<>();
+      students.add("Mawce");
+      students.add("Oji");
+      students.add("AJ");
+      System.out.println(students.get(0));
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Mawce
+    #+end_resultscode
+
+
+
+*** Narrative                                                      :noexport:
+    Once we have declared our ArrayList we can add elements to it. When we add
+    elements we act on the variable itself which means we write the name of the
+    variable, a period, and then the method name.
+
+    We use the .add() method to add elements to our list - making sure we only
+    give it values which match the value type we declared. So in this case,
+    strings. When we use .add() it appends the value to the END of the list.
+
+    When we want to get an element out of our list we access that element by the
+    elements index. The index refers to the position in the list starting at 0.
+    So the first element added to the list is in index 0. 
+** Programming Exercise - Third Element
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_01.ThirdElement
+     #+latex: {\tiny
+     The exercise contains a base that asks the user for strings and adds them to a
+     list. The program stops reading when the user enters an empty string. The
+     program then prints the first element of the list.
+
+     Your assignment is to modify the program so that instead of the first value, the
+     third value on the list is printed. Remember that programmers start counting
+     from zero! The program is allowed to malfunction if there are fewer than three
+     entries on the list, so you don't need to prepare for such an event at all.
+     
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+     > Alex
+     #+end_resultscode
+     #+LaTeX: }
+** Programming Exercise - Second Plus Third
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_
+     #+latex: {\tiny
+     In the exercise template there is a program that reads integers from the user
+     and adds them to a list. This ends when the user enters 0. The program then
+     prints the first value on the list.
+
+     Modify the program so that instead of the first value, the program prints the
+     sum of the second and third numbers. The program is allowed to malfunction if
+     there are fewer than three entries on the list, so you don't need to prepare for
+     such an event at all.
+
+     #+latex: }
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < 1
+     < 3
+     < 5
+     < 7
+     < 0
+     > 8
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** IndexOutOfBounds Exceptions
+*** Color within the lines
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      import java.util.ArrayList;
+
+      public class Example {
+
+          public static void main(String[] args) {
+              ArrayList<String> wordList = new ArrayList<>();
+
+              wordList.add("First");
+              wordList.add("Second");
+
+              System.out.println(wordList.get(2));
+          }
+      }
+    #+end_src
+
+    #+begin_resultscode
+    Exception in thread "main" java.lang.IndexOutOfBoundsException: Index: 2, Size: 2
+    at java.util.ArrayList.rangeCheck(ArrayList.java:653)
+    at java.util.ArrayList.get(ArrayList.java:429)
+    at Example.main(Example.java:(line))
+    Java Result: 1    
+    #+end_resultscode
+*** Narrative                                                      :noexport:
+    If we try to access an element in our list that it outside of the bounds of
+    the list or if we forget that ArrayLists are zero-indexed, java will throw
+    an Exception. This exception is called an IndexOutOfBoundsException and the
+    message gives us some hints to the explanation.
+
+    The message is a "stack track". Remember we talked about the call stack and
+    stack frames, imagine you're Java and someone just asked you to return a
+    value that doesn't exist. You don't know what the hell they're thinking so
+    you start giving them the stack frame information back one after another -
+    popping the stack frames off as you go. So we read the Stack Trace in
+    reverse order.
+
+    Starting at the bottom we see Example.main which is our entry into the
+    program. One line up we see ArrayList.get which is called on the 429th line
+    of ArrayList.java, then we see ArrayList.rangeCheck is called on the 653rd
+    line of ArrayList.java and that threw our exception. It also tells us we
+    asked for index 2 and the array size is 2.
+
+** Programming Exercise - IndexOutOfBoundsException
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_03.IndexOutOfBoundsException
+     #+latex: {\tiny
+     A list is extremely useful for storing the values of variables for later use. That said, making mistakes is also relatively easy with a list.
+
+     There is a program that uses a list in the exercise template. Modify it so that its execution always produces the error IndexOutOfBounds. The user should not have to give any inputs to the program (e.g. write something on the keyboard)
+
+     You can also see a means for going through the values of a list — we will return to this topic a bit later.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     None
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+* Iterating over a List
+** List Sizes  
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Left                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :exports both :wrap resultscode
+      ArrayList<String> teachers = new ArrayList<>();
+
+      teachers.add("Simon");
+      teachers.add("Samuel");
+      teachers.add("Ann");
+      teachers.add("Anna");
+
+      System.out.println(teachers.get(0));
+      System.out.println(teachers.get(1));
+      System.out.println(teachers.get(2));
+      System.out.println(teachers.get(3));
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Simon
+    Samuel
+    Ann
+    Anna
+    #+end_resultscode
+*** Right                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :exports both :wrap resultscode
+      ArrayList<String> teachers = new ArrayList<>();
+
+      teachers.add("Simon");
+      teachers.add("Samuel");
+      teachers.add("Ann");
+      teachers.add("Anna");
+
+      System.out.println(teachers.size());
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    4
+    #+end_resultscode
+    
+*** Narrative                                                      :noexport:
+    When we have a list, we usually want to do something with it. Often we want
+    to do something w/ or to every element in the list. We call this "iterating
+    over the list"
+
+    If we know all the elements we can just create that many print statements
+    but that's a clumsy approach. Instead, we can walk over the elements of the
+    list but first we have to figure out how many elements are IN the list. To
+    do that we can call =size()= on the list and get a count of the elements in
+    our list. This could act as an upper bound of, say, a =for= loop.
+
+** Programming Exercise - List Size
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_04.ListSize
+     #+latex: {\tiny
+     In the exercise template is a program that reads input from the user. Modify its working so that when the program quits reading, the program prints the number of values on the list.
+     
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+     > In total: 4
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+** Walking A List
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList
+      ArrayList<String> students = new ArrayList<>();
+      students.add("Mawce");
+      students.add("AJ");
+      students.add("Oji");
+      for (int i = 0; i < students.size(); i++){
+          System.out.println("Student: " + students.get(i));
+      }
+    #+end_src
+
+    #+RESULTS:
+    : Student: Mawce
+    : Student: AJ
+    : Student: Oji
+
+*** Narrative                                                      :noexport:
+    Once we know the size of the ArrayList we have an upper bound and the lower
+    bound is pre-defined - the lower bound is ALWAYS 0. So it's easy for us to
+    walk the elements of an ArrayList using a =for= loop.
+
+    Our iterator i starts at the array lower bound and since array's are
+    0-indexed that lower bound is 0. The condition is to execute whenever i is
+    less than the size of students and we iterate by one every loop.
+
+    Our print statement uses the =.get()= function and we use our iterator as the
+    argument. This lets us print each element.
+
+** Programming Exercise - Last In List
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_05.LastInList
+     #+latex: {\tiny
+     In the exercise template there is a program that reads inputs from the user and adds them to a list. Reading is stopped once the user enters an empty string.
+
+     Your task is to modify the method to print the last read value after it stops reading. Print the value that was read last from the list. Use the method that tells the size of a list to help you.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+
+     > Mary
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - First and Last
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_06.FirstAndLast
+     #+latex: {\tiny
+     In the exercise template there is a program that reads inputs from the user and adds them to a list. Reading is stopped once the user enters an empty string.
+
+     Modify the program to print both the first and the last values after the reading ends. You may suppose that at least two values are read into the list.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+     
+     > Tom
+     > Mary
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Remember These Numbers
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_07.RememberTheseNumbers
+     #+latex: {\tiny
+     The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+     Expand the functionality of the program so that after reading the numbers, it prints all the numbers received from the user. The number used to indicate stopping should not be printed.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < 72
+     < 2
+     < 8
+     < 11
+     < -1
+     > 72
+     > 2
+     > 8
+     > 11
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Only These Numbers
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_08.OnlyTheseNumbers
+     #+latex: {\tiny
+     The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+     Expand the program to ask for a start and end indices once it has finished asking for numbers. After this the program shall prints all the numbers in the list that fall in the specified range (between the indices given by the user, inclusive). You may assume that the user gives indices that match some numbers in the list.
+
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     < 72
+     < 2
+     < 8
+     < 11
+     < -1
+     > From where? 1
+     > To where? 2
+     < 2
+     < 8
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Greatest In List
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_09.GreatestInList
+     #+latex: {\tiny
+     The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+     Continue developing the program so that it finds the greatest number in the list and prints its value after reading all the numbers. The programming should work in the following manner.
+
+     #+latex: }
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < 72
+     < 2
+     < 8
+     < 93
+     < 11
+     < -1
+
+     > The greatest number: 93
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Index Of
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_10.IndexOf
+     #+latex: {\tiny
+     The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+     Expand the program by adding a functionality that asks the user for a number, and reports that number's index in the list. If the number is not found, the program should not print anything.
+
+     #+latex: }
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     < 72
+     < 2
+     < 8
+     < 8
+     < 11
+     < -1
+
+     > Search for? 
+     < 8
+     > 8 is at index 2
+     > 8 is at index 3     
+     #+end_example
+     #+LaTeX: }
+     
+*** Narrative                                                      :noexport:
+** Programming Exercise - Index of Smallest
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_12.IndexOfSmallest
+     #+latex: {\tiny
+     Write a program that reads numbers from the user. When number 9999 is
+     entered, the reading process stops. After this the program will print the
+     smallest number in the list, and also the indices where that number is
+     found. Notice: the smallest number can appear multiple times in the list.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < 72
+     < 2
+     < 8
+     < 8
+     < 11
+     < 9999
+
+     > Smallest number: 2
+     > Found at index: 1     
+     #+end_resultscode
+     #+begin_resultscode
+     < 72
+     < 44
+     < 8
+     < 8
+     < 11
+     < 9999
+
+     > Smallest number: 8
+     > Found at index: 2
+     > Found at index: 3     
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Iterating with a For-Each loop
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<String> teachers = new ArrayList<>();
+
+
+      teachers.add("Simon");
+      teachers.add("Samuel");
+      teachers.add("Ann");
+      teachers.add("Anna");
+
+      for (String teacher: teachers) {
+          System.out.println(teacher);
+      }
+    #+end_src
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      ArrayList<String> teachers = new ArrayList<>();
+
+      teachers.add("Simon");
+      teachers.add("Samuel");
+      teachers.add("Ann");
+      teachers.add("Anna");
+      for (int i = 0; i < teachers.size(); i++) {
+          String teacher = teachers.get(i);
+          // contents of the for each loop:
+          System.out.println(teacher);
+      }
+    #+end_src
+
+
+*** Narrative                                                      :noexport:
+    When you don't need to keep track of the index, we can use what is a called
+    a /for each/ loop.
+
+    A for-each loop hides some of the parts of our for loop with assumed values.  
+** Programming Exercise - Sum Of A List
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_20.SumOfAList
+     #+latex: {\tiny
+The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+Modify the program so that after reading the numbers it calculates and prints the sum of the numbers in the list.
+     
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+< 72
+< 2
+< 8
+< 11
+< -1
+
+> Sum: 93
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Average Of A List
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_13.AverageOfAList
+     #+latex: {\tiny
+The exercise template contains a base that reads numbers from the user and adds them to a list. Reading is stopped once the user enters the number -1.
+
+When reading ends, calculate the average of the numbers in it, and then print that value.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+< 72
+< 2
+< 8
+< 11
+< -1
+
+> Average: 23.25
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+    
+    
+    

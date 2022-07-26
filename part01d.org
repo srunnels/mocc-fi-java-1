@@ -575,4 +575,6 @@
     #+LaTeX: }
 
 *** Narrative                                                      :noexport:
-    For this exercise we're going to combine all the different ways we take a string a cast it to a different value by asking the user for a string, an integer, a doulbe, and a boolean, then we'll spit them back out!
+    For this exercise we're going to combine all the different ways we take a
+    string a cast it to a different value by asking the user for a string, an
+    integer, a doulbe, and a boolean, then we'll spit them back out!

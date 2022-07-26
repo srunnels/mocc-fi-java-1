@@ -1,0 +1,382 @@
+* Pseudocode for Part01_16
+1. Use scanner.nextLine() to read from the user
+   #+begin_src java
+     String input = scanner.nextLine();
+   #+end_src
+2. Use Integer.valueOf() to convert a String to an int
+   #+begin_src java
+     int intput_i = Integer.valueOf(input);
+   #+end_src
+3. Declare an integer whose value is the int input times 86400
+   #+begin_src java
+   #+end_src
+4. Use System.out.println() to print text to screen
+   #+begin_src java
+   #+end_src
+
+* Pseudocode for Part01_17
+  1. Read from scanner.nextLine() and store the result in a variable
+  2. Read from scanner.nextLine() _again_ and store the result in _another_variable
+  3. Convert the first string to an integer using Integer.valueOf() and save
+     that value to a variable
+  4. Convert the second string to an integer using Integer.valueOf() and save
+     that value to a variable
+  5. Print the leader string "The sum of the numbers is " and the sum of the
+     first and second converted Strings.
+** Code
+   #+begin_src java
+     System.out.println("Give the first number:");
+     String input = scanner.nextLine();
+     int value_1 = Integer.valueOf(input);
+     System.out.println("Give the second number:");
+     input = scanner.nextLine();
+     int value_2 = Integer.valueOf(input2);     
+     System.out.println("The sum of the numbers is " + (value_1 + value_2));
+   #+end_src
+     
+** A Shorter Way to do it
+*** Pseudocode
+    1. Read a string from scanner.nextLine() and convert to an integer
+    2. Read a string from scanner.nextLine() and convert to an integer
+    3. Print the leader string "The sum of the numbers is " and the sum of the
+       first and second converted Strings.
+*** Code
+    #+begin_src java
+      System.out.println("Give the second number:");
+      input_1 = Integer.valueOf(scanner.nextLine());
+      System.out.println("Give the second number:");
+      input_2 = Integer.valueOf(scanner.nextLine());
+      System.out.println("The sum of the numbers is " + (input_1 + input_2));
+    #+end_src
+
+
+* Pseudocode for
+
+* ELSE
+
+  #+begin_src java
+    int number = 11;
+    if (number > 10){
+        System.out.println("Num greater than 10");
+    }
+
+    if (number < 10) {
+        System.out.println("Num less than 10");
+    }
+  #+end_src
+
+  #+RESULTS:
+  : Num greater than 10
+
+  #+begin_src java
+    int number = 10;
+    if (number > 10) {
+        System.out.println("Num greater than 10");
+    } else {
+        System.out.println("Num less than or equal to 10");
+    }
+
+  #+end_src
+
+  #+RESULTS:
+  : Num less than or equal to 10
+
+* Pseudocode for Part01_33.Password
+  1. Get a string from the user
+  2. Compare the string user gave to you the string "Caput Draconis"
+     1. If the two strings are equal print "Welcome!"
+     2. Else print "Off with you!"
+
+#+begin_src java
+  boolean password_check = "Caput Draconis".equals("foo");
+  System.out.println(password_check);
+#+end_src
+
+#+RESULTS:
+: false
+
+#+begin_src java
+  String mypassword_attempt = "foo";
+  boolean password_check = mypassword_attempt.equals("Caput Draconis");
+  System.out.println(password_check);
+#+end_src
+
+#+RESULTS:
+: false
+
+* Pseudocode for Part02_07
+  1. Begin a while loop
+  2. Ask the user for an integer using =Scanner=
+  3. Convert the string from =Scanner= to an integer
+  4. Check if the integer is *0*
+     1. If it is, exit the loop
+  5. Check if the integer is less than *0*
+     1. If it is, print /Unsuitable number/ and return to the top of the loop
+  6. If the number is greater than 0, print the exponent of the number to the
+     2nd power
+     p
+     
+     
+* For Loop Construction
+  #+begin_src java
+    int i = 0;
+    while(i < 10){
+        System.out.println(i);
+        i++;
+    }
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  0
+  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  #+end_example
+
+  #+begin_src java
+    for (int i = 0; i < 10; i++){
+        System.out.println(i);
+        i++;
+    }
+  #+end_src
+
+  #+RESULTS:
+  : 0
+  : 2
+  : 4
+  : 6
+  : 8
+
+* Generating a Random int
+  #+begin_src java
+    import java.util.Random;
+    Random rand = new Random();
+    System.out.println(rand.nextInt(10));
+  #+end_src
+
+  #+RESULTS:
+  : 1
+  
+  "\n"
+
+  #+begin_src java
+    System.out.println("Hi");
+    System.out.println("Bye");
+  #+end_src
+
+  #+RESULTS:
+  : Hi
+  : Bye
+
+  #+begin_src java
+    System.out.print("Hi");
+    System.out.print("Bye");
+  #+end_src
+
+  #+RESULTS:
+  : HiBye
+  #+begin_src java
+    System.out.print("Hi\n");
+    System.out.print("Bye");
+  #+end_src
+
+  #+RESULTS:
+  : Hi
+  : Bye
+
+  #+begin_src java
+    System.out.print("Hi\t");
+    System.out.print("Bye");
+  #+end_src
+
+  #+RESULTS:
+  : Hi	Bye
+
+
+  #+begin_src java
+    public class Example {
+        public static void main(String[] args){
+            printUntilNumber(5);
+
+        }
+
+        public static void printUntilNumber(int number){
+            // while
+            
+
+            // for
+            for (int i = 1; i <= number; i++){
+                System.out.println(i);
+            }
+
+        }
+    }
+  #+end_src
+
+
+
+  #+begin_src java
+    
+  #+end_src
+* PseudoCode for Star Sign Pt 1
+  Given a number =number=, print that many * then a new line.
+
+  1. System.out.print()
+  2. System.out.println() or System.out.print("\n")
+* Pseudocode for Astrology
+  #+begin_src java
+    int size = 4;
+    for(int i = 1; i <= size; i++){
+        printSpaces(size - i);
+        printStars(i);
+    }
+  #+end_src
+
+  
+  #+begin_example
+       ,* (3,1)
+      ,** (2,2)
+     ,*** (1,3)
+    ,**** (0,4)
+  #+end_example
+
+  (4,1)
+  (3,3)
+  (2,5)
+  (1,7)
+  (0,9)
+  (3,3)
+  (3,3)
+
+  #+begin_src java
+    int height = 5;
+    for(int i = 0; i < height; i++){
+        printSpaces(height - (i + 1));
+        printStars(i * 2 + 1);
+    }
+    printSpaces(height - 2);
+    printStars(3);
+    printSpaces(height - 2);
+    printStars(3);
+
+    // 5 = (3,3)
+    // 6 = (4,3)
+    // 7 = (5,3)
+
+
+
+  #+end_src
+
+  #+RESULTS:
+  : 4,1
+  : 3,3
+  : 2,5
+  : 1,7
+  : 0,9
+
+  height = 5
+  | i |         spaces |    stars |
+  |---+----------------+----------|
+  | 0 |              4 |        1 |
+  | 1 |              3 |        3 |
+  | 2 |              2 |        5 |
+  | 3 |              1 |        7 |
+  | 4 |              0 |        9 |
+  |---+----------------+----------|
+  |   | height - (i+1) | i * 2 +1 |
+
+
+
+  
+  #+begin_example
+         ,*
+        ,***
+       ,*****
+      ,*******
+     ,*********
+    ,***********
+        ,***
+        ,***
+  #+end_example
+
+  #+begin_example
+  #+end_example
+
+
+  #+begin_src python
+    x = [1,2,3,4]
+
+    y = {"k": [1,2,3,4],
+         "v": []}
+  #+end_src
+
+  #+begin_src python :results output
+    print("foo" in "foo bar")
+  #+end_src
+
+  #+RESULTS:
+  : True
+
+  | List   | .size() | .get() |
+  |--------+---------+--------|
+  | Scott  |       1 |      0 |
+  | Amanda |       2 |      1 |
+  | Mawce  |       3 |      2 |
+  |--------+---------+--------|
+
+  family.size() // Output: 3
+  family.get(family.size() - 1);
+
+
+
+
+* Pseudocode
+
+  | 72 | 2 | 8 | 93 | 11 |
+  |----+---+---+----+----|
+
+
+  | i | .get(i) | comparing | answer |
+  |---+---------+-----------+--------|
+  | 0 |      72 | 72 > 0    |     72 |
+  | 1 |       2 | 2 > 72    |     72 |
+  | 2 |       8 | 8 > 72    |     72 |
+  | 3 |      93 | 93 > 72   |     93 |
+  | 4 |      11 | 11 > 93   |     93 |
+
+
+  #+begin_src java :imports java.util.ArrayList
+    ArrayList<Integer> numbers = new ArrayList<>();
+    numbers.add(72);
+    numbers.add(2);
+    numbers.add(8);
+    numbers.add(93);
+    numbers.add(11);
+
+    int answer = 0;
+    for(int i = 0; i < numbers.size(); i++){
+        if (numbers.get(i) > answer){
+            answer = numbers.get(i);
+        }
+    }
+
+    System.out.println(answer);
+
+  #+end_src
+
+  #+RESULTS:
+  : 93
+
+
+  #+begin_src java
+    int i = 10;
+    double j = (double) i;
+    double k = 1.0 * i;
+  #+end_src

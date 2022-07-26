@@ -1,0 +1,867 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part02b.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Repeating Functionality}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** Learning Objectives
+   - You are familiar with loops and know how to create a program that contains one.
+   - You know how to use the break command to end a loop's execution.
+   - You know how to use continue command to return to the beginning of a loop.
+   - You are able to create a program that reads inputs from a user until a specific input is given. For example, the number 0 or the string "end", after which the program prints something about the provided inputs (e.g., the input count, and in the case of numbers their sum and average).   
+*** Narrative                                                      :noexport:
+    In this section we're mostly going to talk about doing thingss repeatedly.
+    In programming parlance we refer to this as looping. Loops are an important
+    part of programming because they help us reduce the code we write and
+    instead allow us to build code that repeatedly executed by the processor of
+    our computer. In modern computers, the processor - which specializes in
+    executing commands - is capable of executing over a billion commands in a
+    second. Now, these commands are in machine code so it's a very reduced set
+    of commands like put this number there, add this to that. But suffice to
+    say, your processor is powerful and leveraging repeated code makes it so you
+    can leverage that power.
+
+    Let's look at an example of where a loop might be useful.
+    
+* Introducing Loops
+** Pre-loop
+*** Too wordy
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :exports code :eval no
+      Scanner scanner = new Scanner(System.in);
+      int sum = 0;
+
+      System.out.println("Input a number: ");
+      sum = sum + Integer.valueOf(scanner.nextLine());
+
+      System.out.println("Input a number: ");
+      sum = sum + Integer.valueOf(scanner.nextLine());
+
+      System.out.println("Input a number: ");
+      sum = sum + Integer.valueOf(scanner.nextLine());
+
+      System.out.println("Input a number: ");
+      sum = sum + Integer.valueOf(scanner.nextLine());
+
+      System.out.println("Input a number: ");
+      sum = sum + Integer.valueOf(scanner.nextLine());
+
+      System.out.println("The sum of the numbers is " + sum);     
+    #+end_src
+
+    #+RESULTS:
+
+*** Narrative                                                      :noexport:
+    This code gets the job done. It asks the user to input a number five times
+    and then creates a sum of the provided numbers. It is, however, not very
+    elegant. If we only wanted to sum 3 three numbers, this doesn't work. If we
+    wanted to sum 4 numbers it doesn't work. It's specific only to reading five
+    inputs and summing five integers.
+
+    Worse though is it's very repetitive. We're writing the same code over and
+    over again and that's great for readability. Remember, you're not always
+    going to be the only person who will be reading your code. At the very
+    least, there's you in the future, who might have completely forgotten what
+    present-you was thinking!
+
+    Let's look at a better example.
+** With a loop
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :eval no :exports code
+     Scanner scanner = new Scanner(System.in);
+
+     int numbersRead = 0;
+     int sum = 0;
+
+     while (true) {
+         if (numbersRead == 5) {
+             break;
+         }
+
+         System.out.println("Input number");
+         sum = sum + Integer.valueOf(scanner.nextLine());
+         numbersRead = numbersRead + 1;
+     }
+
+     System.out.println("The sum of the numbers is " + sum); 
+   #+end_src
+
+*** Narrative                                                      :noexport:
+    This example uses what is called a =while= loop - the statement you ee on
+    line 6. A while loop is sort of like a repeating single-branch if statement.
+    It takes a conditional expression, in this case =true=, and repeats the body
+    of the loop until the conditional expression resolves to a falsey statement
+    or the code is directed to eject from the loop. 
+
+    This code is more concise. If the reader sees "while true" they can assume
+    they're looking at some kind of 'forever' loop. In the next line, they see
+    that if numbersRead ever equals 5, a =break= statement is called which
+    ejects the flow from the loop to resume at the next line outside of the body
+    of the while loop.
+
+    If we didn't have this =break= statement, this would be what is called an
+    infinite loop. Computers do what you tell them to which means they don't do
+    what you don't tell them. If you tell the computer to loop while true is
+    truthy, it's going to loop forever until you kill the process manually.
+
+    So the reader will now ask, "How does numbersRead" change? A quick scan
+    shows that numbersRead is incremented by one after a value is read in by
+    Scanner. When you're coding, if you're finding that you are repeating
+    yourself over and over again, those repeated lines might be better suited as
+    a loop.
+** Programming Exercise - Carry On
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_05.CarryOn
+     #+LaTeX: {\tiny
+     Write a program by using the loop example that asks "Shall we carry on?" until the user inputs the string "no".
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class CarryOn {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Shall we carry on?
+     yes
+     Shall we carry on?
+     ye
+     Shall we carry on?
+     y
+     Shall we carry on?
+     no    
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    lets work through a short exercise on using loops
+    
+** Programming Exercise - Are we there yet?
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_06.AreWeThereYet
+     #+LaTeX: {\tiny
+     Write a program, that asks the user to input values until they input the value 4.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class AreWeThereYet {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Give a number:
+     5
+     Give a number:
+     744
+     Give a number:
+     22
+     Give a number:
+     -1
+     Give a number:
+     4
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+
+** Returning to the start of the loop
+**** Back to the top!
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true    
+     #+begin_src java :eval no :exports code
+       Scanner scanner = new Scanner(System.in);
+
+       while (true) {
+           System.out.println("Insert positive integers");
+           int number = Integer.valueOf(scanner.nextLine());
+
+           if (number <= 0) {
+               System.out.println("Unfit number! Try again.");
+               continue;
+           }
+
+           System.out.println("Your input was " + number);
+       }
+     #+end_src
+*** Narrative                                                      :noexport:
+    It is useful to break out of a loop based on a condition but it's also
+    useful to return to the start of a loops body based on a condition. This is
+    where the =continue= statement comes in.
+
+    in this example, we're asking for a positive integer but if the user inputs
+    a negative integer we restart the loop so the input doesn't get printied.
+
+    However, there's a problem with this example. Try to spot it.
+    
+** More Complete
+**** More Complete example
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true     
+     #+begin_src java :eval no :exports code
+       Scanner scanner = new Scanner(System.in);
+
+       while (true) {
+           System.out.println("Input positive numbers.");
+           int number = Integer.valueOf(scanner.nextLine());
+
+           if (number == 0) {
+               break;
+           }
+
+           if (number < 0) {
+               System.out.println("Unfit number! Try again.");
+               continue;
+           }
+
+           System.out.println("Your input was " + number);
+       }       
+     #+end_src
+** Programming Exercise - Only Positives
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_07.OnlyPositives
+     #+LaTeX: {\tiny
+     Write a program that asks the user for numbers. If the number is negative
+     (smaller than zero), the program prints for user "Unsuitable number" and
+     asks the user for a new number. If the number is zero, the program exits
+     the loop. If the number is positive, the program prints the number to the
+     power of two.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class OnlyPositives {
+
+           public nstatic void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Give a number:
+     5
+     25
+     Give a number:
+     4
+     16
+     Give a number:
+     -3
+     Unsuitable number
+     Give a number:
+     1
+     1
+     Give a number:
+
+     0
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Only Positives - Solution
+*** Working                                                       :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={7,11}    
+    #+begin_src java :eval no
+      Scanner scanner = new Scanner(System.in);
+
+      while (true) {
+          System.out.println("Input a number");
+          int number = Integer.valueOf(scanner.nextLine());
+
+          if (number == 0) {
+              break;
+          }
+
+          if (number < 0) {
+              System.out.println("Unfit number");
+              continue;
+          }
+
+          System.out.println(number * number);
+      }
+    #+end_src
+*** More concise                                                  :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_act: <2>
+    :BEAMER_env: onlyenv
+    :END:
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={7,9}
+    #+begin_src java :eval no
+      Scanner scanner = new Scanner(System.in);
+
+      while (true) {
+          System.out.println("Input a number");
+          int number = Integer.valueOf(scanner.nextLine());
+
+          if (number == 0) {
+              break;
+          } else if (number < 0) {
+              System.out.println("Unfit number");
+              continue;
+          }
+
+          System.out.println(number * number);
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    Let's take a quick look at a possible solution for the last exercise.
+
+    Here is a potential solution where we check if the number is 0 on line 7 and
+    if the number is less than 0 on line 11.
+
+    ::NEXT SLIDE::
+
+    In this example, we make the same checks on line 7 and 9 but we use an =else
+    if= statement to join the two concepts. Often times there are multiple ways
+    to solve the same problem in programming. Neither of these two examples is
+    more correct than the other but there is one thing we might want to
+    consider.
+
+    The code in the previous slide very directly points out what each statement
+    does. While it was more wordy each if statement is very direct in its intent.
+
+    The code on the second slide is more compact and may put in the mind of the
+    person reading it that the grouping of conditions is intended for checks
+    which may alter the flow of the loop by calling continue or break. Over time
+    you'll develop your own sense of style in code through experience and
+    through working with others.
+
+    For most of th ecode you'll see in this course, we'll defer to style where
+    we are more clear with the intent of individual statements.
+
+* Calculation with Loops    
+** Creating a loop to collect numbers                             :B_onlyenv:
+   :PROPERTIES:
+   :BEAMER_env: onlyenv
+   :BEAMER_act: <1>
+   :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={5}
+    #+begin_src java :wrap resultscode :exports both
+      int[] numbers = new int[]{1,2,3,4,5};
+      int index = 0;
+
+      while(index < 5){
+          int evens = 0;
+          if ( numbers[index] % 2 == 0 ){
+              evens = evens + 1;
+          }
+
+          System.out.println("Count of even numbers: " + evens);
+          index = index + 1;    
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Count of even numbers: 0
+    Count of even numbers: 1
+    Count of even numbers: 0
+    Count of even numbers: 1
+    Count of even numbers: 0
+    #+end_resultscode
+   
+** Actually collecting the numbers                                :B_onlyenv:
+   :PROPERTIES:
+   :BEAMER_env: onlyenv
+   :BEAMER_act: <2>
+   :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={3}
+    #+begin_src java :wrap resultscode :exports both
+      int[] numbers = new int[]{1,2,3,4,5};
+      int index = 0;
+      int evens = 0;
+
+      while(index < 5){
+          if ( numbers[index] % 2 == 0 ){
+              evens = evens + 1;
+          }
+
+          index = index + 1;    
+      }
+      System.out.println("Count of even numbers: " + evens);
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Count of even numbers: 2
+    #+end_resultscode
+*** Narrative                                                      :noexport:
+    Loops are often used to aid with calculation of indefinite values and
+    provide either some insight or a read out of some nature which ties to the
+    values.
+
+    In this kind of calculation we need to be very careful about when we
+    introduce variable that will store information. If a variable is declared
+    inside of a loop it is only available within the body of that loop.
+    Similarly any variable which you would want to use in the loop AND after the
+    loop would have to be introduced BEFORE the loop.
+
+    In this example, we have created a list of five numbers - something you'll
+    learn to do later - and we are going to access each member of that list -
+    again, something you'll learn to do later - and test if each number is
+    divisible by 2. If it is, we add one to our counter. However, you'll notice
+    that we introduced the variable which we'll use to count our even numbers
+    within the body of the loop. It's important to remember that every command
+    in a loop body gets evaluated and then effectively destroyed at the end of
+    the loop body. So on line 5, we create the integer variable /evens/ and set
+    it to 0 and by line 12 that variable has been freed - which is another word
+    for destroyed - and will be created on the next iteration of the loop. Thats
+    why we never get more than the number one in our evens variable.
+
+    ::NEXT SLIDE::
+
+    Instead, if we declare /evens/ outside of our loop it will persist across
+    all iterations of the loop body. An internal code body - like the body of
+    the loop - inherits the variables defined in the outer body. So here, by the
+    time we get to lines 6,7, and, 8, our code /knows/ about the =evens=
+    variable. We call this /scope/ and we will explore this in much greater
+    detail later. For now, just remember that if you're going to use a variable
+    outside of a loop you must declare it outside of the loop.
+** Programming Exercise - Number of Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_08.NumbersOfNumbers
+     #+LaTeX: {\tiny
+     Write a program that reads values from the user until they input a 0. After
+     this, the program prints the total number of inputted values. The zero
+     that's used to exit the loop should not be included in the total number
+     count.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class NumberOfNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Give a number:
+     < 5 
+     > Give a number:
+     < 22
+     > Give a number:
+     < 9 
+     > Give a number:
+     < -2
+     > Give a number:
+     < 0
+     > Number of numbers: 4
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Programming Exercise - Number of Negative Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_09.NumberOfNegativeNumbers
+     #+LaTeX: {\tiny
+     Write a program that reads values from the user until they input a 0. After this, the program prints the total number of inputted values that are negative. The zero that's used to exit the loop should not be included in the total number count
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class NumberOfNegativeNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Give a number:
+     < 5
+     > Give a number:
+     < 22
+     > Give a number:
+     < 9
+     > Give a number:
+     < -2
+     > Give a number:
+     < 0
+     > Number of negative numbers: 1
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Programming Exercise - Sum of Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_10.SumOfNumbers
+     #+LaTeX: {\tiny
+     Write a program that reads numbers from the user until the user inputs a
+     number 0. After this the program outputs the sum of the numbers. The number
+     zero does not need to be added to the sum, even if it does not change the
+     results.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class SumOfNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Give a number:
+     < 5
+     > Give a number:
+     < 22
+     > Give a number:
+     < 9
+     > Give a number:
+     < -2
+     > Give a number:
+     < 0
+     > Sum of the numbers: 34
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Programming Exercise - Numbers and Sum of Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_11.NumberAndSumOfNumbers
+     #+LaTeX: {\tiny
+     Write a program that asks the user for input until the user inputs 0. After
+     this the program prints the amount of numbers inputted and the sum of the
+     numbers. The number zero does not need to be added to the sum, but adding it
+     does not change the results.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class NumberAndSumOfNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Give a number:
+     < 5
+     > Give a number:
+     < 22
+     > Give a number:
+     < 9
+     > Give a number:
+     < -2
+     > Give a number:
+     < 0
+     > Number of numbers: 4
+     > Sum of the numbers: 34
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Programming Exercise - Average of Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_12.AverageOfNumbers
+     #+LaTeX: {\tiny
+     Write a program that asks the user for input until the user inputs 0. After
+     this, the program prints the average of the numbers. The number zero does
+     not need to be counted to the average. You may assume that the user inputs
+     at least one number.
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class AverageOfNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > Give a number:
+     < 5
+     > Give a number:
+     < 22
+     > Give a number:
+     < 9
+     > Give a number:
+     < -2
+     > Give a number:
+     < 0
+     > Average of the numbers: 8.5
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+** Programming Exercise - Average of Positive Numbers
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_13.AverageOfPositiveNumbers
+     #+LaTeX: {\tiny
+     Write a program that asks the user for input until the user inputs 0. After
+     this, the program prints the average of the positive numbers (numbers that
+     are greater than zero).
+
+     If no positive number is inputted, the program prints "Cannot calculate the
+     average"
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class AverageOfPositiveNumbers {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     < 3
+     < 5
+     < 1
+     < -3
+     < 0
+     > 3.0
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+
+            
+
+    
+
+* Templates                                                        :noexport:
+** Programming Exercise - Name
+*** Left Column                                                       :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_
+     #+LaTeX: {\tiny
+
+     #+LaTeX: }    
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class AreWeThereYet {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+       }
+
+     #+end_src
+*** Right Column                                                      :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Give a number:
+     5
+     Give a number:
+     744
+     Give a number:
+     22
+     Give a number:
+     -1
+     Give a number:
+     4
+     #+end_resultscode
+     #+LaTeX: }
+*** Narrative                                                      :noexport:       
+    Here's another exercise we'll complete where use a number as our break out condition.
+  

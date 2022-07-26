@@ -1,0 +1,1274 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part02d.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Methods}
+# #+BEAMER_HEADER: \AtBeginSection[]{
+# This line inserts a table of contents with the current section highlighted at
+# the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
+# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
+# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{}
+# #+BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Objectives
+** Goals for the section
+   - Introduce the concepts of a method parameter, a return value, and a call stack
+   - Demonstrate how to create methods and how to call them
+* Methods
+** What is a method?
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :exports both :wrap resultscode
+      System.out.println("foo");
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    foo
+    #+end_resultscode
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java :exports both :wrap resultscode
+      int input = Integer.valueOf("10");
+      System.out.println(input);
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    10
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    A method is a named set of statements. For example,
+    =System.out.println("foo");= calls the method that performs printing to the
+    screen. The internal implementation of the method - how it works, the
+    commands used, etc- is hidden from the user.
+
+    So far, we've used method which were ready-made java methods - methods that
+    java defined and lets you use.
+
+** Custom methods
+*** 
+    :PROPERTIES:
+    :BEAMER_act: <1>
+    :BEAMER_env: onlyenv
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
+    #+begin_src java
+      public class Example {
+          public static void main(String[] args) {
+              // program code
+          }
+
+          // your own methods here
+      }
+    #+end_src
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+begin_src java
+      public static void greet() {
+          System.out.println("Greetings from the method world!");
+      }
+    #+end_src
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_act: <3>
+    :BEAMER_env: onlyenv
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true,highlightlines={9}
+    #+begin_src java
+      public class Example {
+          public static void main(String[] args) {
+              greet();
+              // program code
+          }
+          // your own methods here
+          public static void greet() {
+              System.out.println("Greetings from the method world!");
+          }   
+      }
+    #+end_src
+
+    #+RESULTS:
+    : Greetings from the method world!
+
+*** Narrative                                                      :noexport:
+    Since methods are stored collections of statements you can call from other
+    areas of your code, it makes sense that programmers need to be able to
+    define their own methods! From this point on, almost every program will
+    contain custom-created methods.
+
+    You will define your own methods in the primary class of your boilerplate.
+    As an example here, we would have a file Example.java in which our public
+    class =Example= is defined. Since this is our primary class, we have our
+    entrypoint into the code =public static void main=.
+
+    When we define custom methods they would occur outside the body of =main= and
+    inside the body of =Example=. Methods have bodies which are wrapped in curly
+    braces.
+
+    :: NEXT SLIDE ::
+
+    Let's take this new method we've defined called =greet=. Greet only has one
+    command - a system.out.println() command. Let's see where we would place
+    this in our code. 
+
+    :: NEXT SLIDE::
+
+    When we place our method in our code, it goes outside of the main() method
+    and inside the class Example body. When we want to call =greet= we call it by
+    its name and include parenthesis.
+
+    If we think about or program in the terms of flow, main() remains our
+    entrypoint for our code, once it hits the line that calls =greet=, we have
+    left the =main= method and are now in the =greet= method. We call
+    =System.out.println()= and as the body of =greet= is completed, control is
+    passed back to the main() method where we exit.
+
+** Programming Exercise - In a hole in the ground
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_21.InAHoleInTheGround
+     Create a method called printText which prints the phrase "In a hole in the ground there lived a method" and a newline.     
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class InAHoleInTheGround {
+
+           public static void main(String[] args) {
+               printText();
+           }
+
+           public static void printText() {
+               // Write some code in here
+           }
+       }
+
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > In a hole in the ground there lived a method
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Reprint
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_22.Reprint
+     #+latex: {\tiny
+     Expand the previous program so that the main program asks the user for the
+     number of times the phrase will be printed (i.e. how many times the method
+     will be called)
+     #+LATEX: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class Reprint {
+
+           public static void main(String[] args) {
+               // ask the user for how many times should the text be printed
+               // then call the printText-method multiple times with a while-loop
+
+               Scanner scanner = new Scanner(System.in);
+           }
+
+           // Don't change the next line that defines the method!
+           // (We aren't giving a method a parameter yet)
+           public static void printText() {
+               // write some code here
+           }
+       }
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     How many times?
+     > 7
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     < In a hole in the ground there lived a method
+     #+END_RESULTSCODE
+     #+LATEX: }
+
+*** NARRATIVE                                                      :NOEXPORT:
+    GENERATE A PROGRAM THAT ASKS FOR THE CHARACTERS NAME AND THEIR JOB THEN
+    PRINT A SHORT STORY FOR THEM USING THOSE STRINGS.
+** Naming conventions for methods
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :exports code :eval java
+      public static void This_method_says_woof ( ) {
+          System.out.println("woof");
+      }
+    #+end_src
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :exports code :eval no
+      public static void thisMethodSaysWoof() {
+          System.out.println("woof");
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    The names of methods begin with a word written entirely with lowercase
+    letters and the rest of the words begin with upper case letters. We
+    mentioned this when talking about naming variables. We call this CamelCase
+** Method parameters
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1}
+   #+begin_src java :exports both :wrap resultscode :session jprint
+     public static void greet(int numOfTimes) {
+         int i = 0;
+         while (i < numOfTimes) {
+             System.out.println("Greetings!");
+             i++;
+         }
+     }
+
+     public static void main(String[] args){
+         greet(2);
+     }
+   #+end_src
+
+   #+RESULTS:
+   #+begin_resultscode
+   Greetings!
+   Greetings!
+   #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    We have been using parameters for many commands in this course. When we pass
+    a string to Integer.valueOf() that string is a parameter.
+
+    Same for System.out.println.
+
+    A method defines the parameters it will take in the upper most line of the
+    method within the parens following the name of the method.
+
+    We've extended =greet= so that it takes a parameter called =numOfTimes= which is
+    an integer. In the method we use the parameter =numOfTimes= to define how many
+    times we'll print Greetings. We give it 2 and it prints twice. When you pass
+    parameters to a method they are _evaluated_. So if I gave =greet= (1 + 1) it
+    would be the same as calling =greet= with 2. 1+1 will evaluate and two will be
+    put in its place when it is sent to =greet=.
+
+** Programming Exercise - From one to parameter
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_23.FromOneToParameter
+     #+latex: {\tiny
+     Create the following method in the exercise template: public static void
+     printUntilNumber(int number). It should print the numbers from one to the number
+     passed as a parameter. Two examples of the method's usage are given below.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class FromOneToParameter {
+
+           public static void main(String[] args) {
+
+           }
+
+       }
+
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     When called with parameters of 5
+     #+begin_resultscode
+     1
+     2
+     3
+     4
+     5
+     #+end_resultscode
+     #+LaTeX: }
+** Multiple Parameters
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :exports code :eval no
+      public static void sum(int first, int second) {
+          System.out.println("The sum of numbers " + first + " and " + second + " is " + (first + second));
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    Methods can have multiple parameters.
+
+    When a method is called the parameters are passed in the same order.
+** Programming Exercise - Division
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_25.Division
+     #+latex: {\tiny
+     Write a method public static void division(int numerator, int denominator) that prints the result of the division of the numerator by the denominator. Keep in mind that the result of the division of the integers is an integer — in this case we want the result to be a floating point number.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class Division {
+
+           public static void main(String[] args) {
+
+               // Once you have implemented the division method, you can
+               // try it out here. Fopr example division(3,5);
+               // should print "0.6"
+
+               // division(3, 5);
+           }
+
+           // implement the method here
+       }
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     When given 3 and 5:
+     #+begin_resultscode
+     > 0.6
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Division By Three
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_26.DivisionByThree
+     #+latex: {\tiny
+     Write a method public static void divisibleByThreeInRange(int beginning,
+     int end) that prints all the numbers divisible by three in the given range.
+     The numbers are to be printed in order from the smallest to the greatest.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class DivisibleByThree {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+
+       }
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     When given the parameters 3, 6
+     #+begin_resultscode
+     > 3
+     > 6
+     #+end_resultscode
+     When given the parameters 2,10
+     #+begin_resultscode
+     > 3
+     > 6
+     > 9
+     #+end_resultscode     
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Pass by Copy
+*** LEFT                                                           :B_column:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_env: column
+    :BEAMER_col: .50
+    :END:
+**** 
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :exports both :wrap resultscode :eval no
+       public class Example{
+           public static void main(String[] args){
+               int min = 5;
+               int max = 10;
+
+               printNumbers(min,max);
+               System.out.println();
+               min = 8;
+               printNumbers(min,max);
+           }
+           public static void printNumbers(int min, int max) {
+               while (min < max) {
+                   System.out.println(min);
+                   min++;
+               }
+           }
+       }
+     #+end_src
+     
+*** RIGHT                                                    :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: .50
+    :BEAMER_env: column
+    :END:
+
+**** 
+
+     #+begin_resultscode
+     5
+     6
+     7
+     8
+     9
+
+     8
+     9
+     #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    When a method is called - the values of its parameters are COPIED. This
+    means thats the variables in the main method and the method you're calling
+    have the same name but if you change the value of the variables inside the
+    method, it will not change the values of the variables in main().
+    
+    while both methods have vars min and max, changing them doesn't affect
+    either methods output.
+
+    This is what we mean by copy.
+
+** Methods Can Return Values
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,6}
+    #+begin_src java :exports code :wrap resultscode
+      public static int alwaysReturnsTen() {
+          return 10;
+      }
+
+      public static void main(String[] args) {
+          int number = alwaysReturnsTen();
+
+          System.out.println("the method returned the number " + number);
+      }
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={1,8}
+    #+begin_src java :exports code :wrap resultscode
+      public static int alwaysReturnsTen() {
+          return 10;
+      }
+
+      public static void main(String[] args) {
+          int number = alwaysReturnsTen();
+
+          System.out.println("the method returned the number " + alwaysReturnsTen());
+      }
+    #+end_src
+    
+*** Narrative                                                      :noexport:
+    The definition of a method INDICATES what type of value the method returns.
+
+    So far we've only seen VOID. Void means it doesn't return anything.
+
+    If we want to return something we must tell it to by replacing void with a
+    type and when we call it that value returned needs a home.
+
+    Example - line 1 defines a new method that returns an integer
+    Line 6 defines where to store that int. We can also use the return value of a method in any expression where its type is valid.
+** Programming Exercise - Number Uno
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_27.NumberUno
+     #+LATEX: {\tiny
+     Write a method called =numberUno= which takes no arguments and returns an
+     integer. This method should return the value *1*.
+     #+LATEX: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class NumberUno {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+
+       }
+
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+  
+** Programming Exercise - Word
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_28.Word
+     #+latex: {\tiny
+     Write a method called =word()= which takes no argument and returns a string of your choice.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       import java.util.Scanner;
+
+       public class Word {
+
+           public static void main(String[] args) {
+               Scanner scanner = new Scanner(System.in);
+
+           }
+
+       }
+     #+end_src
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: T
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: T
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    Generate a program that asks for the characters name and their job Then
+    print a short story for them using those strings.
+      
+** Return and Control Flow
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\footnotesize
+    #+begin_src java :eval no :exports code
+      public static int faultyMethod() {
+          return 10;
+          System.out.println("I claim to return an integer, but I don't.");
+      }
+    #+end_src
+
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no :exports code
+      public static int functioningMethod(int parameter) {
+          if (parameter > 10) {
+              return 10;
+          }
+
+          System.out.println("The number received as parameter is ten or less.");
+
+          return parameter;
+      }
+    #+end_src
+
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <3>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no :exports code
+      public static void division(int numerator, int denominator) {
+          if (denominator == 0) {
+              System.out.println("Can not divide by 0!");
+              return;
+          }
+
+          System.out.println("" + numerator + " / " + denominator + " = " + (1.0 * numerator / denominator));
+      }
+    #+end_src
+*** Narrative                                                      :noexport:
+    When a return statement is reached in a method, no further commands in the
+    method are evaluated because flow is returned to the calling method.
+
+    doesn't mean you can't ever have code after the return. Sometimes an if
+    statement branch includes a return
+
+    return simply stops the method and returns what its told to return. In fact
+    you can even return in a void method. You would just have return on its own
+    line.
+** Scope
+***                                                          :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <1>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny    
+    #+begin_src java :exports code :wrap resultscode :exports code
+      public static void main(String[] args){
+          int x = 10;
+          if (x > 10){
+              int y = 11;
+              System.out.println(x);
+              System.out.println(y);
+          }
+          System.out.println(x);
+          // THIS WILL ERROR
+          // System.out.println(y); 
+      }
+
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    10
+    #+end_resultscode
+
+***                                                               :B_onlyenv:
+    :PROPERTIES:
+    :BEAMER_env: onlyenv
+    :BEAMER_act: <2>
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny    
+    #+begin_src java :exports code :wrap resultscode :exports both
+      public class Example {
+          public static void main(String[] args){
+              int x = 10;
+              int y = 11;
+              System.out.println("From inside main: " + x + " " + y);
+              sayHi(x, y);
+              System.out.println("From inside main: " + x + " " + y);
+          }
+          public static void sayHi(int x, int y){
+              x += 10;
+              y += 10;
+              System.out.println("From inside sayHi: " + x + " " + y);
+          }
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    From inside main: 10 11
+    From inside sayHi: 20 21
+    From inside main: 10 11
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    Scope is a very important topic in programming.
+
+    Scope refers to the /scope/ of a name binding. Basically, given a variable,
+    where can it be used or accessed. We've run into this other places.
+
+    In this example if we create an if block, the body of the if block has
+    access to the variables from the outer block - basically what was defined in
+    main before the if started.
+
+    However, if we define a var in the if, once we're out of the IF we can't
+    access it.
+
+    The same hold true for methods.
+    
+    ::NEXT SLIDE::
+
+    Here, remember that the vars are passed by copy.
+
+    The scope of x and y in =sayHi= is specific to JUST sayHi
+** Programming Exercise - Summation
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_29.Summation
+     #+latex: {\tiny
+     Expand the method sum in the exercise template so that it calculates and returns
+     the sum of the numbers that are given as the parameters.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class Summation {
+
+           public static int sum(int num1, int num2, int num3, int num4) {
+               // write some code here
+               return -1;
+           }
+
+           public static void main(String[] args) {
+               int result = sum(4, 3, 6, 1);
+               System.out.println("Sum: " + result);
+           }
+       }
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Sum: 14
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+
+** Programming Exercise - Smallest
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_30.Smallest
+     #+latex: {\tiny
+     Define a two-parameter method smallest that returns the smaller of the two numbers passed to it as parameters.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class Smallest {
+
+           public static int smallest(int number1, int number2) {
+               // Write some code here
+               // don't print anything inside this method
+               // there must be a return in the end of the method
+               return -1;
+           }
+
+           public static void main(String[] args) {
+               int result = smallest(2, 7);
+               System.out.println("Smallest: " + result);
+           }
+       }
+
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Smallest: 2
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Greatest
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_31.Greatest
+     #+latex: {\tiny
+     Define a method called greatest that takes three numbers and returns the
+     greatest of them. If there are multiple greatest values, returning one of
+     them is enough. Printing will take place in the main program.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+public class Greatest {
+
+    public static int greatest(int number1, int number2, int number3) {
+        //write some code here
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int result = greatest(2, 7, 3);
+        System.out.println("Greatest: " + result);
+    }
+}
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Greatest: 7
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Averaging
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_32.Averaging
+     #+latex: {\tiny
+     Create a method called average that calculates the average of the numbers passed as parameters. The previously created method sum must be used inside this method!
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       public class Averaging {
+
+           // implement the sum method here again
+           public static int sum(int number1, int number2, int number3, int number4) {
+               // write some code here
+               return 0;
+           }
+
+           public static double average(int number1, int number2, int number3, int number4) {
+               //write some code here
+               return -1;
+           }
+
+           public static void main(String[] args) {
+               double result = average(4, 3, 6, 1);
+               System.out.println("Average: " + result);
+           }
+       }
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     Average: 3.5
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** The Call Stack
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :eval no
+public class Example{
+    public static void main(String[] args){
+        int x = 10;
+        int y = 20;
+        String test = "test";
+        stackExample(30,40);
+    }
+
+    public static void stackExample(int x, int y){
+        System.out.println("Inside method");
+    }
+}
+
+   #+end_src
+
+*** Narrative                                                      :noexport:
+    When you call a method the computer has to remember HOW to come back to
+    /where/ it was as well as to come back to the same STATE such as the variables
+    which were present at the time. The call stack contains /frames/ each of which
+    include information about a specific methods internal variables and their
+    values. When a method is called, a new frame is created in the call stack,
+    when the execution of the method ends the frame relating to the method is
+    removed from the call stack. This allows the process to re-establish its
+    state.
+    
+** Programming Exercise - Star Sign (part 1)
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_33.starSign
+     #+latex: {\tiny
+     Define a method =calledprintStars= that prints the given number of stars and line break
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny 
+     #+begin_resultscode
+     >*****
+     >***
+     >*********
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Printing A Square
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_33.StarSign
+     #+latex: {\tiny
+     Define a method called =printSquare(int size)= that prints a suitable square with the help of the =printStars= method.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     >****
+     >****
+     >****
+     >****
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Programming Exercise - Printing A Rectangle
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_33.StarSign
+     #+latex: {\tiny
+     Write a method called =printRectangle(int width, int height)= that prints the correct rectangle by using the =printStars= method. So the method call =printRectangle(17, 3)= should produce the following output:
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     >*****************
+     >*****************
+     >*****************
+     >*****************
+     #+end_resultscode
+     #+LaTeX: }
+
+
+    
+
+    
+    
+    
+    
+** Programming Exercise - Printing A Triangle
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_33.StarSign
+     #+latex: {\tiny
+     Create a method called =printTriangle(int size)= that prints a triangle by
+     using the =printStars= method. So the call =printTriangle(4)= should print the
+     following:
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     >*
+     >**
+     >***
+     >****
+     #+end_resultscode
+     #+LaTeX: }
+
+** Programming Exercise - Advanced Astrology Part 1
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_34.AdvancedAstrology
+     #+latex: {\tiny
+     Define a method called printSpaces(int number) that produces the number of
+     spaces specified by number. The method does not print the line break.
+
+     You will also have to either copy the printStars method from your previous
+     exercise or reimplement it in this exercise template.
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+
+** Programming Exercise - Advanced Astrology Part 2
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_34.AdvancedAstrology
+     #+latex: {\tiny
+     Create a method called printTriangle(int size) that uses printSpaces and
+     printStars to print the correct triangle. So the method call printTriangle(4)
+     should print the following:
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+        *
+       **
+      ***
+     **** 
+     #+end_example
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+
+
+Create a method called printTriangle(int size) that uses printSpaces and printStars to print the correct triangle. So the method call printTriangle(4) should print the following:    
+
+    
+
+    
+    
+    
+    
+** Programming Exercise - Advanced Astrology Part 3
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_34.AdvancedAstrology
+     #+latex: {\tiny
+Define a method called christmasTree(int height) that prints the correct
+Christmas tree. The Christmas tree consists of a triangle with the specified
+height as well as the base. The base is two stars high and three stars wide, and
+is placed at the center of the triangle's bottom. The tree is to be constructed
+by using the methods printSpaces and printStars.
+
+For example, the call christmasTree(10) should print the following:
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+         *
+        ***
+       *****
+      *******
+     *********
+    ***********
+   *************
+  ***************
+ *****************
+*******************
+        ***
+        ***
+     #+end_example
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+
+
+Create a method called printTriangle(int size) that uses printSpaces and printStars to print the correct triangle. So the method call printTriangle(4) should print the following:    
+
+    
+
+    
+    
+    
+    

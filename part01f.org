@@ -110,7 +110,7 @@
    or false - as our conditional. Since it evaluates to a truthy value, the
    associated code block is evaluated.
 
-   Do note, that =if= statements do _not_ end in parenthesis but the statements
+   Do note, that =if= statements do _not_ end in semicolon but the statements
    within the body do unless they are, themselves, if statements.
 
 ** Programming Exercise - Speeding Ticket
@@ -119,7 +119,7 @@
     :BEAMER_opt: t
     :BEAMER_col: 0.60
     :END:
-**** Part01_23.SpeedingTicket
+**** Part01_24.SpeedingTicket
      #+LaTeX: {\tiny
      Write a program that asks the user for an integer and prints the string "Speeding ticket!" if the input is greater than 120.
      #+LaTeX: }
@@ -149,16 +149,16 @@
      :END:
      #+LaTeX: {\tiny
      #+begin_resultscode
-       Give speed:
-       15
+       > Give speed:
+       < 15
      #+end_resultscode
      #+LaTeX: }
 
      #+LaTeX: {\tiny
      #+begin_resultscode
-       Give speed:
-       135
-       Speeding ticket!
+       > Give speed:
+       < 135
+       > Speeding ticket!
      #+end_resultscode
      #+LaTeX: }
 *** Narrative                                                      :noexport:
@@ -253,7 +253,7 @@
     :BEAMER_opt: t
     :BEAMER_col: 0.70
     :END:
-**** Part01_26.Ancient
+**** Part01_27.Ancient
     #+LaTeX: {\tiny
     Write a program that prompts the user for a year.
 
@@ -287,14 +287,14 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give a year:
-      2017
+      > Give a year:
+      < 2017
     #+end_resultscode
 
     #+begin_resultscode
-      Give a year:
-      2013
-      Ancient history!
+     > Give a year:
+     < 2013
+     > Ancient history!
     #+end_resultscode
 
     #+LaTeX: }
@@ -303,7 +303,13 @@
     2015 we print the sentence "Ancient history!"
 * Else
 ** Else statements
-   #+begin_src plantuml :file /tmp/test.png :exports results
+*** Left Column                                                    :B_column:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :BEAMER_env: column
+    :END:
+   #+begin_src plantuml :file /tmp/else.png :exports results
      @startuml
      if (number greater than 5?) then (yes)
        :Your number is greater than five!;
@@ -315,7 +321,12 @@
 
    #+RESULTS:
    [[file:/tmp/test.png]]
-
+*** Right Column
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.4
+    :BEAMER_env: column
+    :END:
    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,highlightlines={5}
    #+begin_src java  :exports both :wrap resultscode :cache yes
      int number = 4;
@@ -345,7 +356,7 @@
 
    An =else= statement can only exist with an =if= statement and is placed
    after the closing curly brace of the if statement.
-
+   
 ** Programming Exercise - Positivity
 *** Code                                                              :BMCOL:
     :PROPERTIES:
@@ -386,14 +397,14 @@
      :BEAMER_env: block
      :END:
    #+begin_resultscode
-     Give a number:
-     5
-     The number is positive.    
+    > Give a number:
+    < 5
+    > The number is positive.    
    #+end_resultscode
    #+begin_resultscode
-     Give a number:
-     -2
-     The number is not positive.
+    > Give a number:
+    < -2
+    > The number is not positive.
    #+end_resultscode
 
 
@@ -438,14 +449,14 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      How old are you?
-      12
-      You are not an adult
+     > How old are you?
+     < 12
+     > You are not an adult
     #+end_resultscode
     #+begin_resultscode
-      How old are you?
-      32
-      You are an adult
+     > How old are you?
+     < 32
+     > You are an adult
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -484,7 +495,7 @@
    :BEAMER_col: 0.40
    :END:
 
-   #+begin_src plantuml :file /tmp/test2.png :exports results
+   #+begin_src plantuml :file /tmp/elseif.png :exports results
      @startuml
      scale .45
      if (number equals 1?) then (yes)
@@ -553,25 +564,25 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give the first number:
-      5
-      Give the second number:
-      3
-      Greater number is: 5
+      > Give the first number:
+      < 5
+      > Give the second number:
+      < 3
+      > Greater number is: 5
     #+end_resultscode
     #+begin_resultscode
-      Give the first number:
-      5
-      Give the second number:
-      8
-      Greater number is: 8
+      > Give the first number:
+      < 5
+      > Give the second number:
+      < 8
+      > Greater number is: 8
     #+end_resultscode
     #+begin_resultscode
-      Give the first number:
-      5
-      Give the second number:
-      5
-      The numbers are equal!
+      > Give the first number:
+      < 5
+      > Give the second number:
+      < 5
+      > The numbers are equal!
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:
@@ -613,27 +624,27 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_example
-      Give points [0-100]:
-      37
-      Grade: failed
+      > Give points [0-100]:
+      < 37
+      > Grade: failed
     #+end_example
       
     #+begin_example
-      Give points [0-100]:
-      76
-      Grade: 3
+      > Give points [0-100]:
+      < 76
+      > Grade: 3
     #+end_example
 
     #+begin_example
-      Give points [0-100]:
-      95
-      Grade: 5    
+      > Give points [0-100]:
+      < 95
+      > Grade: 5    
     #+end_example
     
     #+begin_example
-      Give points [0-100]:
-      -3
-      Grade: impossible!
+      > Give points [0-100]:
+      < -3
+      > Grade: impossible!
     #+end_example
     #+LaTeX: }
 
@@ -676,27 +687,27 @@
      #+begin_src python :exports code
      #+end_src
      #+begin_resultscode
-     Give points [0-100]:
-     37
-     Grade: failed
+     > Give points [0-100]:
+     < 37
+     > Grade: failed
      #+end_resultscode
      
      #+begin_resultscode
-     Give points [0-100]:
-     76
-     Grade: 3
+     > Give points [0-100]:
+     < 76
+     > Grade: 3
      #+end_resultscode
 
      #+begin_resultscode
-     Give points [0-100]:
-     95
-     Grade: 5    
+     > Give points [0-100]:
+     < 95
+     > Grade: 5    
      #+end_resultscode
     
      #+begin_resultscode
-     Give points [0-100]:
-     -3
-     Grade: impossible!
+     > Give points [0-100]:
+     < -3
+     > Grade: impossible!
      #+end_resultscode
 
 *** Narrative                                                      :noexport:
@@ -781,15 +792,15 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Give a number:
-      2
-      Number 2 is even.
+     > Give a number:
+     < 2
+     > Number 2 is even.
     #+end_resultscode
 
     #+begin_resultscode
-      Give a number:
-      7
-      Number 7 is odd.
+     > Give a number:
+     < 7
+     > Number 7 is odd.
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -896,7 +907,6 @@
     #+LaTeX: {\tiny
     Write a program that prompts the user for two strings. If the strings are the
     same, then the program prints "Same". Otherwise, it prints "Different".
-    prints "Off with you!"
     #+LaTeX: }
 
     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,autogobble=true
@@ -925,19 +935,19 @@
      :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-      Enter the first string:
-      hello
-      Enter the second string:
-      hello
-      Same
+      > Enter the first string:
+      < hello
+      > Enter the second string:
+      < hello
+      > Same
     #+end_resultscode
 
     #+begin_resultscode
-      Enter the first string:
-      hello
-      Enter the second string:
-      world
-      Different
+      > Enter the first string:
+      < hello
+      > Enter the second string:
+      < world
+      > Different
     #+end_resultscode
     #+LaTeX: }
 *** Narrative                                                      :noexport:     
@@ -1205,7 +1215,6 @@
    divisible by both three and five, then print "FizzBuzz" instead of the
    number.'
 
-   
     
 ** The Steps to solve Fizz Buzz in PseudoCode
    
@@ -1227,7 +1236,7 @@
     :BEAMER_col: 0.40
     :END:
 **** Logic Tree
-    #+begin_src plantuml :file /tmp/test.png :exports results
+    #+begin_src plantuml :file /tmp/fizzbuzz.png :exports results
       @startuml
       !pragma useVerticalIf on
       start
@@ -1417,20 +1426,20 @@
     :END:
     #+LaTeX: {\tiny
     #+begin_resultscode
-    Give a year: 2011
-    The year is not a leap year.
+    > Give a year: 2011
+    < The year is not a leap year.
     #+end_resultscode
     #+begin_resultscode
-    Give a year: 2012
-    The year is a leap year.
+    > Give a year: 2012
+    < The year is a leap year.
     #+end_resultscode
     #+begin_resultscode
-    Give a year: 1800
-    The year is not a leap year.
+    > Give a year: 1800
+    < The year is not a leap year.
     #+end_resultscode
     #+begin_resultscode
-    Give a year: 2000
-    The year is a leap year.
+    > Give a year: 2000
+    < The year is a leap year.
     #+end_resultscode    
     #+LaTeX: }
 
@@ -1477,25 +1486,20 @@
     #+begin_example
     #+end_example
     #+begin_resultscode
-    Value of the gift?
-    3500
-    No tax!
-    #+end_resultscode
-    #+begin_resultscode
-    Value of the gift?
-    3500
-    No tax!
+    > Value of the gift?
+    < 3500
+    > No tax!
     #+end_resultscode
 
      #+begin_resultscode
-    Value of the gift?
-    5000
-    Tax: 100.0
+    > Value of the gift?
+    < 5000
+    > Tax: 100.0
     #+end_resultscode
     #+begin_resultscode
-    Value of the gift?
-    27500
-    Tax: 1950.0
+    > Value of the gift?
+    < 27500
+    > Tax: 1950.0
     #+end_resultscode    
 
     #+LaTeX: }
