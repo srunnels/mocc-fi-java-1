@@ -12,20 +12,21 @@
 #+BEAMER_THEME: metropolis
 # #+BEAMER_OUTER_THEME: miniframes [subsection=false]
 #+BEAMER_HEADER: \subtitle{Lists}
-# #+BEAMER_HEADER: \AtBeginSection[]{
-# This line inserts a table of contents with the current section highlighted at
-# the beginning of each section
-# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame}
-# In order to have the miniframes/smoothbars navigation bullets even though we do not use subsections 
-# q.v. https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
-# #+BEAMER_HEADER: \subsection{}
-# #+BEAMER_HEADER: }
+# #+BEAMER_HEADER: \AtBeginSection[]{ # This line inserts a table of contents
+# #with the current section highlighted at # the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame} #
+# #In order to have the miniframes/smoothbars navigation bullets even though we
+# #do not use subsections # q.v.
+# #https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{} +BEAMER_HEADER: }
 #+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
 #+LATEX_HEADER: \usepackage{listings}
 #+LATEX_HEADER: \usepackage{minted}
 #+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
 #+LATEX_HEADER: \usepackage{tabularx}
 #+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{positioning}
 #+LATEX_HEADER: \usepackage{local-style}
 #+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
 #+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
@@ -1010,7 +1011,493 @@ When reading ends, calculate the average of the numbers in it, and then print th
      #+LaTeX: }
 
 *** Narrative                                                      :noexport:
+* Removing Elements from a List
+** .remove()'ing by Index
+*** Index removal
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :wrap resultscode
+      ArrayList<String> list = new ArrayList<>();
+
+      /* Add Elements */
+      list.add("First");
+      list.add("Second");
+      list.add("Third");
+
+      /* Remove an element */
+      list.remove(1);
+
+      System.out.println("Index 0 so the first value: " + list.get(0));
+      System.out.println("Index 1 so the second value: " + list.get(1));
+
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Index 0 so the first value: First
+    Index 1 so the second value: Third
+    #+end_resultscode
+
+
+*** Narrative                                                      :noexport:
+    So we use .add() to add to a list but how do we remove an element from a list?
+
+    Not surprisingly it's the .remove() method. There are two types of
+    parameters we can provide to the .remove function. In this case, we're
+    removing the element at index one. So if we use .remove(1) it would remove
+    the second element we added.
+** .remove()'ing by Value                                         :B_columns:
+   :PROPERTIES:
+   :BEAMER_env: columns
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                     :B_column:BMCOL:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_opt: t
+    :BEAMER_col: 0.45
+    :END:
+**** Removal by Value
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :wrap resultscode
+      ArrayList<String> list = new ArrayList<>();
+
+      /* Add Elements */
+      list.add("First");
+      list.add("Second");
+      list.add("Third");
+
+      /* Remove an element */
+      list.remove("Second");
+
+      System.out.println("Index 0: " + list.get(0));
+      System.out.println("Index 1: " + list.get(1));
+
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Index 0 so the first value: First
+    Index 1 so the second value: Third
+    #+end_resultscode
+*** RIGHT                                                          :B_column:
+    :PROPERTIES:
+    :BEAMER_env: column
+    :BEAMER_col: 0.45    
+    :BEAMER_opt: t
+    :END:
+**** Removal using Reference Type    
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :wrap resultscode
+      ArrayList<Integer> list = new ArrayList<>();
+
+      /* Add Elements */
+      list.add(1);
+      list.add(2);
+      list.add(3);
+
+      /* Remove an element */
+      list.remove(Integer.valueOf(2));
+
+      System.out.println("Index 0: " + list.get(0));
+      System.out.println("Index 1: " + list.get(1));
+
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Index 0 so the first value: 1
+    Index 1 so the second value: 3
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    Slightly more interestingly we can also remove the element by VALUE. 
+
+    This has some blind corners that we need to be careful of.
+
+    Firstly, if we there are multiple elements in your list of the same value,
+    the .remove() method will only remove the FIRST instance of it. It will not
+    remove all instances of the value.
+
+    Secondly, if the values in your list are INTEGERS you have to be very
+    careful of how you use the .remove() method.
+
+    The remove method is what is called an OVERLOADED method. When a method is
+    overloaded in Java there are multiple definitions for the method but they
+    take different parameters or different types of parameters. So one version
+    of remove takes an integer and that version removes by index. It's all it
+    does.
+
+    The other version takes an object as its parameter. So if we need to remove
+    an element by value which happens to be an Integer we have to convert to the
+    REFERENCE type of Integer.
+
+* Checking for the Existence of an Element in a List
+** .contains()
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :imports java.util.ArrayList :wrap resultscode
+      ArrayList<String> list = new ArrayList<>();
+
+      /* Add Elements */
+      list.add("First");
+      list.add("Second");
+      list.add("Third");
+
+      boolean isMember = list.contains("Second");
+      System.out.println("Is Second a member of the list? " + isMember);
+      System.out.println("Is Fourth a member of the list? " + list.contains("Fourth"));
+
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    Is Second a member of the list? true
+    Is Fourth a member of the list? false
+    #+end_resultscode
+
+
+*** Narrative                                                      :noexport:
+    It can be very useful to check if a element is a member of a list. 
+
+    With ArrayList's we do this by calling .contains on our list and providing
+    it with a value we want to check. If the value is found anywhere in the list
+    it returns true, else it returns no.
+** Programming Exercise - On the List?
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_14.OnTheList
+     #+latex: {\tiny
+     In the exercise template there is a program that reads inputs from the user
+     until an empty string is entered. Add the following functionality to it:
+     after reading the inputs one more string is requested from the user. The
+     program then tell whether that string was found in the list or not.
+     
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+     > Search for?
+     < Mary
+     > Mary was found!
+     #+end_resultscode
+     #+begin_resultscode
+     < Tom
+     < Emma
+     < Alex
+     < Mary
+     > Search for?
+     < Logan
+     > Logan was not found!
+     #+end_resultscode
+
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+
+* Using Lists in Methods
+** Lists as Method Parameter
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,firstline=3,lastline=7
+    #+begin_src java :imports java.util.ArrayList :eval no
+      public class Main {
+
+      public static void print(ArrayList<String> list) {
+          for (String value: list) {
+              System.out.println(value);
+          }
+      }
+
+          public static void main(String[] args){
+              ArrayList<String> strings = new ArrayList<>();
+
+              strings.add("First");
+              strings.add("Second");
+              strings.add("Third");
+
+              print(strings);
+
+          }
+      }
+    #+end_src
+
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,firstline=09,lastline=17
+    #+begin_src java :imports java.util.ArrayList :exports both :wrap resultscode
+      public class Main {
+
+          public static void print(ArrayList<String> list) {
+              for (String value: list) {
+                  System.out.println(value);
+              }
+          }
+
+          public static void main(String[] args){
+              ArrayList<String> strings = new ArrayList<>();
+
+              strings.add("First");
+              strings.add("Second");
+              strings.add("Third");
+
+              print(strings);
+          }
+      }
+    #+end_src
+
+    #+RESULTS:
+    #+begin_resultscode
+    First
+    Second
+    Third
+    #+end_resultscode
+
+*** Narrative                                                      :noexport:
+    Just like other variables, lists can be used as a parameter for a method.
+
+    When we use a list as a method parameter we define the parameter as an
+    ArrayList and supply the type of elements in the list.
+
+    Let's walk through a quick example.
+
+    In the first code block I've created a method called print that takes an
+    ArrayList of String elements. It uses the for each shorthand to loop through
+    the list and print every element.
+
+    then in the main method we create our list, fill it and pass the list to
+    print.
+
+    So we can use lists just like any other variable. We can accept it as a
+    parameter and we can pass it as a parameter.
+** Programming Exercise - Print In Range
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_15.PrintInRange
+     #+latex: {\tiny
+     Create the method public static void printNumbersInRange(ArrayList<Integer> numbers, int lowerLimit, int upperLimit) in the exercise template. The method prints the numbers in the given list whose values are in the range [lowerLimit, upperLimit]. A few examples of using the method are supplied below.
+     
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       ArrayList<Integer> numbers = new ArrayList<>();
+       numbers.add(3);
+       numbers.add(2);
+       numbers.add(6);
+       numbers.add(-1);
+       numbers.add(5);
+       numbers.add(1);
+
+       System.out.println("The numbers in the range [0, 5]");
+       printNumbersInRange(numbers, 0, 5);
+
+       System.out.println("The numbers in the range [3, 10]");
+       printNumbersInRange(numbers, 3, 10);
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     The numbers in the range [0,5]
+     3
+     2
+     5
+     1
+     The numbers in the range [3,10]
+     3
+     2
+     5
+     1
+     #+end_resultscode
+
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** On Copying the List to a Method Parameter
+   \begin{tikzpicture}
+   \node [draw] (A) at (0,0) {int x = 10};
+   \node [draw] (AV) at (10,0) {10};
+   \draw[->] (A) edge (AV);
+   \node [draw,below=of A.west,anchor=west] (B) {double y = 4.2};
+   \node [draw,below=of AV.east,anchor=east] (BV) {4.2};
+   \draw[->] (B) edge (BV);
+   \node [draw,below=of B.west,anchor=west] (C) {ArrayList<String> students = new ArrayList<>()};
+   \node [draw,below=of BV.east,anchor=east] (CV) {0xCFFFF23D};
+   \draw[->] (C) edge (CV);
+   \end{tikzpicture}
+*** Narrative                                                       :noexport:
+    Here's where things get a little sticky.
+
+    A few lessons ago I said when you pass a variable to a method that java
+    passes that variable "by value" or it passes a copy of the value. So when we
+    act on that variable in the method we won't be changing the actual variable.
+    But, this starts to get a little different when we take into account
+    Reference Types versus Value Types.
+
+    Let's look at it this way, on the left, I'm defining some new variables. An
+    int, a double, and an ArrayList . On the right is what is
+    generated when you declare those variables. For the first two which are
+    value types (or primitives) we get the value. That's easy. But the last two
+    which are Reference types we get something that looks very different. This
+    is a hexadecimal (a base-16 number). This is commonly used in computing
+    parlance to refer to a section of memory. So what we're getting here are
+    references to places in memory.
+
+    So now when we pass a reference variable to a method - again we do this by
+    what is called "pass by value" - we're passing a copy to the memory
+    reference of the variable. This means, that for /most/ - not ALL - reference
+    types - if we n be pass them to a method we will be able to make direct
+    changes to the underlying data as long as the data is /mutable/ - which is
+    another word for changeable.
+
+    So, for Strings, this won't work. Strings are a reference type but they're
+    immutable - you cannot change them.
+
+    This is one of the reason we often say Java is "pass by copy". The two types
+    really are "pass by reference" and "pass by value" but it's easier to think
+    of Java as passing a copy of the value. If the value is a primitive it's
+    passing a copy of the actual bits that make up that value. If it's a
+    reference type, it's copying the reference.
+** Altering a List in a Method
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** LEFT                                                              :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t    
+    :END:
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+name: pass-by-copy
+    #+begin_src java  :imports java.util.ArrayList :exports code
+      public class Main {
+
+          public static void print(ArrayList<String> list) {
+              for (String value: list) {
+                  System.out.println(value);
+              }
+              list.remove(0);
+          }
+
+          public static void main(String[] args){
+              ArrayList<String> strings = new ArrayList<>();
+
+              strings.add("First");
+              strings.add("Second");
+              strings.add("Third");
+
+              print(strings);
+              System.out.println();
+              for (String value: strings) {
+                  System.out.println(value);
+              }
+          }
+      }
+    #+end_src
+
+    #+RESULTS: pass-by-copy
+    : First
+    : Second
+    : Third
+    : 
+    : Second
+    : Third
+
+*** RIGHT                                                             :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.5
+    :BEAMER_opt: t
+    :END:
+    #+call: pass-by-copy() :wrap resultscode
+*** Narrative                                                      :noexport:
+   Here's an example where we pass an ArrayList to a method =print= again. But
+   this time I made it so =print= removes the first element of the list as well.
+   If we pass =strings= to print it prints the contents of our list and then
+   removes the first element. So when we then iterate over our list we can see
+   its changed.
+** Programming Exercise - Remove Last
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part02_16.RemoveLast
+     #+latex: {\tiny
+     Create the method public static void removeLast(ArrayList<String> strings) in the exercise template. The method should remove the last value in the list it receives as a parameter. If the list is empty, the method does nothing.
+     
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       ArrayList<String> strings = new ArrayList<>();
+
+       strings.add("First");
+       strings.add("Second");
+       strings.add("Third");
+
+       System.out.println(strings);
+
+       removeLast(strings);
+       removeLast(strings);
+
+       System.out.println(strings);
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     > [First, Second, Third]
+     > [First]
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
     
-    
-    
-    
+* Summary of ArrayList Functionality
+** If you want to...
+  | You want to...                             | Use         |
+  |--------------------------------------------+-------------|
+  | Add an element to an ArrayList             | .add()      |
+  | Get the size of an Arraylist               | .size()     |
+  | Get an element from an ArrayList           | .get()      |
+  | Remove an element from an ArrayList        | .remove()   |
+  | Check if an element exists in an ArrayList | .contains() |
+
+
+

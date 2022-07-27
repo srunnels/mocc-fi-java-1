@@ -1,0 +1,456 @@
+#+TITLE: Intro to Java Programming
+#+AUTHOR: Scott Runnels
+#+LANGUAGE: en
+#+EXPORT_FILE_NAME: part03c.pdf
+#+OPTIONS:   H:2 num:t toc:t \n:nil @:t ::t |:t ^:nil -:nil f:t *:t <:t 
+#+BIND: org-latex-caption-above nil
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+LaTeX_CLASS_OPTIONS: [aspectratio=169]
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+COLUMNS: %20ITEM %13BEAMER_env(Env) %6BEAMER_envargs(Args) %4BEAMER_col(Col) %7BEAMER_extra(Extra)
+#+BEAMER_THEME: metropolis
+# #+BEAMER_OUTER_THEME: miniframes [subsection=false]
+#+BEAMER_HEADER: \subtitle{Arrays}
+# #+BEAMER_HEADER: \AtBeginSection[]{ # This line inserts a table of contents
+# #with the current section highlighted at # the beginning of each section
+# #+BEAMER_HEADER: \begin{frame}<beamer>\frametitle{Topic}\tableofcontents[currentsection]\end{frame} #
+# #In order to have the miniframes/smoothbars navigation bullets even though we
+# #do not use subsections # q.v.
+# #https://tex.stackexchange.com/questions/2072/beamer-navigation-circles-without-subsections/2078#2078
+# #+BEAMER_HEADER: \subsection{} +BEAMER_HEADER: }
+#+LATEX_HEADER: \definecolor{myblue}{RGB}{20,105,176}
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[listings, many]{tcolorbox}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{etoolbox}
+#+LATEX_HEADER: \usepackage{tikz}
+#+LATEX_HEADER: \usetikzlibrary{positioning}
+#+LATEX_HEADER: \usepackage{local-style}
+#+LATEX_HEADER: \BeforeBeginEnvironment{minted}{\begin{tcolorbox}[enhanced,colframe=myblue,boxrule=1pt,boxsep=1pt,left=1pt,right=1pt,top=-0pt,bottom=0pt,arc=0pt,toprule=0pt, rightrule=0pt,colback=white,attach boxed title to top left={yshift=-0pt},title=Code,boxed title style={colback=myblue, right=0mm, bottomrule=0pt, left=0mm, arc=0pt}, fonttitle=\tiny]}%
+#+LATEX_HEADER: \AfterEndEnvironment{minted}{\end{tcolorbox}}%
+#+LATEX_HEADER: \usepackage{parskip}
+* Arrays
+** The Ancestor to ArrayList
+   Fixed size lists
+   
+*** Narrative                                                      :noexport:
+    Array's are the ancestor to the ArrayList. An array contains a limited
+    number of spots - or indices - for values.
+** Creating an Array
+*** An Array of Five Integers
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+    int[] numbers = new int[3];
+    #+end_src
+*** An Array of Two Hundred Strings
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+    String[] numbers = new String[200];
+    #+end_src
+    
+*** Narrative                                                      :noexport:
+    you can create an array using the following format. You add square brackets
+    after the type of elements it would contain - in this case we have int
+    followed by empty square brackets then the name of the array on the left
+    side of the equals sign. On the right side of the equals we use the =new=
+    keyword to create the array followed by the type of the elements, and square
+    brackets with the size of the Array inside the square brackets.
+
+    So to create an Array called "numbers" with three elements we could use the
+    this format. Similarly if we wanted to create an array of 200 strings we
+    would use this.
+
+** Assigning and Accessing Elements
+*** Assigning
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+      int[] numbers = new int[3];
+      numbers[0] = 2;
+      numbers[2] = 5;
+      System.out.println(numbers[0]);
+      System.out.println(numbers[2]);
+    #+end_src
+    
+*** Accessing
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,firstline=4,lastline=5
+    #+begin_src java :wrap resultscode
+      int[] numbers = new int[3];
+      numbers[0] = 2;
+      numbers[2] = 5;
+      System.out.println(numbers[0]);
+      System.out.println(numbers[2]);
+    #+end_src
+    
+
+    #+begin_src 
+    #+end_src
+*** Narrative                                                      :noexport:
+    Assignging and Accessing to an array is done by 0-indexed indices. Since we
+    create the array with the number of elements when we declare the array we
+    don't have to add elements in order. Instead of using .add() like we do with
+    an ArrayList we just access the index directly using the square brackets.
+
+** Programming Exercise - Swap
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+   
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_18.Swap
+     #+latex: {\tiny
+The exercise template already contains a program, that creates an array and
+prints the values of the array twice. Modify the program to do following: After
+the first printing, the program should ask for two indices from the user. The
+values in these two indices should be swapped, and in the end the values of the
+array should be printed once again.
+
+     #+latex: }
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_example
+     #+end_example
+     #+begin_resultscode
+     > 1
+     > 3
+     > 5
+     > 7
+     > 9
+
+     > Give two indices to swap:
+     < 2
+     < 4
+
+     > 1
+     > 3
+     > 9
+     > 7
+     > 5
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+** Getting the size of an Array
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java  :exports both :wrap resultscode
+     int[] numbers = new int[4];
+     numbers[0] = 42;
+     numbers[1] = 13;
+     numbers[2] = 12;
+     numbers[3] = 7;
+
+     System.out.println("The array has " + numbers.length + " elements.");
+
+     int index = 0;
+     while (index < numbers.length) {
+         System.out.println(numbers[index]);
+         index = index + 1;
+     }
+   #+end_src
+
+   #+RESULTS:
+   #+begin_resultscode
+   The array has 4 elements.
+   42
+   13
+   12
+   7
+   #+end_resultscode
+
+
+*** Narrative                                                      :noexport:
+    Accessing the size of an array is done through access to a variable
+    associated with the array. This variable is accessed as
+    NAMEOFTHEARRAY.length - keep in mind it's a VARIABLE not a METHOD. So you
+    don't provide parameters - not even the empty parens!
+
+    We can use this much like we do the .size() method for ArrayList to iterate
+    over our list by counting from 0 to length -1.
+** Programming Exercise - Index Was Not Found
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+   
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_19.IndexWasNotFound
+     #+latex: {\tiny
+     The exercise template already has an array containing numbers. Complete the
+     program so that it asks the user for a number to search in the array. If
+     the array contains the given number, the program tells the index containing
+     the number. If the array doesn't contain the given number, the program will
+     advise that the number wasn't found.
+     
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+       > Search for?
+       < 3
+       > 3 is at index 4.
+     
+     #+end_resultscode
+     #+begin_resultscode
+       > Search for?
+       < 3
+       > 3 is at index 4.
+     
+     #+end_resultscode
+     #+begin_resultscode
+       > Search for? 
+       < 7
+       > 7 is at index 7
+     
+     #+end_resultscode
+     #+begin_resultscode
+       > Search for?
+       < 22
+       > 22 was not found
+     #+end_resultscode
+
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+
+** Array as a parameter of a method
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+   #+begin_src java :wrap resultscode :exports code
+     public static void listElements(int[] integerArray) {
+         System.out.println("the elements of the array are: ");
+         int index = 0;
+         while (index < integerArray.length) {
+             int number = integerArray[index];
+             System.out.print(number + " ");
+             index = index + 1;
+         }
+
+         Synstem.out.println("");
+     }
+   #+end_src
+
+   #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny,firstline=,lastline=   
+   #+begin_src java :wrap resultscode :exports code
+     public static void listElements(int[] integerArray) {
+         System.out.println("the elements of the array are: ");
+         int index = 0;
+         while (index < integerArray.length) {
+             int number = integerArray[index];
+             System.out.print(number + " ");
+             index = index + 1;
+         }
+         System.out.println("");
+     }
+
+     public static void main(String[] args){
+         int[] numbers = new int[3];
+         numbers[0] = 1;
+         numbers[1] = 2;
+         numbers[2] = 3;
+
+         listElements(numbers);         
+     }
+   #+end_src
+
+   #+RESULTS:
+   #+begin_resultscode
+   the elements of the array are: 
+   1 2 3 
+   #+end_resultscode
+
+
+
+*** Narrative                                                      :noexport:
+    Methods can take arrays as parameters just like they can with ArrayList. In
+    fact, you've seen them multiple times because the public static void main
+    takes an array of Strings as the parameter! When we define a method which
+    takes an array as a parameter we use the type followed by empty brackets.
+
+    Here we defined a function called =listElements= which takes an array of
+    integers and prints out the elements. And just like with ArrayList's an
+    Array is a reference type so if we pass it to a method and change it in the
+    method we're changing the actual array!
+
+** Programming Exercise - Sum of Array
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+   
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_20.SumOfArray
+     #+latex: {\tiny
+     The class SumOfArray has a method public static int sumOfNumbersInArray(int[] array). Complete the method so that it computes and returns the sum of the numbers in the array it receives as parameter.
+
+
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       int[] numbers = {5, 1, 3, 4, 2};
+       sumOfNumbersInArray(numbers);
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     15
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+    
+** Programming Exercise - Print Neatly
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+   
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_21.PrintNeatly
+     #+latex: {\tiny
+     Complete the method public static void printNeatly(int[] array) in the class named 'ArrayPrinter' to make it print the numbers of the array it receives more neatly. There should be a whitespace and a comma between each number. don't put a comma after the last number.
+
+Print the numbers on one line using System.out.print.
+
+You can try out your printing with this example:
+
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       int[] array = {5, 1, 3, 4, 2};
+       printNeatly(array);
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     5,1,3,4,2
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+** Programming Exercise - Print in stars
+   :PROPERTIES:
+   :BEAMER_opt: t
+   :END:
+*** Code
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.60
+    :END:
+**** Part03_22.PrintInStars
+     #+latex: {\tiny
+     Complete the method public static void printArrayInStars(int[] array) in
+     the class named 'Printer' to make it print a row of stars for each number
+     in the array. The amount of stars on each row is defined by the
+     corresponding number in the array.
+
+     You can try out the printing with this example:
+
+
+     #+latex: }
+     #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+     #+begin_src java :eval no
+       int[] array = {5, 1, 3, 4, 2};
+       printArrayInStars(array);
+     #+end_src
+
+*** Output                                                            :BMCOL:
+    :PROPERTIES:
+    :BEAMER_opt: t
+    :BEAMER_col: 0.40
+    :END:
+
+**** Desired Output                                                 :B_block:
+     :PROPERTIES:
+     :BEAMER_opt: t
+     :BEAMER_env: block
+     :END:
+     #+LaTeX: {\tiny
+     #+begin_resultscode
+     ,*****
+     ,*
+     ,***
+     ,****
+     ,**
+     #+end_resultscode
+     #+LaTeX: }
+
+*** Narrative                                                      :noexport:
+    
+** Implicit Declaration of Arrays
+*** 
+    #+ATTR_LATEX: :options numbersep=5pt,linenos,breaklines=true,fontsize=\tiny
+    #+begin_src java :eval no
+int[] numbers = {100, 1, 42};
+    #+end_src
+
+
+    
+*** Narrative                                                      :noexport:
+    If you know the values for the array ahead of time you can implicitly
+    declare the array with the intended values instead of using the new keyword
+    and adding the values manually.
+
+    
